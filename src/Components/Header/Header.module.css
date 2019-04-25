@@ -1,0 +1,178 @@
+
+.header {
+    align-items: center;
+    background-color: transparent;
+    box-sizing: border-box;
+    display: flex;
+    height: 48px;
+    color: white;
+    padding: 16px;
+    padding-top: 24px;
+    position: fixed;
+    transition: all .2s linear;
+    width: 100%;
+    z-index: 100;
+}
+
+.accbtn{
+    border: solid 1px black;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 16px ;
+    box-sizing: border-box;
+}
+
+.headerbackground {
+    background-color: #283593;
+    box-shadow: -3px -10px 30px #888888;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.account {
+    display: none;
+    flex: 1;
+    margin-right: 64px;
+    justify-content: flex-end;
+}
+
+.mobileMenu {
+    height: 100%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: -9999; /* Sit on top */
+    visibility: hidden;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(75, 44, 32, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 1s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+.mobileContent {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+.mobileOpen {
+    opacity: 1;
+    z-index: 10000;
+    visibility: visible;
+}
+
+.mobilebutton {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 32px;
+    margin-right: 40px;
+}
+
+.mobileCloseButton {
+    color: #818181;
+    cursor: pointer;
+    font-size: 60px;
+    position: absolute;
+    right: 45px;
+    text-decoration: none;
+    top: 20px;
+}
+
+.mobileMenuLinks {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+.mobileMenuLinks:hover, .mobileMenuLinks:focus {
+    color: #f1f1f1;
+}
+
+.number {
+    display: none;
+    right: 16px;
+    position: absolute;
+    margin-top: -8px;
+}
+
+.mobilenumber {
+    bottom: 32px;
+    margin-left: auto;
+    font-size: 16px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: auto;
+    text-align: center;
+}
+.mobilewhatsapp {
+    margin-bottom: -16px;
+}
+
+
+.link {
+    color: #bdbdbd;
+    display: none;
+    font-family: 'Roboto';
+    margin: 16px;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s ease-in-out;
+}
+
+.logo {
+    font-family: 'Unica One';
+    font-weight: 500;
+    color: white;
+    /* text-align: center; */
+}
+
+.link:hover {
+    color: rgba(117, 117, 117, 0.2);
+}
+
+
+@media (min-width: 412px) {
+    .header {
+        height: 64px;
+    }
+
+    .logo {
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .link {
+        display: block;
+    }
+    /* .mobilebutton{
+        display: none;
+    } */
+    .account {
+        display: flex;
+    }
+
+    .number {
+        display: block;
+    }
+
+    .logo {
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .header {
+        padding: 24px;
+        padding-left: 48px;
+    }
+}

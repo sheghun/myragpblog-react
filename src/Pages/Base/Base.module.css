@@ -1,0 +1,46 @@
+.backdrop {
+    align-items: center;
+    background-image: url('../../assets/images/coffecompress.jpg');
+    background-position-y: 50%;
+    background-size: cover;
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50vh;
+    padding: 16px;
+    width: 100%;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    margin-left: 32px;
+    border-radius: 50%;
+}
+
+.author {
+    margin-bottom: 54px;
+}
+
+.authorimage {
+    align-items: baseline;
+    display: flex;
+}
+
+.postwrapper {
+    margin: 5rem auto 5rem;
+    margin-bottom: 0rem;
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+@media (min-width: 768px) {
+    .postwrapper {
+        width: 720px;
+    }
+}
