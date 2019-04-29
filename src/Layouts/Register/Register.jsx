@@ -23,6 +23,7 @@ const styles = theme => ({
     appBar: {
         position: 'relative',
     },
+    toolbarSpacing: theme.mixins.toolbar,
     layout: {
         width: 'auto',
         marginLeft: theme.spacing.unit * 2,
@@ -61,9 +62,13 @@ const steps = ['', '', ''];
 
 class Register extends React.Component {
     state = {
-        activeStep: 0,
+        activeStep: 1,
         submit: 0
     };
+
+    goToStep = (i) => {
+        this.setState(state => ({...state, activeStep: i}));
+    }
 
     /**
      * Get the current step and choose the form to display
@@ -76,11 +81,11 @@ class Register extends React.Component {
         }
         switch (stepInt) {
             case 1:
-                return <FirstForm {...restProps} />;
+                return <FirstForm next={this.goToStep} {...restProps} />;
             case 2:
-                return <SecondForm {...restProps} />;
+                return <SecondForm next={this.goToStep} {...restProps} />;
             case 3:
-                return <ThirdForm {...restProps} />;
+                return <ThirdForm next={this.goToStep} {...restProps} />;
             default:
                 throw new Error('Unknown step');
         }
@@ -89,11 +94,9 @@ class Register extends React.Component {
     render() {
         const { classes } = this.props;
         const { submit } = this.state;
-        const activeStep = this.props.match.params.step
-        console.log(activeStep)
+        const activeStep = this.state.activeStep
 
         return (
-            <ErrorWrapper>
                 <React.Fragment>
                     <CssBaseline />
                     <AppBar position="absolute" color="primary" className={classes.appBar}>
@@ -103,20 +106,12 @@ class Register extends React.Component {
                             </Typography>
                         </Toolbar>
                     </AppBar>
+                    <div className={classes.toolbarSpacing}></div>
                     <main className={classes.layout}>
                         <Paper className={classes.paper}>
-                            <Typography component="h1" variant="h4" align="center">
-                                {activeStep === 'verifyPayment' ? 'Verify Payment' : 'Register' || activeStep === '3' ? 'Payment' : 'Register'}
+                            <Typography variant="h4" align="center">
+                                Register
                             </Typography>
-                            <Stepper activeStep={
-                                activeStep === 'verifyPayment' ? 3 : +activeStep - 1
-                            } className={classes.stepper}>
-                                {steps.map(label => (
-                                    <Step key={label}>
-                                        <StepLabel>{label}</StepLabel>
-                                    </Step>
-                                ))}
-                            </Stepper>
                             <React.Fragment>
                                 <React.Fragment>
                                     {this.getStepContent(activeStep, submit)}
@@ -125,7 +120,6 @@ class Register extends React.Component {
                         </Paper>
                     </main>
                 </React.Fragment>
-            </ErrorWrapper>
         );
     }
 }

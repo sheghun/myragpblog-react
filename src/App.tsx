@@ -40,7 +40,7 @@ const routes = [
     { path: '/web', component: Web },
     { path: '/user', component: Dashboard },
     { path: '/payment', component: Payment },
-    { path: '/register/:step', component: Register },
+    { path: '/register', component: Register },
     { path: "/:username", component: Blog }
 ]
 

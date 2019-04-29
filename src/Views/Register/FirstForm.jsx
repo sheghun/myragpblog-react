@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import SnackbarSpinner from '../../Components/SnackbarSpinner/SnackbarSpinner'
 import Snackbar from '../../Components/Snackbar/Snackbar'
 import FormControl from '@material-ui/core/FormControl'
@@ -23,6 +24,9 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         marginLeft: theme.spacing.unit,
     },
+    label: {
+        color: 'red'
+    }
 })
 
 class FirstForm extends Component {
@@ -37,8 +41,8 @@ class FirstForm extends Component {
                 userName: '',
                 firstName: '',
                 referalId: '',
-                ragpReferalId: '',
-                passwordAgain: '',
+                phoneNumber: '',
+                confirmPassword: '',
                 termsAndCondition: false,
             },
 
@@ -53,8 +57,8 @@ class FirstForm extends Component {
             lastNameError: false,
             referalIdError: false,
             firstNameError: false,
-            ragpReferalIdError: false,
-            passwordAgainError: false,
+            phoneNumberError: false,
+            confirmPassword: false,
             termsAndConditionError: false,
         }
     }
@@ -88,7 +92,7 @@ class FirstForm extends Component {
 
     /**
      * Validate the user's inputs before
-     * Required: email, lastName, firstName, password, passwordAgain, username, referalId, ragpReferalId, termsAndCondition
+     * Required: email, lastName, firstName, password, confirmPassword, username, referalId, ragpReferalId, termsAndCondition
      */
     validate = (inputs, callback) => {
         function validateEmail(email) {
@@ -96,7 +100,7 @@ class FirstForm extends Component {
         }
         // For storing the errors
         const error = []
-        // VAlidate inputs
+        // Validate inputs
         for (const value in inputs) {
             switch (value) {
                 // Validate Referal Id
@@ -104,7 +108,7 @@ class FirstForm extends Component {
                     if (inputs[value].length > 0 && typeof (inputs[value]) === 'string') {
                         this.setState({ referalIdError: false })
                     } else {
-                        this.setState({ referalIdError: true })
+                        this.setState({ referalIdError: 'Referal Id is required' })
                         error.push('referalId')
                     }
                     break;
@@ -134,7 +138,7 @@ class FirstForm extends Component {
                     if (inputs[value].length > 0 && validateEmail(inputs[value].trim())) {
                         this.setState({ emailError: false })
                     } else {
-                        this.setState({ emailError: true })
+                        this.setState({ emailError: 'Email is required and must be a valid email' })
                         error.push('email')
                     }
                     break;
@@ -144,7 +148,7 @@ class FirstForm extends Component {
                     if (inputs[value].length > 0 && typeof (inputs[value]) === 'string') {
                         this.setState({ userNameError: false })
                     } else {
-                        this.setState({ userNameError: true })
+                        this.setState({ userNameError: 'Username is required' })
                         error.push('userName')
                     }
                     break;
@@ -160,21 +164,21 @@ class FirstForm extends Component {
                     break;
 
                 // Validate Password Again
-                case 'passwordAgain':
+                case 'confirmPassword':
                     if (inputs[value] === inputs['password']) {
-                        this.setState({ passwordAgainError: false })
+                        this.setState({ confirmPassword: false })
                     } else {
-                        this.setState({ passwordAgainError: true })
-                        error.push('passwordAgain')
+                        this.setState({ confirmPassword: true })
+                        error.push('confirmPassword')
                     }
                     break;
 
                 // Validate Recharge And Get Paid Referal Id
-                case 'ragpReferalId':
-                    if(inputs[value].length > 0) {
-                        this.setState({ragpReferalIdError: false})
+                case 'phoneNumber':
+                    if (inputs[value].length === 11) {
+                        this.setState({ phoneNumberError: false })
                     } else {
-                        this.setState({ragpReferalIdError: true})
+                        this.setState({ phoneNumberError: 'Phone number should be 11 digits' })
                         error.push('ragpReferalId')
                     }
                     break;
@@ -193,42 +197,91 @@ class FirstForm extends Component {
                     break;
             }
         }
-        if (error.length === 0) callback(false)
-        else callback(true)
+        if (error.length === 0) {
+            callback(false)
+        }
+        else {
+            callback(true)
+        }
     }
 
-    submit = event => {
+    submit = () => {
         // Validate inputs first
-        this.validate(this.state.inputs, err => {
-            console.log(err)
-            if (!err) {
-                this.setState({ loading: true })
-                Axios.post('/register', { ...this.state.inputs, step: 1 }, {
-                    headers: { "Content-Type": "application/json" },
-                    withCredentials: true
-                })
-                    .then(response => {
-                        const resp = response.data
-                        this.setState({ loading: false })
-                        console.log(response)
-                        if (resp.error) {
-                            this.setState({ registerErrors: resp.error })
-                        } else if (resp.success) {
-                            this.setState({ registerSuccess: ['Successful'] })
-                            setTimeout(() => {
-                                this.props.history.push(`2?username=${this.state.inputs.userName}`)
-                            }, 3000);
+        this.validate(this.state.inputs, async (err) => {
+            if (err) return;
+            // Set the loading to show
+            this.setState(state => ({ ...state, loading: true }));
+            // Try connecting to the server
+            try {
+                // Check if the number already exists
+                const response = await Axios.post('/member/verify?type=number', { input: this.state.inputs.phoneNumber });
+                if (response.status === 200) {
+                    this.setState({ phoneNumberError: 'Phone number has already exists', loading: false });
+                    return;
+                }
+            } catch (err) {
+                if (err.response) {
+                    // Phone number does not exists
+                    if (err.response.status === 404) {
+                        // Then validate the username
+                        try {
+                            // Check if username has already been used
+                            const response = await Axios.post('/member/verify?type=username', { input: this.state.inputs.userName });
+                            if (response.status === 200) {
+                                this.setState({ userNameError: 'Username already exists', loading: false });
+                                return
+                            }
+                        } catch (err) {
+                            // Then username does not exist
+                            if (err.response.status === 404) {
+                                // Check if referalId exists
+                                // We are verifying through username coz the referalId is still a username
+                                try {
+                                    const response = await Axios.post('/member/verify?type=username', { input: this.state.inputs.referalId });
+                                    // If referal Id exists
+                                    if (response.status === 200) {
+                                        // check if the email has already been used
+                                        try {
+                                            const response = await Axios.post('/member/verify?type=email', { input: this.state.inputs.email })
+                                            if (response.status === 200) {
+                                                // Means email exists
+                                                this.setState({ emailError: 'E-mail already exists' });
+                                                return;
+                                            }
+                                        } catch (err) {
+                                            // Email does not exists
+                                            if (err.response.status === 404) {
+                                                // Post all inputs to the api
+                                                try {
+                                                    const response = await Axios.post('/member', {...this.state.inputs});
+                                                    if (response.status === 201) {
+                                                        
+                                                    }
+                                                } catch (error) {
+                                                    if(error.response) {
+                                                        alert('not working');
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } catch (err) {
+                                    // Referal Id does not exists
+                                    if (err.response.status === 404) {
+                                        this.setState({ referalIdError: 'Referal Id does not exist', loading: false });
+                                        return
+                                    }
+                                }
+                            }
                         }
-                    })
-            } else {
-                // Just stop execution and return nothing
-                return
+                    }
+                }
             }
         })
     }
 
     /**
-     * For removing unique eorrs using their index from the "this.state.registerErrors"
+     * For removing unique errors using their index from the "this.state.registerErrors"
      *
      */
     clearRegisterErrors = (event, reason, index, type) => {
@@ -257,11 +310,11 @@ class FirstForm extends Component {
     }
 
     render() {
-        console.log(this.state)
         const { classes } = this.props
+        console.log(this.state.inputs)
         return (
             <React.Fragment>
-                <SnackbarSpinner loading={this.state.loading} onClose={() => { }} />
+                <SnackbarSpinner type="success" loading={this.state.loading} onClose={() => { }} />
                 {/* Loop Through The Register Error To Create A Snackbar Of Errors */}
                 {this.state.registerErrors.map((errorMessage, index) => (
                     <Snackbar
@@ -270,7 +323,7 @@ class FirstForm extends Component {
                         open={true} onClose={(event, reason) => this.clearRegisterErrors(event, reason, index, 'error')}
                     />
                 ))}
-                {/* Dispay the success snackbar */}
+                {/* Display the success snackbar */}
                 {this.state.registerSuccess.map((successMessage, index) => (
                     <Snackbar
                         key={index}
@@ -280,15 +333,15 @@ class FirstForm extends Component {
                 ))}
 
                 <Grid container spacing={24}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             id="referalId"
                             name="referalId"
-                            label="Referal Id"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Referal Id</Typography>}
                             fullWidth
-                            error={this.state.referalIdError}
-                            helperText={this.state.referalIdError ? 'Referal Id is required before signing up' : ''}
+                            error={!!this.state.referalIdError}
+                            helperText={this.state.referalIdError}
                             onChange={(e) => this.changeHandler(e)}
                             value={this.state.inputs.referalId}
                         />
@@ -298,8 +351,7 @@ class FirstForm extends Component {
                             required
                             id="firstName"
                             name="firstName"
-                            label="First name"
-                            autoComplete="fname"
+                            label={<Typography component="span" variant="overline" className={classes.label}>First name</Typography>}
                             fullWidth
                             error={this.state.firstNameError}
                             helperText={this.state.firstNameError ? 'First name is required' : ''}
@@ -313,12 +365,24 @@ class FirstForm extends Component {
                             id="lastName"
                             name="lastName"
                             value={this.state.inputs.lastName}
-                            label="Last name"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Last name</Typography>}
                             fullWidth
                             error={this.state.lastNameError}
                             helperText={this.state.lastNameError ? 'Last name is required' : ''}
                             onChange={(e) => this.changeHandler(e)}
-                            autoComplete="lname"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            type="text"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Phone Number</Typography>}
+                            fullWidth
+                            error={!!this.state.phoneNumberError}
+                            helperText={this.state.phoneNumberError}
+                            onChange={(e) => this.changeHandler(e)}
+                            value={this.state.inputs.phoneNumber}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -326,11 +390,11 @@ class FirstForm extends Component {
                             required
                             id="email"
                             name="email"
-                            label="E-mail"
+                            label={<Typography component="span" variant="overline" className={classes.label}>E-mail</Typography>}
                             type="email"
                             fullWidth
-                            error={this.state.emailError}
-                            helperText={this.state.emailError ? 'A valid email is required' : ''}
+                            error={!!this.state.emailError}
+                            helperText={this.state.emailError}
                             onChange={(e) => this.changeHandler(e)}
                             value={this.state.inputs.email}
                         />
@@ -340,10 +404,10 @@ class FirstForm extends Component {
                             required
                             id="userName"
                             name="userName"
-                            label="Username"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Username</Typography>}
                             fullWidth
-                            error={this.state.userNameError}
-                            helperText={this.state.userNameError ? 'Username is required before signing up' : ''}
+                            error={!!this.state.userNameError}
+                            helperText={this.state.userNameError}
                             onChange={(e) => this.changeHandler(e)}
                             value={this.state.inputs.userName}
                         />
@@ -353,7 +417,7 @@ class FirstForm extends Component {
                             required
                             id="password"
                             name="password"
-                            label="Password"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Password</Typography>}
                             type="password"
                             fullWidth
                             error={this.state.passwordError}
@@ -364,33 +428,19 @@ class FirstForm extends Component {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            id="passwordAgain"
-                            name="passwordAgain"
+                            id="confirmPassword"
+                            name="confirmPassword"
                             type="password"
-                            label="Password Again"
+                            label={<Typography component="span" variant="overline" className={classes.label}>Password Again</Typography>}
                             fullWidth
-                            error={this.state.passwordAgainError}
-                            helperText={this.state.passwordAgainError ? 'Passwords does not match' : ''}
+                            error={this.state.confirmPassword}
+                            helperText={this.state.confirmPassword ? 'Passwords does not match' : ''}
                             onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.passwordAgain}
+                            value={this.state.inputs.confirmPassword}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="ragpReferalId"
-                            name="ragpReferalId"
-                            type="text"
-                            label="Recharge And Get Paid"
-                            fullWidth
-                            error={this.state.ragpReferalIdError}
-                            helperText={this.state.ragpReferalIdError ?
-                                'Recharge And Get Paid referal Id is needed' : ''
-                            }
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.ragpReferalId}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+
+                    <Grid item xs={12}>
                         <FormControl
                             error={true}
                         >
@@ -403,7 +453,7 @@ class FirstForm extends Component {
                                             onChange={(e) => this.changeHandler(e)}
                                         />
                                     }
-                                    label="I hereby agree to the terms and condition"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>I hereby agree to the terms and condition</Typography>}
                                 />
                                 <FormHelperText>
                                     {this.state.termsAndConditionError ? 'You must agree to our terms and condition' : ''}

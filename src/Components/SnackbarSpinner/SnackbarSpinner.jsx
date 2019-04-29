@@ -10,8 +10,8 @@ const SnackbarSpinner = props => {
             type="loading"
             message={
                 <>
-                    <CircularProgress size={18} />
-                    <p style={{ color: 'red', marginLeft: '1rem', fontWeight: '700' }}>Loading...</p>
+                    <CircularProgress color="secondary" size={18} />
+                    <p style={{ color: 'white', marginLeft: '1rem', fontWeight: '700' }}>Loading...</p>
                 </>
             }
             open={true}

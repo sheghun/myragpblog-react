@@ -30,7 +30,7 @@ const styles1 = theme => ({
         backgroundColor: theme.palette.error.dark,
     },
     info: {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: 'white',
     },
     loading: {
         backgroundColor: 'white'
@@ -111,7 +111,7 @@ const CustomizedSnackbars = (props) => {
                     horizontal: 'left',
                 }}
                 open={props.open}
-            
+
                 // autoHideDuration={6000  }
                 onClose={props.onClose}
             >
