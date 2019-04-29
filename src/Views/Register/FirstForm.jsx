@@ -14,6 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 
 import Axios from 'axios'
 import queryString from 'query-string'
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     buttons: {
@@ -47,7 +48,7 @@ class FirstForm extends Component {
             },
 
             registerErrors: [],
-            registerSuccess: [],
+            successful: false,
 
             loading: false,
             submitted: false,
@@ -96,7 +97,7 @@ class FirstForm extends Component {
      */
     validate = (inputs, callback) => {
         function validateEmail(email) {
-            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+            return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
         }
         // For storing the errors
         const error = []
@@ -253,12 +254,12 @@ class FirstForm extends Component {
                                             if (err.response.status === 404) {
                                                 // Post all inputs to the api
                                                 try {
-                                                    const response = await Axios.post('/member', {...this.state.inputs});
+                                                    const response = await Axios.post('/member', { ...this.state.inputs });
                                                     if (response.status === 201) {
-                                                        
+                                                        this.setState({successful: true, loading: false})
                                                     }
                                                 } catch (error) {
-                                                    if(error.response) {
+                                                    if (error.response) {
                                                         alert('not working');
                                                     }
                                                 }
@@ -323,155 +324,159 @@ class FirstForm extends Component {
                         open={true} onClose={(event, reason) => this.clearRegisterErrors(event, reason, index, 'error')}
                     />
                 ))}
-                {/* Display the success snackbar */}
-                {this.state.registerSuccess.map((successMessage, index) => (
-                    <Snackbar
-                        key={index}
-                        type='success' message={successMessage}
-                        open={true} onClose={(event, reason) => this.clearRegisterErrors(event, reason, index, 'success')}
-                    />
-                ))}
-
-                <Grid container spacing={24}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="referalId"
-                            name="referalId"
-                            label={<Typography component="span" variant="overline" className={classes.label}>Referal Id</Typography>}
-                            fullWidth
-                            error={!!this.state.referalIdError}
-                            helperText={this.state.referalIdError}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.referalId}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="firstName"
-                            name="firstName"
-                            label={<Typography component="span" variant="overline" className={classes.label}>First name</Typography>}
-                            fullWidth
-                            error={this.state.firstNameError}
-                            helperText={this.state.firstNameError ? 'First name is required' : ''}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.firstName}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="lastName"
-                            name="lastName"
-                            value={this.state.inputs.lastName}
-                            label={<Typography component="span" variant="overline" className={classes.label}>Last name</Typography>}
-                            fullWidth
-                            error={this.state.lastNameError}
-                            helperText={this.state.lastNameError ? 'Last name is required' : ''}
-                            onChange={(e) => this.changeHandler(e)}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            type="text"
-                            label={<Typography component="span" variant="overline" className={classes.label}>Phone Number</Typography>}
-                            fullWidth
-                            error={!!this.state.phoneNumberError}
-                            helperText={this.state.phoneNumberError}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.phoneNumber}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="email"
-                            name="email"
-                            label={<Typography component="span" variant="overline" className={classes.label}>E-mail</Typography>}
-                            type="email"
-                            fullWidth
-                            error={!!this.state.emailError}
-                            helperText={this.state.emailError}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.email}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="userName"
-                            name="userName"
-                            label={<Typography component="span" variant="overline" className={classes.label}>Username</Typography>}
-                            fullWidth
-                            error={!!this.state.userNameError}
-                            helperText={this.state.userNameError}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.userName}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="password"
-                            name="password"
-                            label={<Typography component="span" variant="overline" className={classes.label}>Password</Typography>}
-                            type="password"
-                            fullWidth
-                            error={this.state.passwordError}
-                            helperText={this.state.passwordError ? 'Password should be at least six characters' : ''}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.password}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type="password"
-                            label={<Typography component="span" variant="overline" className={classes.label}>Password Again</Typography>}
-                            fullWidth
-                            error={this.state.confirmPassword}
-                            helperText={this.state.confirmPassword ? 'Passwords does not match' : ''}
-                            onChange={(e) => this.changeHandler(e)}
-                            value={this.state.inputs.confirmPassword}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormControl
-                            error={true}
-                        >
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            color="primary"
-                                            name="termsAndCondition"
-                                            onChange={(e) => this.changeHandler(e)}
-                                        />
-                                    }
-                                    label={<Typography component="span" variant="overline" className={classes.label}>I hereby agree to the terms and condition</Typography>}
+                {!this.state.successful ?
+                    <>
+                        <Grid container spacing={24}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="referalId"
+                                    name="referalId"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Referal Id</Typography>}
+                                    fullWidth
+                                    error={!!this.state.referalIdError}
+                                    helperText={this.state.referalIdError}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.referalId}
                                 />
-                                <FormHelperText>
-                                    {this.state.termsAndConditionError ? 'You must agree to our terms and condition' : ''}
-                                </FormHelperText>
-                            </FormGroup>
-                        </FormControl>
-                    </Grid>
-                </Grid>
-                <div className={classes.buttons}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.submit}
-                        className={classes.button}
-                    >
-                        Next
-                    </Button>
-                </div>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="firstName"
+                                    name="firstName"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>First name</Typography>}
+                                    fullWidth
+                                    error={this.state.firstNameError}
+                                    helperText={this.state.firstNameError ? 'First name is required' : ''}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.firstName}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="lastName"
+                                    name="lastName"
+                                    value={this.state.inputs.lastName}
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Last name</Typography>}
+                                    fullWidth
+                                    error={this.state.lastNameError}
+                                    helperText={this.state.lastNameError ? 'Last name is required' : ''}
+                                    onChange={(e) => this.changeHandler(e)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    type="text"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Phone Number</Typography>}
+                                    fullWidth
+                                    error={!!this.state.phoneNumberError}
+                                    helperText={this.state.phoneNumberError}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.phoneNumber}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="email"
+                                    name="email"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>E-mail</Typography>}
+                                    type="email"
+                                    fullWidth
+                                    error={!!this.state.emailError}
+                                    helperText={this.state.emailError}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.email}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="userName"
+                                    name="userName"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Username</Typography>}
+                                    fullWidth
+                                    error={!!this.state.userNameError}
+                                    helperText={this.state.userNameError}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.userName}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="password"
+                                    name="password"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Password</Typography>}
+                                    type="password"
+                                    fullWidth
+                                    error={this.state.passwordError}
+                                    helperText={this.state.passwordError ? 'Password should be at least six characters' : ''}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.password}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type="password"
+                                    label={<Typography component="span" variant="overline" className={classes.label}>Password Again</Typography>}
+                                    fullWidth
+                                    error={this.state.confirmPassword}
+                                    helperText={this.state.confirmPassword ? 'Passwords does not match' : ''}
+                                    onChange={(e) => this.changeHandler(e)}
+                                    value={this.state.inputs.confirmPassword}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <FormControl
+                                    error={true}
+                                >
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    color="primary"
+                                                    name="termsAndCondition"
+                                                    onChange={(e) => this.changeHandler(e)}
+                                                />
+                                            }
+                                            label={<Typography component="span" variant="overline" className={classes.label}>I hereby agree to the terms and condition</Typography>}
+                                        />
+                                        <FormHelperText>
+                                            {this.state.termsAndConditionError ? 'You must agree to our terms and condition' : ''}
+                                        </FormHelperText>
+                                    </FormGroup>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                        <div className={classes.buttons}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={this.submit}
+                                className={classes.button}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <Grid container style={{margin: '64px 0 64px'}} spacing={24} justify="center">
+                            <Grid item xs={12} spacing={8} sm={6}>
+                                <Typography align="center" variant="body1">Registration Successful</Typography>
+                                <Typography align="center" variant="caption">You can now <Link to="/login">login</Link></Typography>
+                            </Grid>
+                        </Grid>
+                    </>
+                }
             </React.Fragment>
         );
     }
