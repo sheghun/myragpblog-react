@@ -1,4 +1,4 @@
-import React, { Component, Suspense, useEffect } from 'react';
+import React, { Component, Suspense, useEffect, useReducer } from 'react';
 
 // React router dependencies
 import { Route, withRouter, Switch, Redirect, RouteComponentProps } from 'react-router-dom';
@@ -6,17 +6,14 @@ import { Route, withRouter, Switch, Redirect, RouteComponentProps } from 'react-
 // For lazy loading
 import loadable from '@loadable/component';
 
-// React redux dependencies
-import { connect } from 'react-redux'
-
-// Redux actions
-import { loginUserAction } from './Store/Actions/Actions'
+// Global Context
+import Context from './Context';
 
 // Material-ui Components
 import { MuiThemeProvider } from '@material-ui/core';
 
 // Theme
-import theme from './theme.js'
+import theme from './theme.js';
 
 
 import './App.css'
@@ -35,6 +32,15 @@ interface props extends RouteComponentProps {
     loginUserAction: CallableFunction
 }
 
+export interface action {
+    type: 'LOGIN' | 'LOGOUT';
+}
+
+export interface state {
+    loggedIn: boolean;
+    loggedInOnce: boolean;
+}
+
 const routes = [
     { path: '/login', component: Signin },
     { path: '/web', component: Web },
@@ -44,15 +50,31 @@ const routes = [
     { path: "/:username", component: Blog }
 ]
 
-const App = (props: props) => {
+// Initial state
+const initialState: state = { loggedIn: false, loggedInOnce: false };
 
-    useEffect(() => {
-        props.loginUserAction()
-    });
+/**
+ * Reducers
+ * @params state action
+ */
+const reducer = (state: state, action: action): state => {
+    switch (action.type) {
+        case "LOGIN":
+            return { ...state, loggedIn: true, loggedInOnce: true };
+        case 'LOGOUT':
+            return { ...state, loggedIn: false, loggedInOnce: true };
+        default:
+            return state;
+    }
+}
+
+const App = (props: props) => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
         <Suspense fallback={<Spinner />}>
             <MuiThemeProvider theme={theme}>
+                <Context.Provider value={{state, dispatch}}>
                 <Switch>
                     {routes.map((route, index) =>
                         <Route key={index} path={route.path} component={route.component} />
@@ -62,14 +84,11 @@ const App = (props: props) => {
                     {/* Redirect for register */}
                     <Redirect exact from="/register" to="register/1" />
                 </Switch>
+                </Context.Provider>
             </MuiThemeProvider>
         </Suspense>
     );
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-    loginUserAction: () => dispatch(loginUserAction())
-})
 
-
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(App);
