@@ -1,10 +1,9 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useContext } from 'react';
 import queryString from 'query-string';
 // @material-ui components
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import TextField from "@material-ui/core/TextField";
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
@@ -12,8 +11,12 @@ import Typography from '@material-ui/core/Typography';
 // Styles dependencies
 import { StyleRulesCallback, Theme } from '@material-ui/core/styles';
 import withStyles from '@material-ui/core/styles/withStyles'
+// Context
+import Context from '../../Context'
 // React router dependencies
 import { RouteComponentProps } from 'react-router';
+// axios
+import Axios, { AxiosError } from 'axios';
 
 const useStyles = ((theme: Theme) => ({
     main: {
@@ -55,28 +58,47 @@ const useStyles = ((theme: Theme) => ({
 
 interface props extends RouteComponentProps {
     classes: any;
- }
+}
 
 const SignIn = (props: props) => {
 
     // Extract properties from props
     const { location, classes } = props;
+    // Get the context from the global state
+    const dispatch = useContext(Context).dispatch;
     // username state
     const [userName, setUserName] = useState('');
     // password state
     const [password, setPassword] = useState('');
+    // Error state
+    const [error, setError] = useState('');
     // Error username state
-    const [userNameError, setUserNameError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
     const queryUrl = queryString.parse(location.search)
 
-    const submit = (event: React.FormEvent<HTMLFormElement>) => {
 
-    }
+    const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        // Clear previous errors
+        setError('');
+        // Try sending request to the server
+        try {
+            const response = await Axios.post('/login', { userName, password });
+            if (response.status === 200) {
+                dispatch({ type: 'LOGIN' });
+            }
+        } catch (error) {
+            //Type alias
+            const err = error as AxiosError;
+            // @ts-ignore
+            if (err.response.status === 422) {
+                setError('Inputs incorrect')
+            }
+            // @ts-ignore
+            if (err.response.status === 401) {
+                setError('Username Or Password Incorrect')
+            }
+        }
 
-
-    const validate = () => {
-        return true;
     }
 
 
@@ -89,11 +111,13 @@ const SignIn = (props: props) => {
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
-                    </Typography>
+                </Typography>
+                <Typography variant="body1" color="error">
+                    {error}
+                </Typography>
                 <form className={classes.form} onSubmit={submit}>
                     <TextField
                         margin="normal"
-                        error={!!userNameError}
                         required
                         fullWidth
                         label="Username"
@@ -104,8 +128,8 @@ const SignIn = (props: props) => {
                         value={userName}
                         autoFocus
                     />
-                <TextField
-                margin="normal"
+                    <TextField
+                        margin="normal"
                         required
                         fullWidth
                         label="Password"
@@ -116,14 +140,14 @@ const SignIn = (props: props) => {
                         onChange={(event) => setPassword(event.target.value)}
                         value={password}
                     />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Sign in
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign in
                 </Button>
                 </form>
             </Paper>
