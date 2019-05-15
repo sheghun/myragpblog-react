@@ -4,7 +4,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 // @material-ui/core Components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -21,6 +21,7 @@ import dashboardRoutes from "../../Routes/Dashboard";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx";
 import image from "../../assets/img/sidebar-2.jpg";
 import logo from "../../assets/img/reactlogo.png";
+import Context from "../../Context";
 
 const switchRoutes = (
     <Switch>
@@ -33,6 +34,10 @@ const switchRoutes = (
 );
 
 class Dashboard extends React.Component {
+
+    // Get the context
+    static contextType = Context;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -66,56 +71,53 @@ class Dashboard extends React.Component {
         window.removeEventListener("resize", this.resizeFunction);
     }
     render() {
-        const { classes, match, isLoggedIn, ...rest } = this.props
-        if (!isLoggedIn) return <Redirect to={`/login?returnUrl=${location.pathname}`} />
+        const { classes, location, match, ...rest } = this.props
+        // Get the context from the state
+        const context = this.context.state;
+        console.log(location)
+
+
         return (
-            <ErrorWrapper>
-                <div className={classes.wrapper}>
-                    <Sidebar
-                        routes={dashboardRoutes}
-                        logoText={"My Ragp's Blog"}
-                        logo={logo}
-                        image={image}
-                        handleDrawerToggle={this.handleDrawerToggle}
-                        open={this.state.mobileOpen}
-                        color="red"
-                        {...rest}
-                    />
-                    <div className={classes.mainPanel} ref="mainPanel">
-                        <Header
+            <>
+                {!context.loggedIn ?
+                    <Redirect to={'/login?returnUrl=' + location.pathname} />
+                    :
+                    <div className={classes.wrapper}>
+                        <Sidebar
                             routes={dashboardRoutes}
+                            logoText={"My Ragp's Blog"}
+                            logo={logo}
+                            image={image}
                             handleDrawerToggle={this.handleDrawerToggle}
+                            open={this.state.mobileOpen}
+                            color="red"
+                            location={location}
                             {...rest}
                         />
-                        {this.getRoute() ? (
-                            <div className={classes.content}>
-                                <div className={classes.container}>
-                                    {dashboardRoutes.map((prop, key) => {
-                                        return <Route exact path={prop.path} component={prop.component} key={key} />;
-                                    })}
+                        <div className={classes.mainPanel} ref="mainPanel">
+                            {/* <Header
+                                routes={dashboardRoutes}
+                                handleDrawerToggle={this.handleDrawerToggle}
+                                {...rest}
+                            /> */}
+                            {this.getRoute() ? (
+                                <div className={classes.content}>
+                                    <div className={classes.container}>
+                                        {dashboardRoutes.map((prop, key) => {
+                                            return <Route exact path={prop.path} component={prop.component} key={key} />;
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        ) : (
-                                <div className={classes.map}>{switchRoutes}</div>
-                            )}
-                        {this.getRoute() ? <Footer /> : null}
+                            ) : (
+                                    <div className={classes.map}>{switchRoutes}</div>
+                                )}
+                            {this.getRoute() ? <Footer /> : null}
+                        </div>
                     </div>
-                </div>
-            </ErrorWrapper>
+                }
+            </>
         );
     }
 }
 
-Dashboard.propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state) => ({
-    isLoggedIn: state.isLoggedIn
-})
-
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(dashboardStyle)(Dashboard))
+export default withRouter(withStyles(dashboardStyle)(Dashboard))

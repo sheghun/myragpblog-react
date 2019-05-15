@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from 'react-redux'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -23,10 +21,13 @@ import CardBody from "../../Components/Card/CardBody.jsx";
 import CardFooter from "../../Components/Card/CardFooter.jsx";
 import SnackbarContent from "../../Components/Snackbar/SnackbarContent.jsx";
 
+//Icon
+import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import MoneyIcon from "@material-ui/icons/Money";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp"
+
 //Styles
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-//Actions
-import { loadingAction, loadedAction, loginUserAction } from "../../Store/Actions/Actions";
 //Hoc's
 import ErrorWrapper from '../../Hoc/ErrorWrapper/ErrorWrapper';
 import Typography from "@material-ui/core/Typography";
@@ -68,7 +69,7 @@ class Dashboard extends React.Component {
                         <Card>
                             <CardHeader color="warning" stats icon>
                                 <CardIcon color="warning">
-                                    <Icon>people_outline</Icon>
+                                    <PeopleOutlineIcon />
                                 </CardIcon>
                                 <br />
                                 <p className={classes.cardCategory}>My Network</p>
@@ -90,7 +91,7 @@ class Dashboard extends React.Component {
                         <Card>
                             <CardHeader color="success" stats icon>
                                 <CardIcon color="success">
-                                    <Icon>money</Icon>
+                                    <MoneyIcon />
                                 </CardIcon>
                                 <br />
                                 <p className={classes.cardCategory}>Revenue</p>
@@ -108,7 +109,7 @@ class Dashboard extends React.Component {
                         <Card>
                             <CardHeader color="success" stats icon>
                                 <CardIcon color="success">
-                                    <Icon>date_range</Icon>
+                                    <TrendingUpIcon />
                                 </CardIcon>
                                 <br />
                                 <p className={classes.cardCategory}>Days Left</p>
@@ -239,24 +240,4 @@ class Dashboard extends React.Component {
     }
 }
 
-Dashboard.propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
-
-
-
-
-const mapStateToProps = (state) => ({
-    isLoggedIn: state.isLoggedIn
-})
-
-const mapDispatchToProps = dispatch => ({
-    loadingAction: () => dispatch(loadingAction),
-    loadedAction: () => dispatch(loadedAction),
-    loginUserAction: () => dispatch(loginUserAction)
-})
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(dashboardStyle)(Dashboard));
+export default withStyles(dashboardStyle)(Dashboard);

@@ -156,7 +156,7 @@ class FirstForm extends Component {
 
                 // Validate Password
                 case 'password':
-                    if (inputs[value].length > 6 && typeof (inputs[value]) === 'string') {
+                    if (inputs[value].length >= 6 && typeof (inputs[value]) === 'string') {
                         this.setState({ passwordError: false })
                     } else {
                         this.setState({ passwordError: true })
@@ -247,6 +247,7 @@ class FirstForm extends Component {
                                             if (response.status === 200) {
                                                 // Means email exists
                                                 this.setState({ emailError: 'E-mail already exists' });
+                                                this.setState({ loading: false });
                                                 return;
                                             }
                                         } catch (err) {
