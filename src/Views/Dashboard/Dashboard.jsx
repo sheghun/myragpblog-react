@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 
 // @material-ui/core
 import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/core/Icon";
+
 // @material-ui/icons
-import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
+import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import MoneyIcon from "@material-ui/icons/Money";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp"
 
 // * Personal components
 import GridItem from "../../Components/Grid/GridItem.jsx";
@@ -21,10 +23,6 @@ import CardBody from "../../Components/Card/CardBody.jsx";
 import CardFooter from "../../Components/Card/CardFooter.jsx";
 import SnackbarContent from "../../Components/Snackbar/SnackbarContent.jsx";
 
-//Icon
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import MoneyIcon from "@material-ui/icons/Money";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp"
 
 //Styles
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
@@ -76,14 +74,6 @@ class Dashboard extends React.Component {
                                 <h3 className={classes.cardTitle}>{state.network}</h3>
                             </CardHeader>
                             <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <Danger>
-                                        <Warning />
-                                    </Danger>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        Get more space
-                                    </a>
-                                </div>
                             </CardFooter>
                         </Card>
                     </GridItem>
@@ -98,10 +88,20 @@ class Dashboard extends React.Component {
                                 <h3 className={classes.cardTitle}>&#8358;{state.earnings.toLocaleString(3)}</h3>
                             </CardHeader>
                             <CardFooter stats>
-                                <div className={classes.stats}>
+                            </CardFooter>
+                        </Card>
+                    </GridItem>
+                    <GridItem xs={12} sm={6} md={6}>
+                        <Card>
+                            <CardHeader color="success" stats icon>
+                                <CardIcon color="success">
                                     <DateRange />
-                                    Last 24 Hours
-                                </div>
+                                </CardIcon>
+                                <br />
+                                <p className={classes.cardCategory}>Days Left</p>
+                                <h3 className={classes.cardTitle}>{state.daysleft}</h3>
+                            </CardHeader>
+                            <CardFooter stats>
                             </CardFooter>
                         </Card>
                     </GridItem>
@@ -112,32 +112,10 @@ class Dashboard extends React.Component {
                                     <TrendingUpIcon />
                                 </CardIcon>
                                 <br />
-                                <p className={classes.cardCategory}>Days Left</p>
-                                <h3 className={classes.cardTitle}>{state.daysleft}</h3>
-                            </CardHeader>
-                            <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <DateRange />
-                                    Last 24 Hours
-                                </div>
-                            </CardFooter>
-                        </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={6}>
-                        <Card>
-                            <CardHeader color="success" stats icon>
-                                <CardIcon color="success">
-                                    <Icon>trending_up</Icon>
-                                </CardIcon>
-                                <br />
                                 <p className={classes.cardCategory}>Visits</p>
                                 <h3 className={classes.cardTitle}>{state.daysleft}</h3>
                             </CardHeader>
                             <CardFooter stats>
-                                <div className={classes.stats}>
-                                    <DateRange />
-                                    Last 24 Hours
-                                </div>
                             </CardFooter>
                         </Card>
                     </GridItem>

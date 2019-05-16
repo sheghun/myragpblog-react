@@ -28,19 +28,27 @@ import { RouteComponentProps } from 'react-router';
 import Axios, { AxiosError } from 'axios';
 import SnackbarSpinner from '../../Components/SnackbarSpinner/SnackbarSpinner';
 import Pricing from '../../Components/Pricing/Pricing';
+// Background Image
+import backgroundImage from "../../assets/images/bg-signin.jpg";
 
 
 const useStyles = ((theme: Theme) => ({
+    body: {
+        width: '100vw',
+        height: '100vh',
+        filter: 'blur(8px)',
+        ['-webkit-filter']: 'blur(8px)',
+        backgroundImage: 'url(' + backgroundImage + ')'
+    },
     main: {
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 400,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
+        position: 'absolute',
+        top: '0',
+        left: '30%',
+        [theme.breakpoints.down('sm')]: {
+            transform: 'translateX(-19%)'
+        }
     },
     subMain: {
         width: 'auto',
@@ -99,9 +107,28 @@ const SignIn = (props: props) => {
     // Error state
     const [error, setError] = useState('');
     // Error username state
-    const queryUrl = queryString.parse(location.search)
+    const queryUrl = queryString.parse(location.search);
+    // Return Url
+    let returnUrl = queryUrl.returnUrl || 'user/dashboard';
+    // Check if the former url is the logout url redirect to the dashboard
+    returnUrl = returnUrl === '/user/logout' ? 'user/dashboard' : returnUrl;
     // Current form to display
     const [currentForm, setCurrentForm] = useState('');
+
+    // Try logging user in on page mount
+    useEffect(() => {
+        (async () => {
+            try {
+
+                const response = await Axios.get('/member/verify-token');
+                if (response.status === 200) {
+                    dispatch({ type: 'LOGIN' });
+                    history.push(returnUrl as string);
+                }
+            } catch (error) { }
+
+        })();
+    }, [])
 
     const validate = () => {
         if (userName.length <= 1) {
@@ -131,7 +158,7 @@ const SignIn = (props: props) => {
             if (response.status === 200) {
                 if (!response.data.notDone) {
                     dispatch({ type: 'LOGIN' });
-                    history.push('/user/dashboard');
+                    history.push(returnUrl as string);
                 }
                 setCurrentForm('second');
             }
@@ -160,6 +187,7 @@ const SignIn = (props: props) => {
         default:
             return (
                 <>
+                    <div className={classes.body} />
                     <SnackbarSpinner type="success" loading={loading} onClose={() => { }} />
                     <main className={classes.main}>
                         <CssBaseline />

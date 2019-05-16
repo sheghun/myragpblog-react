@@ -95,11 +95,12 @@ class Dashboard extends React.Component {
                             {...rest}
                         />
                         <div className={classes.mainPanel} ref="mainPanel">
-                            {/* <Header
+                            <Header
                                 routes={dashboardRoutes}
+                                color="primary"
                                 handleDrawerToggle={this.handleDrawerToggle}
                                 {...rest}
-                            /> */}
+                            />
                             {this.getRoute() ? (
                                 <div className={classes.content}>
                                     <div className={classes.container}>
@@ -111,7 +112,6 @@ class Dashboard extends React.Component {
                             ) : (
                                     <div className={classes.map}>{switchRoutes}</div>
                                 )}
-                            {this.getRoute() ? <Footer /> : null}
                         </div>
                     </div>
                 }
