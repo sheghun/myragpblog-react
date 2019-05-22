@@ -1,10 +1,12 @@
 {
-    "extends": ["tslint:latest", "tslint-react"],
-
-    "rules": {
-      // override tslint-react rules here
-      "jsx-wrap-multiline": false,
-
-
-    }
-  }
+	"extends": [
+		"tslint:latest",
+		"tslint-react"
+	],
+	"rules": {
+		"jsx-wrap-multiline": false,
+		"no-submodule-imports": false,
+		"indent": false,
+		"max-line-length": false
+	}
+}

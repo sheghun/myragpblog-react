@@ -4,7 +4,7 @@ import red from '@material-ui/core/colors/red'
 export default createMuiTheme({
     palette: {
         primary: {
-            main: '#202124'
+            main: '#2d05c5'
         },
         secondary: {
             main: '#fff'
@@ -12,7 +12,8 @@ export default createMuiTheme({
         error: red
     },
     typography: {
-        color: '#5f6368',
+		color: '#5f6368',
+		useNextVariants: true,
         body1: {
             color: '#5f6368',
             lineHeight: '2em'

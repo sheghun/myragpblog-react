@@ -25,7 +25,7 @@ const Signin = loadable(() => import("./Views/Signin/Signin"));
 const Dashboard = loadable(() => import("./Layouts/Dashboard/Dashboard"));
 const Register = loadable(() => import("./Layouts/Register/Register"));
 const Payment = loadable(() => import("./Layouts/Payment/Payment"));
-const Web = loadable(() => import("./Layouts/Web/Web"));
+const Web = loadable(() => import("./Views/Web/Web"));
 
 interface IProps extends RouteComponentProps {
     loginUserAction: CallableFunction;
@@ -42,7 +42,7 @@ export interface IState {
 
 const routes = [
     { path: "/login", component: Signin },
-    { path: "/web", component: Web },
+    { exact:true, path: "/", component: Web },
     { path: "/user", component: Dashboard },
     { path: "/payment", component: Payment },
     { path: "/register", component: Register },
@@ -68,7 +68,10 @@ const reducer = (state: IState, action: IAction): IState => {
 };
 
 const renderRoutes = (routes.map((route, index) =>
-    <Route key={index} path={route.path} component={route.component} />,
+    route.exact ?
+    <Route exact={true} key={index} path={route.path} component={route.component} />
+    :
+    <Route key={index} path={route.path} component={route.component} />
 ));
 
 const App = (props: IProps) => {
@@ -80,10 +83,6 @@ const App = (props: IProps) => {
                 <Context.Provider value={{ state, dispatch }}>
                     <Switch>
                         {renderRoutes}
-                        {/* Redirect to the home page */}
-                        <Redirect exact={true} from="/" to="/web/home" />
-                        {/* Redirect for register */}
-                        <Redirect exact={true} from="/register" to="register/1" />
                     </Switch>
                 </Context.Provider>
             </MuiThemeProvider>

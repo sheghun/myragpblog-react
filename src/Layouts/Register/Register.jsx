@@ -5,13 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
-
-// Personal components
-import ErrorWrapper from '../../Hoc/ErrorWrapper/ErrorWrapper'
 
 // Lazy loaded Components
 const FirstForm = React.lazy(() => import('../../Views/Register/FirstForm'))
@@ -68,7 +62,8 @@ class Register extends React.Component {
 
     goToStep = (i) => {
         this.setState(state => ({...state, activeStep: i}));
-    }
+	}
+	
 
     /**
      * Get the current step and choose the form to display
@@ -106,7 +101,7 @@ class Register extends React.Component {
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <div className={classes.toolbarSpacing}></div>
+                    <div className={classes.toolbarSpacing} />
                     <main className={classes.layout}>
                         <Paper className={classes.paper}>
                             <Typography variant="h4" align="center">

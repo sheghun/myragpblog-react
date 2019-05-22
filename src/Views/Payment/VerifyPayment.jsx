@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +10,7 @@ import Axios from 'axios'
 
 // * For handling the query parametes in the url
 import queryString from 'query-string'
-import { CircularProgress } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
     listItem: {
