@@ -20,12 +20,24 @@ import "./App.css";
 // Personal Components
 import Spinner from "./Components/Spinner/Spinner";
 
-const Blog = React.lazy(() => import("./Layouts/Blog/Blog.jsx"));
-const Signin = loadable(() => import("./Views/Signin/Signin"));
-const Dashboard = loadable(() => import("./Layouts/Dashboard/Dashboard"));
-const Register = loadable(() => import("./Layouts/Register/Register"));
-const Payment = loadable(() => import("./Layouts/Payment/Payment"));
-const Web = loadable(() => import("./Views/Web/Web"));
+const Blog = loadable(() => import("./Layouts/Blog/Blog.jsx"), {
+	fallback: <Spinner />,
+});
+const Signin = loadable(() => import("./Views/Signin/Signin"), {
+	fallback: <Spinner />,
+});
+const Dashboard = loadable(() => import("./Layouts/Dashboard/Dashboard"), {
+	fallback: <Spinner />,
+});
+const Register = loadable(() => import("./Layouts/Register/Register"), {
+	fallback: <Spinner />,
+});
+const Payment = loadable(() => import("./Layouts/Payment/Payment"), {
+	fallback: <Spinner />,
+});
+const Web = loadable(() => import("./Views/Web/Web"), {
+	fallback: <Spinner />,
+});
 
 interface IProps extends RouteComponentProps {
     loginUserAction: CallableFunction;
@@ -42,7 +54,7 @@ export interface IState {
 
 const routes = [
     { path: "/login", component: Signin },
-    { exact:true, path: "/", component: Web },
+    { exact: true, path: "/", component: Web },
     { path: "/user", component: Dashboard },
     { path: "/payment", component: Payment },
     { path: "/register", component: Register },
@@ -71,7 +83,7 @@ const renderRoutes = (routes.map((route, index) =>
     route.exact ?
     <Route exact={true} key={index} path={route.path} component={route.component} />
     :
-    <Route key={index} path={route.path} component={route.component} />
+    <Route key={index} path={route.path} component={route.component} />,
 ));
 
 const App = (props: IProps) => {
