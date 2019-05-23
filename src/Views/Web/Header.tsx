@@ -83,6 +83,9 @@ const Header = () => {
 													<a href="#team-section-8" title="Team">Team</a>
 												</li>
 												<li>
+													<Link to="/login" title="Login">Login</Link>
+												</li>
+												<li>
 													<a href="#contact-section-14" title="Contact">Contact</a>
 												</li>
 												<li>

@@ -42,7 +42,7 @@ const Web = () => {
 										<h1 className="sm-heading">
 											PROFESSIONAL WAY
                                             <br />
-											TO PRESENT YOUR APP
+											TO PROSPECT YOUR PROSPECTS
                                         </h1>
 
 										<div className="line-separator" />
