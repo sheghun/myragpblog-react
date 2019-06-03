@@ -16,7 +16,7 @@ const LogOut = (props: IProps) => {
             if (response.status === 200) {
                 history.push('/');
             }
-        })()
+		})()
     })
 
     return <Spinner />

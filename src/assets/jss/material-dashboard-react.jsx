@@ -48,12 +48,12 @@ const card = {
 };
 
 const defaultFont = {
-  fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily: '"Lato", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
   lineHeight: "1.5em"
 };
-
-const primaryColor = "#9C27B0";
+const secondaryColor = "#9C27B0";
+const primaryColor = "#2d05c5";
 const warningColor = "#ff9800";
 const dangerColor = "#f44336";
 const successColor = "#4caf50";
@@ -103,7 +103,7 @@ const infoCardHeader = {
   ...infoBoxShadow
 };
 const primaryCardHeader = {
-  background: "linear-gradient(60deg, #8e24aa, #9C27B0)",
+  background: "linear-gradient(60deg, #8e24aa, #2d05c5)",
   ...primaryBoxShadow
 };
 const roseCardHeader = {
@@ -141,7 +141,7 @@ const title = {
   marginTop: "30px",
   marginBottom: "25px",
   minHeight: "32px",
-  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+  fontFamily: "'Lato', 'Helvetica', 'Arial', sans-serif",
   "& small": {
     color: "#777",
     fontWeight: "400",
@@ -192,6 +192,7 @@ export {
   successBoxShadow,
   warningBoxShadow,
   dangerBoxShadow,
+  secondaryColor,
   roseBoxShadow,
   warningCardHeader,
   successCardHeader,

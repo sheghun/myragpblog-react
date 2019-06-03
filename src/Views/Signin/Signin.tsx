@@ -20,7 +20,7 @@ import Axios, { AxiosError } from "axios";
 import queryString from "query-string";
 import React, { Component, useContext, useEffect, useState } from "react";
 // React router dependencies
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
 
 import Pricing from "../../Components/Pricing/Pricing";
 // Personal Components
@@ -32,11 +32,11 @@ import Context from "../../Context";
 import useStyles from "./styles";
 
 
-interface props extends RouteComponentProps {
+interface IProps extends RouteComponentProps {
 	classes: any;
 }
 
-const SignIn = (props: props) => {
+const SignIn = (props: IProps) => {
 
 	// Extract properties from props
 	const { location, history, classes } = props;
@@ -71,7 +71,7 @@ const SignIn = (props: props) => {
 				}
 			} catch (error) { /**no code */ }
 
-			})();
+		})();
 	}, []);
 
 	const validate = () => {
@@ -100,22 +100,22 @@ const SignIn = (props: props) => {
 		try {
 			const response = await Axios.post("/login", { userName, password });
 			if (response.status === 200) {
-				if (!response.data.notDone) {
-					dispatch({ type: "LOGIN" });
-					history.push(returnUrl as string);
+				if (response.data.notDone) {
+					setCurrentForm("second");
+					return;
 				}
-				setCurrentForm("second");
 			}
 		} catch (error) {
 			// Type alias
 			const err = error as AxiosError;
-			// @ts-ignore
-			if (err.response.status === 422) {
-				setError("Inputs incorrect");
-			}
-			// @ts-ignore
-			if (err.response.status === 401) {
-				setError("Username Or Password Incorrect");
+			if (err.response) {
+				if (err.response.status === 422) {
+					setError("Inputs incorrect");
+				}
+				// @ts-ignore
+				if (err.response.status === 401) {
+					setError("Username Or Password Incorrect");
+				}
 			}
 		}
 		setLoading(false);
@@ -125,16 +125,13 @@ const SignIn = (props: props) => {
 		case "second":
 			return <SecondForm {...props} />;
 
-		case "third":
-			return <ThirdForm {...props} />;
-
 		default:
 			return (
 				<>
+					<CssBaseline />
 					<div className={classes.body} />
-					<SnackbarSpinner type="success" loading={loading} onClose={() => { }} />
+					{/* <SnackbarSpinner type="success" loading={loading} onClose={() => { }} /> */}
 					<main className={classes.main}>
-						<CssBaseline />
 						<Paper className={classes.paper}>
 							<Avatar className={classes.avatar}>
 								<LockIcon />
@@ -188,8 +185,7 @@ const SignIn = (props: props) => {
 
 };
 
-const SecondForm = (props: props) => {
-
+const SecondForm = (props: IProps) => {
 	// Get the props
 	const { classes, history } = props;
 	// Loading animation flag
@@ -292,7 +288,7 @@ const SecondForm = (props: props) => {
 			const data = { ragpReferalId, whatsappNumber, accountName, accountNumber, bankAccountType, bank };
 			const response = await Axios.put("/member", data);
 			if (response.status === 200) {
-				history.push("/package");
+				history.push("/payment");
 			}
 		} catch (error) {
 			const err = error as AxiosError;
@@ -442,13 +438,6 @@ const SecondForm = (props: props) => {
 		</>
 	);
 
-};
-
-const ThirdForm = (props: props) => {
-
-	return (
-		<Pricing />
-	);
 };
 
 export default withStyles(useStyles as any)(SignIn);

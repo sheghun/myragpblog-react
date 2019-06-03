@@ -90,7 +90,7 @@ class Dashboard extends React.Component {
                             image={image}
                             handleDrawerToggle={this.handleDrawerToggle}
                             open={this.state.mobileOpen}
-                            color="red"
+                            color="purple"
                             location={location}
                             {...rest}
                         />

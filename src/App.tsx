@@ -40,25 +40,25 @@ const Web = loadable(() => import("./Views/Web/Web"), {
 });
 
 interface IProps extends RouteComponentProps {
-    loginUserAction: CallableFunction;
+	loginUserAction: CallableFunction;
 }
 
 export interface IAction {
-    type: "LOGIN" | "LOGOUT";
+	type: "LOGIN" | "LOGOUT";
 }
 
 export interface IState {
-    loggedIn: boolean;
-    loggedInOnce: boolean;
+	loggedIn: boolean;
+	loggedInOnce: boolean;
 }
 
 const routes = [
-    { path: "/login", component: Signin },
-    { exact: true, path: "/", component: Web },
-    { path: "/user", component: Dashboard },
-    { path: "/payment", component: Payment },
-    { path: "/register", component: Register },
-    { path: "/:username", component: Blog },
+	{ path: "/login", component: Signin },
+	{ exact: true, path: "/", component: Web },
+	{ path: "/user", component: Dashboard },
+	{ path: "/payment", component: Payment },
+	{ path: "/register", component: Register },
+	{ path: "/:username", component: Blog },
 ];
 
 // Initial state
@@ -69,37 +69,37 @@ const initialState: IState = { loggedIn: false, loggedInOnce: false };
  * @params state action
  */
 const reducer = (state: IState, action: IAction): IState => {
-    switch (action.type) {
-        case "LOGIN":
-            return { ...state, loggedIn: true, loggedInOnce: true };
-        case "LOGOUT":
-            return { ...state, loggedIn: false, loggedInOnce: true };
-        default:
-            return state;
-    }
+	switch (action.type) {
+		case "LOGIN":
+			return { ...state, loggedIn: true, loggedInOnce: true };
+		case "LOGOUT":
+			return { ...state, loggedIn: false, loggedInOnce: true };
+		default:
+			return state;
+	}
 };
 
 const renderRoutes = (routes.map((route, index) =>
-    route.exact ?
-    <Route exact={true} key={index} path={route.path} component={route.component} />
-    :
-    <Route key={index} path={route.path} component={route.component} />,
+	route.exact ?
+		<Route exact={true} key={index} path={route.path} component={route.component} />
+		:
+		<Route key={index} path={route.path} component={route.component} />,
 ));
 
 const App = (props: IProps) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-    return (
-        <Suspense fallback={<Spinner />}>
-            <MuiThemeProvider theme={theme}>
-                <Context.Provider value={{ state, dispatch }}>
-                    <Switch>
-                        {renderRoutes}
-                    </Switch>
-                </Context.Provider>
-            </MuiThemeProvider>
-        </Suspense>
-    );
+	return (
+		<Suspense fallback={<Spinner />}>
+			<MuiThemeProvider theme={theme}>
+				<Context.Provider value={{ state, dispatch }}>
+					<Switch>
+						{renderRoutes}
+					</Switch>
+				</Context.Provider>
+			</MuiThemeProvider>
+		</Suspense>
+	);
 };
 
 export default withRouter(App);

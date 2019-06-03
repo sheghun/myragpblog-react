@@ -40,9 +40,11 @@ const Web = () => {
 									<div className="title-block-container white-content">
 
 										<h1 className="sm-heading">
-											PROFESSIONAL WAY
+											THE MOST EFFECTIVE
                                             <br />
-											TO PROSPECT YOUR PROSPECTS
+											SYSTEM FOR BUILDING
+											<br />
+											YOUR RAGP BUSINESS
                                         </h1>
 
 										<div className="line-separator" />

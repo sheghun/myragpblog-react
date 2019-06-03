@@ -8,7 +8,8 @@ import {
   infoColor,
   successColor,
   warningColor,
-  dangerColor
+  dangerColor,
+  secondaryColor
 } from "../../material-dashboard-react.jsx";
 
 const sidebarStyle = theme => ({
@@ -107,7 +108,7 @@ const sidebarStyle = theme => ({
       height: "100%",
       content: '""',
       display: "block",
-      background: "#000",
+      background: secondaryColor,
       opacity: ".8"
     }
   },
@@ -161,10 +162,10 @@ const sidebarStyle = theme => ({
     color: "#FFFFFF"
   },
   purple: {
-    backgroundColor: primaryColor,
+    backgroundColor: primaryColor + " !important",
     ...primaryBoxShadow,
     "&:hover": {
-      backgroundColor: primaryColor,
+      backgroundColor: primaryColor + " !important",
       ...primaryBoxShadow
     }
   },
@@ -198,12 +199,12 @@ const sidebarStyle = theme => ({
         "0 12px 20px -10px rgba(255,152,0,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(255,152,0,.2)"
     }
   },
-  red: {
-    backgroundColor: dangerColor,
+  primary: {
+    backgroundColor: secondaryColor,
     boxShadow:
       "0 12px 20px -10px rgba(244,67,54,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(244,67,54,.2)",
     "&:hover": {
-      backgroundColor: dangerColor,
+      backgroundColor: secondaryColor,
       boxShadow:
         "0 12px 20px -10px rgba(244,67,54,.28), 0 4px 20px 0 rgba(0,0,0,.12), 0 7px 8px -5px rgba(244,67,54,.2)"
     }

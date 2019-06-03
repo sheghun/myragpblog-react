@@ -8,14 +8,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "@material-ui/icons/Menu";
 // @ts-ignore
 import classNames from "classnames";
-import PropTypes from "prop-types";
 import React from "react";
 // core components
 import HeaderLinks from "./HeaderLinks.jsx";
 
 import Button from "../CustomButtons/Button"
 
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import headerStyle from "../../assets/jss/material-dashboard-react/components/headerStyle.jsx";
 
 function Header({ ...props }: any) {

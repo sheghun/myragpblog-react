@@ -89,7 +89,7 @@ const styles = theme => ({
         marginTop: "0px",
         minHeight: "auto",
         fontWeight: "300",
-        fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+        fontFamily: "'Lato', 'Helvetica', 'Arial', sans-serif",
         marginBottom: "3px",
         textDecoration: "none"
     },
@@ -499,7 +499,7 @@ class UserProfile extends Component {
                                 }
                                 <IconButton onClick={() => { this.profileImageInput.click(); this.profileImageInput.value = '' }}>
                                     <EditIcon style={{ color: 'white' }} />
-                                    <input accept="image/*" ref={ref => this.profileImageInput = ref} style={{ display: 'none' }}
+                                    <input aria-label="Input to upload image" accept="image/*" ref={ref => this.profileImageInput = ref} style={{ display: 'none' }}
                                         type="file" onChange={this.profileImageUpdateHandler}
                                     />
                                 </IconButton>
@@ -672,7 +672,7 @@ class UserProfile extends Component {
                         <Card profile>
                             <CardAvatar profile>
                                 <Link to={this.props.match.url + '#profile'} onClick={this.profileView}>
-                                    <img src={this.state.inputs.image} alt="..." />
+                                    <img src={this.state.inputs.image} alt="Profile" />
                                 </Link>
                             </CardAvatar>
                             <CardBody profile>

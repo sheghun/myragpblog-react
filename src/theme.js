@@ -13,6 +13,7 @@ export default createMuiTheme({
     },
     typography: {
 		color: '#5f6368',
+		fontFamily: "Lato",
 		useNextVariants: true,
         body1: {
             color: '#5f6368',
@@ -26,7 +27,7 @@ export default createMuiTheme({
         },
         overline: {
             fontWeight: 'bold',
-            fontFamily: 'Roboto Mono'
+            fontFamily: 'Lato Mono'
         },
         h1: {
             color: '#202124'
