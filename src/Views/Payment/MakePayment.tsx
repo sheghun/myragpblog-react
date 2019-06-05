@@ -12,6 +12,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import StarIcon from "@material-ui/icons/StarBorder";
+import ArrowBackwardIcon from '@material-ui/icons/ArrowBack'
 import { makeStyles } from "@material-ui/styles";
 import React, { useState } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -52,23 +53,28 @@ const useStyles = ((theme: Theme) => ({
 	"appBar": {
 		borderBottom: `1px solid ${theme.palette.divider}`,
 	},
-	"grid": {
-		minHeight: "200px",
+	"button": {
+		margin: "-100px auto 0 !important",
+		width: "70% !important",
+	},
+	"card": {
+		minHeight: "300px",
+
+	},
+	"cardContent": {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-evenly",
+		minHeight: "250px",
 	},
 	"link": {
 		margin: theme.spacing.unit * 1 + " " + theme.spacing.unit * 1.5,
-	},
-	"toolbar": {
-		flexWrap: "wrap",
-	},
-	"toolbarTitle": {
-		flexGrow: 1,
 	},
 	"heroContent": {
 		boxSizing: "border-box",
 		marginLeft: "auto",
 		marginRight: "auto",
-		padding: theme.spacing.unit * 0.5 + "rem " + theme.spacing.unit * 0 + "px " + theme.spacing.unit * 6 + "px",
+		padding: theme.spacing.unit * 1.2 + "px " + theme.spacing.unit * 0 + "px " + theme.spacing.unit * 4 + "px",
 	},
 	"tiers": {
 		marginLeft: "auto",
@@ -80,13 +86,15 @@ const useStyles = ((theme: Theme) => ({
 		}
 	},
 	"cardHeader": {
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: "#fff",
 	},
 	"cardPricing": {
-		alignItems: "baseline",
+		alignItems: "center",
 		display: "flex",
+		flexDirection: "column",
 		justifyContent: "center",
 		marginBottom: theme.spacing.unit * 2,
+		marginTop: "-3rem",
 	},
 	"footer": {
 		borderTop: `1px solid ${theme.palette.divider}`,
@@ -97,6 +105,13 @@ const useStyles = ((theme: Theme) => ({
 			paddingBottom: theme.spacing.unit * 6,
 			paddingTop: theme.spacing.unit * 6,
 		},
+	},
+	"subHeader": {
+		// lineHeight: "1.2 !important",
+		// marginTop: "16px !important",
+	},
+	"toolbar": {
+		...theme.mixins.toolbar
 	},
 }));
 
@@ -109,6 +124,7 @@ const tiers: any = [
 			"Pay yourself when your package expires",
 		],
 		price: "2,500",
+		subheader: "One Time Payment pay yourself when your package expires",
 		title: "One Month",
 	},
 	{
@@ -119,7 +135,7 @@ const tiers: any = [
 			"Automatically charged when your package expires",
 		],
 		price: "2,000",
-		subheader: "Most popular",
+		subheader: "Pay continuously you're automatically charged when your package expires",
 		title: "Subscription",
 	},
 ];
@@ -159,7 +175,7 @@ const MakePayment = (props: IProps) => {
 			const response = await Axios.post("payment/pay-once", { packageId: 1 });
 			if (response.status === 200) {
 				// Grab the data
-				const {data} = response;
+				const { data } = response;
 				window.location.href = data.authorizationUrl;
 			}
 		} catch (error) {
@@ -198,9 +214,9 @@ const MakePayment = (props: IProps) => {
 	 * @param title string
 	 *
 	 */
-	const submit = (title: string) => {
+	const submit = (title: string) => (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
 		if (title === "One Month") {
-			payOneTimeBill()
+			payOneTimeBill();
 			return;
 		}
 		paySubscriptionBill();
@@ -208,14 +224,20 @@ const MakePayment = (props: IProps) => {
 
 	return (
 		<>
+			{/* <AppBar color="secondary">
+				<Toolbar>
+					<ArrowBackwardIcon />
+			</Toolbar>
+			</AppBar> */}
+			<div className={classes.toolbar} />
 			<Progress show={loading} />
 			<CssBaseline />
 			<main style={{ maxWidth: "600px" }} className={classes.heroContent}>
-				<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom={true}>
+				<Typography variant="h4" align="center" color="textPrimary" gutterBottom={true}>
 					Pricing
 			</Typography>
-				<Typography variant="h5" align="center" color="textSecondary" component="p">
-					Package you want your blog to run on.
+				<Typography variant="h6" align="center" color="textSecondary" component="p">
+					Select your package
 			</Typography>
 			</main>
 			{/* End hero unit */}
@@ -223,35 +245,33 @@ const MakePayment = (props: IProps) => {
 				<Grid container={true} spacing={8} alignItems="flex-end" justify="center">
 					{tiers.map((tier: ITier) => (
 						// Enterprise card is full width at sm breakpoint
-						<Grid item={true} className={classes.grid} key={tier.title} justify="center" xs={12} sm={5}>
-							<Card>
+						<Grid item={true} className={classes.grid} key={tier.title} justify="center" xs={12} sm={4}>
+							<Card className={classes.card}>
 								<CardHeader
 									title={tier.title}
-									subheader={tier.subheader}
 									titleTypographyProps={{ align: "center" }}
-									subheaderTypographyProps={{ align: "center" }}
+									subheaderTypographyProps={{ align: "center", variant: "subtitle2", className: classes.subHeader }}
+									subheader={tier.subheader}
 									action={tier.title === "Pro" ? <StarIcon /> : null}
 									className={classes.cardHeader}
 								/>
-								<CardContent>
+								<CardContent className={classes.cardContent}>
 									<div className={classes.cardPricing}>
 										<Typography component="h2" variant="h3" color="textPrimary">
 											₦{tier.price}
 										</Typography>
 										<Typography variant="h6" color="textSecondary">
-											/mo
+											per month
                     					</Typography>
 									</div>
-									<ul>
-										{tier.description.map((line) => (
-											<Typography component="li" variant="subtitle1" align="center" key={line}>
-												{line}
-											</Typography>
-										))}
-									</ul>
 								</CardContent>
 								<CardActions>
-									<Button fullWidth={true} onClick={() => submit(tier.title)} variant={tier.buttonVariant} color="primary">
+									<Button
+										className={classes.button}
+										fullWidth={true}
+										onClick={submit(tier.title)} variant={tier.buttonVariant}
+										color="primary"
+									>
 										{tier.buttonText}
 									</Button>
 								</CardActions>

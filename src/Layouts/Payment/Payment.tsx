@@ -1,18 +1,21 @@
-import React from "react"
+import React from "react";
+import { Route } from "react-router-dom";
 import MakePayment from "../../Views/Payment/MakePayment";
 import VerifyPayment from "../../Views/Payment/VerifyPayment";
-import { Route } from "react-router-dom";
 
 const routes = [
-	{ path: "/payment", component: MakePayment },
 	{ path: "/payment/verify-payment", component: VerifyPayment },
+	{ exact: true, path: "/payment", component: MakePayment },
 ];
 
 const Payment = () => {
 	return (
 		<>
 			{routes.map((route, i) =>
-				<Route key={i} path={route.path} component={route.component} />
+				route.exact ?
+					<Route exact={true} key={i} path={route.path} component={route.component} />
+					:
+					<Route key={i} path={route.path} component={route.component} />,
 			)}
 		</>
 	);
