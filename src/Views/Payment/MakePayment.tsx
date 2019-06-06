@@ -117,7 +117,7 @@ const useStyles = ((theme: Theme) => ({
 
 const tiers: any = [
 	{
-		buttonText: "Sign up for free",
+		buttonText: "Pay one time",
 		buttonVariant: "outlined",
 		description: [
 			"One Time Payment",
@@ -128,7 +128,7 @@ const tiers: any = [
 		title: "One Month",
 	},
 	{
-		buttonText: "Get started",
+		buttonText: "Subscribe",
 		buttonVariant: "contained",
 		description: [
 			"Pay continuously",

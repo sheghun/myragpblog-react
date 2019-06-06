@@ -31,7 +31,6 @@ import Context from "../../Context";
 // Import personal styles
 import useStyles from "./styles";
 
-
 interface IProps extends RouteComponentProps {
 	classes: any;
 }
@@ -52,10 +51,19 @@ const SignIn = (props: IProps) => {
 	const [error, setError] = useState("");
 	// Error username state
 	const queryUrl = queryString.parse(location.search);
-	// Return Url
-	let returnUrl = queryUrl.returnUrl || "user/dashboard";
 	// Check if the former url is the logout url redirect to the dashboard
-	returnUrl = returnUrl === "/user/logout" ? "user/dashboard" : returnUrl;
+	let returnUrl = !queryUrl.returnUrl ? "/user/dashboard" : queryUrl.returnUrl === "/user/logout" ?
+		"/user/dashboard" : queryUrl.returnUrl;
+
+	// Loop through the queryUrl to get the current 
+	if (Object.keys(queryUrl).length !== 0 && typeof (queryUrl) === "object") {
+		returnUrl += "?";
+		for (const fragments in queryUrl) {
+			if (fragments === "returnUrl") { continue; }
+
+			returnUrl += fragments + "=" + queryUrl[fragments] + "&";
+		}
+	}
 	// Current form to display
 	const [currentForm, setCurrentForm] = useState("");
 
@@ -70,7 +78,6 @@ const SignIn = (props: IProps) => {
 					history.push(returnUrl as string);
 				}
 			} catch (error) { /**no code */ }
-
 		})();
 	}, []);
 
@@ -104,6 +111,8 @@ const SignIn = (props: IProps) => {
 					setCurrentForm("second");
 					return;
 				}
+				dispatch({ type: "LOGIN" });
+				history.push(returnUrl as string);
 			}
 		} catch (error) {
 			// Type alias
