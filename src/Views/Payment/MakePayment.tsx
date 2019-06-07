@@ -182,7 +182,7 @@ const MakePayment = (props: IProps) => {
 			const err = error as AxiosError;
 			if (err.response) {
 				if (err.response.status === 403) {
-					history.push("/login?returnUrl" + location.pathname);
+					history.push("/login?returnUrl=" + location.pathname);
 				}
 			}
 		}

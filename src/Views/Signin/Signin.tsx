@@ -55,8 +55,8 @@ const SignIn = (props: IProps) => {
 	let returnUrl = !queryUrl.returnUrl ? "/user/dashboard" : queryUrl.returnUrl === "/user/logout" ?
 		"/user/dashboard" : queryUrl.returnUrl;
 
-	// Loop through the queryUrl to get the current 
-	if (Object.keys(queryUrl).length !== 0 && typeof (queryUrl) === "object") {
+	// Loop through the queryUrl to get the current
+	if (Object.keys(queryUrl).length > 1 && typeof (queryUrl) === "object") {
 		returnUrl += "?";
 		for (const fragments in queryUrl) {
 			if (fragments === "returnUrl") { continue; }

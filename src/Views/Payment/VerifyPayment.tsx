@@ -8,6 +8,7 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Progress from "../../Components/Progress/Progress";
+import Snackbar from "../../Components/Snackbar/Snackbar";
 
 const useStyles = ((theme: Theme) => ({
 	paper: {
@@ -38,26 +39,42 @@ const VerifyPayment = (props: IProps) => {
 	const queryUrl = queryString.parse(location.search);
 	const [loading, setLoading] = useState(false);
 	const [successful, setSuccessful] = useState(false);
+	const [notSuccessful, setNotSucessful] = useState(false);
+	const [invalidReference, setInvalidReference] = useState(false);
+	const [networkFailed, setNetworkFailed] = useState(false);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				setLoading(true);
-				const response = await Axios.post("/payment/verify-transaction");
+				const response = await Axios.post("/payment/verify-transaction", { ...queryUrl });
 				if (response.status === 200) {
-					setSuccessful(true)
+					setSuccessful(true);
+
+					setTimeout(() => {
+						history.push("/user/dashboard");
+					}, 3000);
 				}
 			} catch (error) {
 				const err = error as AxiosError;
 				if (err.response) {
+					if (err.response.status === 400) {
+						setNotSucessful(true);
+					}
 					if (err.response.status === 403) {
 						// Format the string
 						const urlQueries = location.search.replace("?", "&");
 						history.push("/login?returnUrl=" + location.pathname + urlQueries);
 					}
+					if (err.response.status === 404) {
+						setInvalidReference(true);
+					}
+					if (err.response.status === 500) {
+						setNetworkFailed(true);
+					}
 				}
 			}
-			setLoading(false)
+			setLoading(false);
 		})();
 
 	}, []);
@@ -71,7 +88,9 @@ const VerifyPayment = (props: IProps) => {
 					<Typography variant="h6" align="center">Verifying your payment please wait.</Typography>
 					{loading ? <CircularProgress /> : null}
 					{successful ? <Typography variant="body1">Payment successful redirecting to dashboard</Typography> : null}
-
+					{networkFailed ? <Typography style={{ color: "red" }}>Bad network try reloading the page </Typography> : null}
+					{notSuccessful ? <Typography style={{ color: "red" }}>Transaction not successful </Typography> : null}
+					{invalidReference ? <Typography style={{ color: "red" }}>Transaction reference does not exist</Typography> : null}
 				</Grid>
 			</Grid>
 		</>
