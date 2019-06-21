@@ -2,6 +2,8 @@ import React from "react";
 import Header from "./Header";
 import HeadLinks from "./HeadLinks";
 
+import subBackgroundImage from "../../assets/images/subscribe-background.jpg"
+
 const Web = () => {
 
 	return (
@@ -40,25 +42,12 @@ const Web = () => {
 									<div className="title-block-container white-content">
 
 										<h1 className="sm-heading">
-											THE MOST EFFECTIVE
-                                            <br />
-											SYSTEM FOR BUILDING
+											THE ULTIMATE THIRD PARTY TOOL
 											<br />
-											YOUR RAGP BUSINESS
+											A FULLY AUTOMATED MARKETING
+											<br />
+											NETWORK BUILDING SYSTEM.
                                         </h1>
-
-										<div className="line-separator" />
-										<h4>Available on stores</h4>
-
-										<a href="#" title="App Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-006.jpg" alt="App Store" />
-										</a>
-										<a href="#" title="Google Play" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-007.jpg" alt="Google Play" />
-										</a>
-										<a href="#" title="Windows Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-008.jpg" alt="Win Store" />
-										</a>
 									</div>
 								</div>
 							</div>
@@ -74,7 +63,7 @@ const Web = () => {
 
 							<div className="row">
 
-								<div className="col-lg-8 col-md-7 pull-right">
+								<div className="col-lg-10 col-lg-offset-1 col-md-12">
 
 									<div className="row">
 
@@ -82,7 +71,7 @@ const Web = () => {
 
 											<div className="title-block-container">
 
-												<h2>Explain why you have to buy it</h2>
+												<h2>A FULLY AUTOMATED MARKETING & NETWORK BUILDING SYSTEM.</h2>
 
 												<div className="line-separator" />
 											</div>
@@ -92,69 +81,11 @@ const Web = () => {
 
 											<div className="content-block-container">
 
-												<p>User experience android release crowdfunding gamification early adopters
-													stealth advisor metrics traction return on investment. Handshake series A
-													financing release business-to-consumer stealth marketing market research
-                                        &amp; development.</p>
+												<p>
+													Finally, the most effective prospecting, recruiting, training &amp; support systems (all rapped up in one) at your finger tips.the dream of all network marketers finally realized. now you can truly do your <strong>RAGP</strong> business the 21st century way with a fully automated marketing &amp; network building system!! no more endless whatsapp posts &amp; lengthy talks: just share your blog link, guide your prospect to properly navigate the blog, and let the blog do the magic!
+												</p>
 											</div>
 										</div>
-
-										<div className="col-md-12 content-block content-block-style-3">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-diamond circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Responsive design">Responsive design</a></h4>
-
-												<p>Influencer business model canvas market buzz partnership incubator rockstar
-                                                    crowdfunding infographic partner network metrics pivot buyer return on
-                                        investment. Infographic founders first mover advantage.</p>
-											</div>
-										</div>
-
-										<div className="col-md-12 content-block content-block-style-3">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-code circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Clean code">Clean code</a></h4>
-
-												<p>User experience android release crowdfunding gamification early adopters
-                                                    stealth advisor metrics traction return on investment. Early adopters
-                                                    traction stealth focus partnership conversion responsive web design social
-                                        media.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div
-									className="col-lg-4 col-lg-offset-0 col-md-5 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1"
-								>
-
-									<div className="image-block">
-
-										<div className="image-block-container">
-											<img src="images/content/content-036.png" alt="Image Block" />
-											<img src="images/content/content-037.png" alt="Image Block" />
-										</div>
-									</div>
-								</div>
-
-								<div className="col-lg-8 col-md-12 col-sm-12 button-block">
-
-									<div className="button-block-container md-text-center">
-										<a href="#" title="App Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-001.jpg" alt="App Store" />
-										</a>
-										<a href="#" title="Google Play" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-002.jpg" alt="Google Play" />
-										</a>
-										<a href="#" title="Windows Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-003.jpg" alt="Win Store" />
-										</a>
 									</div>
 								</div>
 							</div>
@@ -170,7 +101,7 @@ const Web = () => {
 
 							<div className="row">
 
-								<div className="col-lg-8 col-md-7">
+								<div className="col-sm-12">
 
 									<div className="row">
 
@@ -178,7 +109,7 @@ const Web = () => {
 
 											<div className="title-block-container">
 
-												<h2>Why you have to buy LUNE ?</h2>
+												<h2>WHY SHOULD I SUBSCRIBE TO MYRAGPBLOG.COM</h2>
 
 												<div className="line-separator" />
 											</div>
@@ -188,70 +119,11 @@ const Web = () => {
 
 											<div className="content-block-container">
 
-												<p>Alpha pitch customer return on investment stock pivot ecosystem equity long
-                                        tail prototype low hanging fruit paradigm shift startup.</p>
+												<p>
+
+													Recharge And Get Paid is an amazing business and money making opportunity the best business opportunity available for the common man in Nigeria to start a business, create wealth, achieve financial freedom and escape poverty today!. The <strong>RAGP</strong> business is no doubt a fast vehicle for wealth creation, much like a bullet train! but to run as fast you can with it, you need rails to run on, you need an effective system for prospecting, recruiting, training &amp; support that you can use to build that large <strong>RAGP</strong> network &amp; make that big money you're dreaming of super fast. We are that high speed automated system you've been looking for we provide you with all the resources &amp; support systems you need to succeed in building your ragp business!
+												</p>
 											</div>
-										</div>
-
-										<div className="col-md-6 content-block">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-diamond circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Responsive design">Responsive design</a></h4>
-
-												<p>IPad holy grail hackathon facebook sales startup ownership.</p>
-											</div>
-										</div>
-
-										<div className="col-md-6 content-block">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-code circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Clean code">Clean code</a></h4>
-
-												<p>A/B testing monetization ecosystem accelerator founders.</p>
-											</div>
-										</div>
-
-										<div className="col-md-6 content-block">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Well Documented">Well Documented</a></h4>
-
-												<p>Learning curve scrum project partner network direct mailing.</p>
-											</div>
-										</div>
-
-										<div className="col-md-6 content-block">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-google circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Google Fonts">Google Fonts</a></h4>
-
-												<p>Validation alpha success hackathon seed round assets.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div
-									className="col-lg-4 col-lg-offset-0 col-md-5 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1"
-								>
-
-									<div className="image-block">
-
-										<div className="image-block-container">
-											<img src="images/content/content-038.png" alt="Image Block" />
-											<img src="images/content/content-039.png" alt="Image Block" />
 										</div>
 									</div>
 								</div>
@@ -259,6 +131,7 @@ const Web = () => {
 						</div>
 					</div>
 				</div>
+
 
 				<div id="content-section-32" className="content-section white-section">
 
@@ -272,30 +145,34 @@ const Web = () => {
 
 									<div className="title-block-container text-center">
 
-										<h2>THE BENEFITS OF BUYING LUNE</h2>
+										<h2>BENEFITS OF SUBSCRIBING FOR THE BLOG:</h2>
 
-										<p>Release bandwidth user experience research &amp; development branding termsheet
-                                business plan advisor analytics ecosystem entrepreneur freemium.</p>
+										<p>
+											You stand to benefit the following from our system
+										</p>
 
 										<div className="line-separator" />
 									</div>
 								</div>
 
-								<div className="col-md-4 padding-top-100">
+								<div className="col-md-6 padding-top-100">
 
 									<div className="row">
 
-										<div className="col-md-12 content-block content-block-style-3"
-											data-gfort-swiper-slide-to="1">
+										<div
+											className="col-md-12 content-block content-block-style-3"
+											data-gfort-swiper-slide-to="1"
+										>
 
 											<div className="content-block-container text-right">
 
 												<i className="fa fa-diamond circle-icon-block circle-icon-block-lg" />
 
-												<h4>Clean design</h4>
+												<h4>An Effective Prospecting &amp; Presenting Tool</h4>
 
-												<p>Sales first mover advantage low hanging fruit return on investment seed round
-                                        termsheet.</p>
+												<p>
+													Our system is designed to serve you as an effective third party tool for sharing and explaining the <strong>RAGP</strong> business opportunity to your prospects. By thoroughly navigating the blog, your prospects get a comprehensive, concise and compelling information, understanding and appreciation of the ragp business opportunity in no time
+												</p>
 											</div>
 										</div>
 
@@ -306,30 +183,17 @@ const Web = () => {
 
 												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
 
-												<h4>Well Documented</h4>
+												<h4>A High Rate Conversion &amp; Recruitment Tool</h4>
 
-												<p>Seed round android early adopters user experience validation crowdsource
-                                        startup.</p>
-											</div>
-										</div>
-
-										<div className="col-md-12 content-block content-block-style-3"
-											data-gfort-swiper-slide-to="3">
-
-											<div className="content-block-container text-right">
-
-												<i className="fa fa-th circle-icon-block circle-icon-block-lg" />
-
-												<h4>Bootstrap</h4>
-
-												<p>Responsive web design gamification user experience beta success facebook
-                                        release.</p>
+												<p>
+													Beyond furnishing your prospects with a compelling &amp; persuasive understanding of the <strong>RAGP</strong> business opportunity, the blog is designed to efficiently help you convert your prospects into downlines, by systematically guiding &amp; leading them to join the business and register as your ragp downlines; even without your knowledge and involvement all you need to do is share the blog link with then and let the blog do the rest expect up to 50% conversion rate of prospects to downlines as you effectively deploy &amp; use the blog.
+												</p>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<div className="col-md-4 pull-right padding-top-100">
+								<div className="col-md-6 pull-right padding-top-100">
 
 									<div className="row">
 
@@ -340,10 +204,11 @@ const Web = () => {
 
 												<i className="fa fa-code circle-icon-block circle-icon-block-lg" />
 
-												<h4>Clean code</h4>
+												<h4>A Powerful Training Tool</h4>
 
-												<p>Sales client interaction design product management user experience
-                                        partnership.</p>
+												<p>
+													It’s not enough to convert a prospect into a downline, he/she also needs to be trained to become an effective and productive networker &amp; RAGP(ER)! the blog is also designed and equipped to serve this all important purpose of training new downlines and providing them with all the resources they need to succeed in the ragp network marketing business!
+												</p>
 											</div>
 										</div>
 
@@ -354,142 +219,11 @@ const Web = () => {
 
 												<i className="fa fa-google circle-icon-block circle-icon-block-lg" />
 
-												<h4>Google Fonts</h4>
+												<h4>That Essential Support System</h4>
 
-												<p>Strategy stock startup partner network interaction design alpha pitch.</p>
-											</div>
-										</div>
-
-										<div className="col-md-12 content-block content-block-style-3"
-											data-gfort-swiper-slide-to="6">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-terminal circle-icon-block circle-icon-block-lg" />
-
-												<h4>Easy to use</h4>
-
-												<p>Traction virality termsheet crowdfunding low hanging fruit interaction
-                                        design.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="col-md-4">
-
-									<div className="row">
-
-										<div className="col-md-12">
-
-											<div className="mobile-slider iphone-slider">
-
-												<img src="images/content/iphone-frame.png" className="iphone-frame"
-													alt="iPhone Image" />
-
-												<div className="mobile-slider-container">
-
-													<div className="gfort-swiper-slider vertical-swiper-slider"
-														data-swiper-items="1">
-
-														<div className="swiper-wrapper">
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-040.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-041.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-042.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-043.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-044.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div className="swiper-slide">
-
-																<div className="swiper-slide-container">
-
-																	<div className="image-block">
-
-																		<div className="image-block-container">
-																			<img src="images/content/content-045.jpg"
-																				alt="Slide Image" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div className="swiper-pagination" />
-
-														<div className="swiper-button-prev">
-															<i className="fa fa-angle-left" />
-														</div>
-
-														<div className="swiper-button-next">
-															<i className="fa fa-angle-right" />
-														</div>
-													</div>
-												</div>
+												<p>
+													Beyond training, you &amp; your downlines need an ongoing support system in other to survive the rigourous &amp; challenges of building a successful network marketing business. myragpblog.com is especially designed, programed and equiped to provide you with that timely &amp; useful support 24/7.
+												</p>
 											</div>
 										</div>
 									</div>
@@ -504,7 +238,7 @@ const Web = () => {
 					<div className="section-container">
 
 						<div className="background-image-block parallax-effect gfort-background">
-							<img src="images/subscribe/subscribe-001.jpg" alt="Parallax Background" />
+							<img src={subBackgroundImage} alt="Parallax Background" />
 						</div>
 
 						<div className="container">
@@ -515,7 +249,7 @@ const Web = () => {
 
 									<div className="title-block-container white-content text-center">
 
-										<h2>SUBSCRIBE NOW AND STAY INFORMED</h2>
+										<h2>SUBSCRIBE NOW (JOIN US)</h2>
 
 										<div className="line-separator" />
 									</div>
@@ -525,18 +259,9 @@ const Web = () => {
 
 									<div className="form-block-container white-content text-center">
 										<form method="post" action="#">
-
-											<div className="col-md-8">
+											<div className="col-sm-offset-4 col-md-4">
 												<div className="form-group">
-													<input type="email" className="form-control subscribe-email"
-														name="subscribe_email" />
-													<label>Email address</label>
-												</div>
-											</div>
-
-											<div className="col-md-4">
-												<div className="form-group">
-													<button type="submit" className="btn btn-gfort wave-effect">SUBSCRIBE</button>
+													<button type="submit" className="btn btn-gfort wave-effect">REGISTER</button>
 												</div>
 											</div>
 										</form>
@@ -547,7 +272,7 @@ const Web = () => {
 					</div>
 				</div>
 
-				<div id="content-section-24" className="content-section white-section">
+				<div id="content-section-31" className="content-section grey-section">
 
 					<div className="section-container">
 
@@ -555,7 +280,7 @@ const Web = () => {
 
 							<div className="row">
 
-								<div className="col-md-6">
+								<div className="col-lg-12">
 
 									<div className="row">
 
@@ -563,7 +288,7 @@ const Web = () => {
 
 											<div className="title-block-container">
 
-												<h2>Details about the project</h2>
+												<h2>Features Of The Blog</h2>
 
 												<div className="line-separator" />
 											</div>
@@ -573,222 +298,103 @@ const Web = () => {
 
 											<div className="content-block-container">
 
-												<p>
-													Learning curve metrics social media accelerator incubator ecosystem churn
-													rate vitality value proposition deployment alpha innovator buyer. Social
-													media backing iPad user experience supply chain buzz analytics branding
-													partnership mass market.
-												</p>
-												<ul>
-													<li>Supply chain ecosystem agile development rock star mass market.</li>
-													<li>Business model canvas long tail assets monetisation.</li>
-													<li>Branding social media growth hacking innovator strategy MVP.</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="col-md-6 video-block">
-
-									<div className="video-block-container">
-										<iframe
-											src="https://player.vimeo.com/video/96396015?color=d32f2f"
-											allowFullScreen={true}
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="content-section-23" className="content-section grey-section">
-
-					<div className="section-container">
-
-						<div className="container">
-
-							<div className="row">
-
-								<div className="col-md-6 pull-right">
-
-									<div className="row">
-
-										<div className="col-md-12 title-block">
-
-											<div className="title-block-container">
-
-												<h2>Details about the project</h2>
-
-												<div className="line-separator" />
+												<p>Our Features.</p>
 											</div>
 										</div>
 
-										<div className="col-md-12 content-block content-block-style-3">
+										<div className="col-md-6 content-block">
 
 											<div className="content-block-container">
 
 												<i className="fa fa-diamond circle-icon-block circle-icon-block-lg" />
 
-												<h4><a href="#" title="Responsive design">Responsive design</a></h4>
+												<h4>
+													A Multi-Media: Presentation Of The RAGP Business
+												</h4>
 
 												<p>
-													Influencer business model canvas market buzz partnership incubator rockstar
-													crowdfunding infographic partner network metrics pivot buyer return on
-													investment.
+													We furnishe your prospects with a concise and comprehensive presentation of the RAGP business in all available media formats: in text, video, audio, picture, etc formats.
 												</p>
 											</div>
 										</div>
 
-										<div className="col-md-12 content-block content-block-style-3">
-
-											<div className="content-block-container">
-
-												<i className="fa fa-code circle-icon-block circle-icon-block-lg" />
-
-												<h4><a href="#" title="Clean code">Clean code</a></h4>
-
-												<p>
-													Learning curve metrics social media accelerator incubator ecosystem churn
-													rate vitality value proposition deployment alpha innovator buyer.
-												</p>
-											</div>
-										</div>
-
-										<div className="col-md-12 content-block content-block-style-3">
+										<div className="col-md-6 content-block">
 
 											<div className="content-block-container">
 
 												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
 
-												<h4><a href="#" title="Well Documented">Well Documented</a></h4>
+												<h4><a href="#" title="Well Documented">Constant Updating Of Content</a></h4>
 
 												<p>
-													Social media backing iPad user experience supply chain buzz analytics
-													branding partnership mass market.
+													Keep abreast with the happenings, developments and progress in our ever dynamic RAGP business, the blog content is updated steadily to ensure that you remain current and stay ahead in the business.
+												</p>
+											</div>
+										</div>
+
+										<div className="col-md-6 content-block">
+
+											<div className="content-block-container">
+
+												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
+
+												<h4><a href="#" title="Well Documented">Customized Blogs For You &amp; Your Downlines</a></h4>
+
+												<p>
+													Upon subscription, you can quickly customize your blog by fitting into it your ragp username/referral id, your whatsapp number, your profile pictures, your email address, etc. so that your prospects, after navigating the blog, have no doubt who to join as they decide to join/start their ragp business.
+												</p>
+											</div>
+										</div>
+
+										<div className="col-md-6 content-block">
+
+											<div className="content-block-container">
+
+												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
+
+												<h4><a href="#" title="Well Documented">A Lucrative Income Stream</a></h4>
+
+												<p>
+													Besides helping you to effectively build your ragp business, the blog also affords you the opportunity to make good money from others people’s subscription and renewal fees. you'll find the myragpblog.com compensation plan very rewarding, making you the winner in more ways than one.
+												</p>
+											</div>
+										</div>
+
+										<div className="col-md-6 content-block">
+
+											<div className="content-block-container">
+
+												<i className="fa fa-book circle-icon-block circle-icon-block-lg" />
+
+												<h4><a href="#" title="Well Documented">Unbeatable Customer Care System</a></h4>
+
+												<p>
+													No system is perfect &amp; error free, so we expect you to experience some challenges every now and then as you use the blog. we've preempted that by building into the system a super responsive customer care service to make your experience of the blog as painless as possible!
+												</p>
+											</div>
+										</div>
+
+										<div className="col-md-6 content-block">
+
+											<div className="content-block-container">
+
+												<i className="fa fa-code circle-icon-block circle-icon-block-lg" />
+
+												<h4><a href="#" title="Clean code">Very Rich &amp; Up To Date Content</a></h4>
+
+												<p>
+													The blog is laced with super rich persuasive contents aimed at stirring and moving your prospects and downlines to take right actions that will lead to success for both you and them.
 												</p>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<div className="col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1">
-
-									<div className="image-block">
-
-										<div className="image-block-container">
-											<img src="images/content/content-033.png" alt="Image Block" />
-											<img src="images/content/content-034.png" alt="Image Block" />
-											<img src="images/content/content-035.png" alt="Image Block" />
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div id="portfolio-section-9" className="portfolio-section white-section">
-
-					<div className="section-container">
-
-						<div className="container">
-
-							<div className="row">
-
-								<div className="col-lg-10 col-lg-offset-1 col-md-12 title-block">
-
-									<div className="title-block-container text-center">
-
-										<h2>SCREENSHOTS</h2>
-
-										<p>Release bandwidth user experience research &amp; development branding termsheet
-                                business plan advisor analytics ecosystem entrepreneur freemium.</p>
-
-										<div className="line-separator" />
-									</div>
-								</div>
-
-								<div className="col-md-12 screenshots-block">
-
-									<div className="screenshots-block-container">
-
-										<div className="mobile-slider iphone-slider">
-
-											<img src="images/mobile-slider/iphone-frame.png" className="iphone-frame" alt="iPhone Image" />
-
-											<div className="mobile-slider-container">
-
-												<div className="gfort-swiper-slider" data-swiper-items="1">
-
-													<div className="swiper-wrapper">
-
-														<div className="swiper-slide">
-
-															<div className="swiper-slide-container">
-
-																<div className="image-block">
-
-																	<div className="image-block-container">
-																		<img src="images/portfolio/app/thumbs/app-thumbs-001.jpg" alt="Slide Image" />
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div className="swiper-slide">
-
-															<div className="swiper-slide-container">
-
-																<div className="image-block">
-
-																	<div className="image-block-container">
-																		<img src="images/portfolio/app/thumbs/app-thumbs-002.jpg" alt="Slide Image" />
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div className="swiper-pagination" />
-
-													<div className="swiper-button-prev">
-														<i className="fa fa-angle-left" />
-													</div>
-
-													<div className="swiper-button-next">
-														<i className="fa fa-angle-right" />
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div className="screenshots-images-wrapper">
-
-											<div className="images-wrapper">
-												<img src="images/portfolio/app/thumbs/app-thumbs-003.jpg" alt="Image Block" />
-												<img src="images/portfolio/app/thumbs/app-thumbs-004.jpg" alt="Image Block" />
-											</div>
-
-											<div className="images-wrapper">
-												<img src="images/portfolio/app/thumbs/app-thumbs-005.jpg" alt="Image Block" />
-												<img src="images/portfolio/app/thumbs/app-thumbs-006.jpg" alt="Image Block" />
-											</div>
-
-											<div className="images-wrapper">
-												<img src="images/portfolio/app/thumbs/app-thumbs-001.jpg" alt="Image Block" />
-												<img src="images/portfolio/app/thumbs/app-thumbs-002.jpg" alt="Image Block" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="testimonials-section-11" className="testimonials-section black-section">
+				{/* <div id="testimonials-section-11" className="testimonials-section black-section">
 
 					<div className="section-container">
 
@@ -803,6 +409,8 @@ const Web = () => {
 								<div className="gfort-swiper-slider" data-swiper-items="1">
 
 									<div className="swiper-wrapper">
+
+										<h1 style={{ color: " white", textAlign: "center" }}>Testimonies</h1>
 
 										<div className="swiper-slide">
 
@@ -914,7 +522,7 @@ const Web = () => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 
 				<div id="team-section-8" className="team-section white-section">
 
@@ -930,16 +538,11 @@ const Web = () => {
 
 										<h2>OUR TEAM</h2>
 
-										<p>
-											Release bandwidth user experience research &amp; development branding termsheet
-											business plan advisor analytics ecosystem entrepreneur freemium.
-										</p>
-
 										<div className="line-separator" />
 									</div>
 								</div>
 
-								<div className="col-md-3 col-sm-6 team-block team-block-style-2">
+								<div className="col-md-offset-3 col-md-3 col-sm-6 team-block team-block-style-2">
 
 									<div className="team-block-container">
 
@@ -951,7 +554,7 @@ const Web = () => {
 										</div>
 
 										<div className="team-block-title">
-											<h4><a href="#" title="ARTHUR">ARTHUR</a></h4>
+											<h4><a href="#" title="Oladiran Segun Solomon">OLADIRAN SEGUN</a></h4>
 											<h6 className="main-color">DEVELOPER</h6>
 										</div>
 
@@ -972,65 +575,13 @@ const Web = () => {
 										<div className="image-block">
 
 											<div className="image-block-container">
-												<img src="images/team/team-037.jpg" alt="Image Block" />
-											</div>
-										</div>
-
-										<div className="team-block-title">
-											<h4><a href="#" title="ACELINE">ACELINE</a></h4>
-											<h6 className="main-color">ART DIRECTOR</h6>
-										</div>
-
-										<div className="social-icons-block social-icons-block-sm social-icons-block-style-2">
-											<ul>
-												<li><a href="#" title="Facebook"><i className="fa fa-facebook" /></a></li>
-												<li><a href="#" title="Twitter"><i className="fa fa-twitter" /></a></li>
-												<li><a href="#" title="Behance"><i className="fa fa-behance" /></a></li>
-												<li><a href="#" title="Dribbble"><i className="fa fa-dribbble" /></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div className="col-md-3 col-sm-6 team-block team-block-style-2">
-
-									<div className="team-block-container">
-
-										<div className="image-block">
-
-											<div className="image-block-container">
-												<img src="images/team/team-038.jpg" alt="Image Block" />
-											</div>
-										</div>
-
-										<div className="team-block-title">
-											<h4><a href="#" title="CORIN">CORIN</a></h4>
-											<h6 className="main-color">CEO</h6>
-										</div>
-
-										<div className="social-icons-block social-icons-block-sm social-icons-block-style-2">
-											<ul>
-												<li><a href="#" title="Facebook"><i className="fa fa-facebook" /></a></li>
-												<li><a href="#" title="Twitter"><i className="fa fa-twitter" /></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div className="col-md-3 col-sm-6 team-block team-block-style-2">
-
-									<div className="team-block-container">
-
-										<div className="image-block">
-
-											<div className="image-block-container">
 												<img src="images/team/team-039.jpg" alt="Image Block" />
 											</div>
 										</div>
 
 										<div className="team-block-title">
-											<h4><a href="#" title="APOLLINE">APOLLINE</a></h4>
-											<h6 className="main-color">DESIGNER</h6>
+											<h4><a href="#" title="APOLLINE">MARK PHILIP</a></h4>
+											<h6 className="main-color">CONTENT WRITTER</h6>
 										</div>
 
 										<div className="social-icons-block social-icons-block-sm social-icons-block-style-2">
@@ -1040,38 +591,6 @@ const Web = () => {
 												<li><a href="#" title="Dribbble"><i className="fa fa-dribbble" /></a></li>
 											</ul>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="cta-section-10" className="cta-section grey-section">
-
-					<div className="section-container">
-
-						<div className="container">
-
-							<div className="row">
-
-								<div className="col-lg-10 col-lg-offset-1 col-md-12 title-block">
-
-									<div className="title-block-container text-center">
-
-										<h2>DOWNLOAD FROM</h2>
-
-										<div className="line-separator" />
-
-										<a href="#" title="App Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-001.jpg" alt="App Store" />
-										</a>
-										<a href="#" title="Google Play" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-002.jpg" alt="Google Play" />
-										</a>
-										<a href="#" title="Windows Store" className="btn-gfort-image">
-											<img src="images/download-buttons/download-buttons-003.jpg" alt="Win Store" />
-										</a>
 									</div>
 								</div>
 							</div>
@@ -1093,8 +612,7 @@ const Web = () => {
 
 										<h2>GET IN TOUCH</h2>
 
-										<p>Release bandwidth user experience research &amp; development branding termsheet
-                                business plan advisor analytics ecosystem entrepreneur freemium.</p>
+										<p>Reach us on this platforms</p>
 
 										<div className="line-separator" />
 									</div>
@@ -1102,62 +620,10 @@ const Web = () => {
 
 								<div className="col-md-12 form-block contact-form-block">
 
-									<div className="form-block-container">
-										<form method="post"
-											action="http://graphicfort.com/templates/lune/templates/php/contact.php">
-
-											<div className="col-md-4">
-												<div className="form-group">
-													<input type="text" className="form-control contact-name" name="contact_name" />
-													<label>Name</label>
-												</div>
-											</div>
-
-											<div className="col-md-4">
-												<div className="form-group">
-													<input type="text" className="form-control contact-email" name="contact_email" />
-													<label>Email address</label>
-												</div>
-											</div>
-
-											<div className="col-md-4">
-												<div className="form-group">
-													<input type="text" className="form-control contact-subject"
-														name="contact_subject" />
-													<label>Subject</label>
-												</div>
-											</div>
-
-											<div className="col-md-12">
-												<div className="form-group">
-													<textarea className="form-control contact-message"
-														name="contact_message" />
-													<label>Message</label>
-												</div>
-											</div>
-
-											<div className="col-md-12">
-												<div className="form-group">
-													<div className="gfort-recaptcha" />
-												</div>
-											</div>
-
-											<div className="col-md-12">
-												<div className="form-group">
-													<input type="checkbox" className="form-control contact-terms"
-														name="contact_terms" value="accepted" />
-													<label>I have read and agreed to LUNE <a href="#"
-														title="terms and conditions">terms and conditions</a>.</label>
-												</div>
-											</div>
-
-											<div className="col-md-12">
-												<div className="form-group">
-													<button type="submit" className="btn btn-gfort wave-effect">SEND
-                                            MESSAGE</button>
-												</div>
-											</div>
-										</form>
+									<div style={{display: "flex", justifyContent: "center"}}>
+										<div style={{ textAlign: "center", fontWeight: 700}}>
+											<span>Customer Care:</span> 09123472902
+										</div>
 									</div>
 								</div>
 							</div>
