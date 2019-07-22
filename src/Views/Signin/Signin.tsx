@@ -41,7 +41,7 @@ const SignIn = (props: IProps) => {
 	// Get the context from the global state
 	const dispatch = useContext(Context).dispatch;
 	// username state
-	const [userName, setUserName] = useState("");
+	const [username, setUserName] = useState("");
 	// password state
 	const [password, setPassword] = useState("");
 	// Error state
@@ -81,7 +81,7 @@ const SignIn = (props: IProps) => {
 	const validate = () => {
 		setError("");
 
-		if (userName.length <= 1) {
+		if (username.length <= 1) {
 			setError("Username is required");
 			return false;
 		}
@@ -102,7 +102,7 @@ const SignIn = (props: IProps) => {
 		}
 		// Try sending request to the server
 		try {
-			const response = await Axios.post("/user/login", { userName, password });
+			const response = await Axios.post("/user/login", { username, password });
 			if (response.status === 200) {
 				if (response.data.notDone) {
 					setCurrentForm("second");
@@ -158,7 +158,7 @@ const SignIn = (props: IProps) => {
 									name="username"
 									type="text"
 									onChange={(event) => setUserName(event.target.value)}
-									value={userName}
+									value={username}
 									autoFocus={true}
 								/>
 								<TextField
