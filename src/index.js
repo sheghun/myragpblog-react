@@ -1,3 +1,4 @@
+import "./bootstrap";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -7,9 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
-import { install } from '@material-ui/styles'
 
-install()
 
 axios.defaults.baseURL = 'http://localhost:8000';
 // axios.defaults.baseURL = 'https://api.myragpblog.com';

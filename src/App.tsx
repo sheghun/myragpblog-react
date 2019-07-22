@@ -13,7 +13,7 @@ import Context from "./Context";
 import { MuiThemeProvider } from "@material-ui/core";
 
 // Theme
-import theme from "./theme.js";
+import theme from "./theme";
 
 import "./App.css";
 

@@ -1,63 +1,71 @@
 body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	background-color: #fafafa;
+	font-family: 'Lato', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
-    font-family:'Lato', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+* {
+	box-sizing: border-box !important;
+}
 
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-  }
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
 
-  .base {
-      width: 100vw;
-      box-sizing: border-box;
-  }
+.base {
+	width: 100vw;
+	box-sizing: border-box;
+}
 
-  input {
-      font-family: 'Robot';
-  }
+input {
+	font-family: 'Robot';
+}
 
-  textarea:focus, input:focus{
-    outline: none;
+textarea:focus,
+input:focus {
+	outline: none;
 }
 
 button {
-    background-color: transparent;
-    border: none;
+	background-color: transparent;
+	border: none;
 }
 
 
-  p {
-      font-size: 16px;
-      line-height: 2;
-      font-weight: 500;
-  }
-  button {
-      font-size: 18px;
-      background-color: transparent;
-      font-family: 'Lato';
-      border: none;
-  }
-  h1 {
-      font-size: 32px;
-      line-height: 1.25em;
-  }
-  h2 {
-      font-size: 26px;
-      line-height: 1.154em;
-  }
+p {
+	font-size: 16px;
+	line-height: 2;
+	font-weight: 500;
+}
 
-  h3 {
-      font-size: 22px;
-      line-height: 1.136em;
-  }
+button {
+	font-size: 18px;
+	background-color: transparent;
+	font-family: 'Lato';
+	border: none;
+}
 
-  h4 {
-      font-size: 18px;
-      line-height: 1.1em;
-  }
+h1 {
+	font-size: 32px;
+	line-height: 1.25em;
+}
+
+h2 {
+	font-size: 26px;
+	line-height: 1.154em;
+}
+
+h3 {
+	font-size: 22px;
+	line-height: 1.136em;
+}
+
+h4 {
+	font-size: 18px;
+	line-height: 1.1em;
+}
