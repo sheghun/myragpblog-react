@@ -11,23 +11,23 @@ import { withRouter, Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Select from '@material-ui/core/Select';
 // Personal Components
-import GridItem from "../../../Components/Grid/GridItem.jsx";
-import GridContainer from "../../../Components/Grid/GridContainer.jsx";
-import CustomInput from "../../../Components/CustomInput/CustomInput.jsx";
-import Button from "../../../Components/CustomButtons/Button.jsx";
-import Card from "../../../Components/Card/Card.jsx";
-import CardHeader from "../../../Components/Card/CardHeader.jsx";
-import CardAvatar from "../../../Components/Card/CardAvatar.jsx";
-import CardBody from "../../../Components/Card/CardBody.jsx";
-import Spinner from '../../../Components/Spinner/Spinner';
-import Dialog from '../../../Components/Dialog/Dialog';
-import Snackbar from '../../../Components/Snackbar/Snackbar';
-import CircularProgress from '../../../Components/CircularProgress/CircularProgress';
-import Modal from '../../../Components/Modal/Modal';
-import CardFooter from "../../../Components/Card/CardFooter.jsx";
+import GridItem from "../../Components/Grid/GridItem.jsx";
+import GridContainer from "../../Components/Grid/GridContainer.jsx";
+import CustomInput from "../../Components/CustomInput/CustomInput.jsx";
+import Button from "../../Components/CustomButtons/Button.jsx";
+import Card from "../../Components/Card/Card.jsx";
+import CardHeader from "../../Components/Card/CardHeader.jsx";
+import CardAvatar from "../../Components/Card/CardAvatar.jsx";
+import CardBody from "../../Components/Card/CardBody.jsx";
+import Spinner from '../../Components/Spinner/Spinner';
+import Dialog from '../../Components/Dialog/Dialog';
+import Snackbar from '../../Components/Snackbar/Snackbar';
+import CircularProgress from '../../Components/CircularProgress/CircularProgress';
+import Modal from '../../Components/Modal/Modal';
+import CardFooter from "../../Components/Card/CardFooter.jsx";
 
 import Axios from 'axios';
-import * as helpers from '../../../_helpers';
+import * as helpers from '../../_helpers';
 
 const styles = theme => ({
     cardCategoryWhite: {

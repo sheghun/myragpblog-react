@@ -1,53 +1,52 @@
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard"
-import Person from "@material-ui/icons/Person"
-import Wallet from '@material-ui/icons/AccountBalanceWallet'
-import ToggleOff from '@material-ui/icons/ToggleOff';
+import Wallet from "@material-ui/icons/AccountBalanceWallet";
+import Dashboard from "@material-ui/icons/Dashboard";
+import Person from "@material-ui/icons/Person";
+import ToggleOff from "@material-ui/icons/ToggleOff";
 
 // core components/views
-import DashboardPage from "../Views/Dashboard/Dashboard.jsx"
-import UserProfile from "../Views/Dashboard/UserProfile/UserProfile.jsx"
-import Transactions from "../Views/Dashboard/Transactions/Transactions"
-import Notifications from '../Views/Base/Notifications/Notifications'
+import Notifications from "../Views/Base/Notifications/Notifications";
+import DashboardPage from "../Views/Dashboard/Dashboard.jsx";
 import LogOut from "../Views/Dashboard/Logout";
-
+import Transactions from "../Views/Dashboard/Transactions";
+import UserProfile from "../Views/Dashboard/UserProfile";
 
 const dashboardRoutes = [
-    {
-        path: "/user/dashboard",
-        sidebarName: "DASHBOARD",
-        navbarName: "DASHBOARD",
-        icon: Dashboard,
-        component: DashboardPage
-    },
-    {
-        path: "/user/user_profile",
-        sidebarName: "PROFILE",
-        navbarName: "PROFILE",
-        icon: Person,
-        component: UserProfile
-    },
-    {
-        path: "/user/transactions",
-        sidebarName: "TRANSACTIONS",
-        navbarName: "TRANSACTIONS",
-        icon: Wallet,
-        component: Transactions
-    },
-    {
-        path: "/user/notifications",
-        sidebarName: "NOTIFICATIONS",
-        navbarName: "NOTIFICATIONS",
-        icon: Wallet,
-        component: Notifications
-    },
-    {
-        path: "/user/logout",
-        sidebarName: "LOGOUT",
-        icon: ToggleOff,
-        component: LogOut
+	{
+		component: DashboardPage,
+		icon: Dashboard,
+		navbarName: "DASHBOARD",
+		path: "/user/dashboard",
+		sidebarName: "DASHBOARD",
+	},
+	{
+		component: UserProfile,
+		icon: Person,
+		navbarName: "PROFILE",
+		path: "/user/user_profile",
+		sidebarName: "PROFILE",
+	},
+	{
+		component: Transactions,
+		icon: Wallet,
+		navbarName: "TRANSACTIONS",
+		path: "/user/transactions",
+		sidebarName: "TRANSACTIONS",
+	},
+	{
+		component: Notifications,
+		icon: Wallet,
+		navbarName: "NOTIFICATIONS",
+		path: "/user/notifications",
+		sidebarName: "NOTIFICATIONS",
+	},
+	{
+		component: LogOut,
+		icon: ToggleOff,
+		path: "/user/logout",
+		sidebarName: "LOGOUT",
 
-    }
+	},
 ];
 
 export default dashboardRoutes;

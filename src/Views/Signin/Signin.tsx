@@ -1,5 +1,3 @@
-// For lazy loading
-import loadable from "@loadable/component";
 // @material-ui components
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -18,11 +16,10 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 // axios
 import Axios, { AxiosError } from "axios";
 import queryString from "query-string";
-import React, { Component, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // React router dependencies
 import { RouteComponentProps } from "react-router-dom";
 
-import Pricing from "../../Components/Pricing/Pricing";
 // Personal Components
 import Progress from "../../Components/Progress/Progress";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
@@ -77,11 +74,13 @@ const SignIn = (props: IProps) => {
 					dispatch({ type: "LOGIN" });
 					history.push(returnUrl as string);
 				}
-			} catch (error) { /**no code */ }
+			} catch (error) { /* no code */ }
 		})();
 	}, []);
 
 	const validate = () => {
+		setError("");
+
 		if (userName.length <= 1) {
 			setError("Username is required");
 			return false;
@@ -97,15 +96,13 @@ const SignIn = (props: IProps) => {
 		event.preventDefault();
 		// Loading animation
 		setLoading(true);
-		// Clear previous errors
-		setError("");
 		// Run the validation before requesting the server
 		if (false === validate()) {
 			return;
 		}
 		// Try sending request to the server
 		try {
-			const response = await Axios.post("/login", { userName, password });
+			const response = await Axios.post("/user/login", { userName, password });
 			if (response.status === 200) {
 				if (response.data.notDone) {
 					setCurrentForm("second");

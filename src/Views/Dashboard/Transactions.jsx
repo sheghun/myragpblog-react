@@ -5,18 +5,18 @@ import React, { Component } from 'react'
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // Personal Components
-import Card from "../../../Components/Card/Card";
-import CardHeader from "../../../Components/Card/CardHeader"
-import CardBody from "../../../Components/Card/CardBody";
-import Table from "../../../Components/Table/Table";
-import SnackbarSpinner from "../../../Components/SnackbarSpinner/SnackbarSpinner"
+import Card from "../../Components/Card/Card";
+import CardHeader from "../../Components/Card/CardHeader"
+import CardBody from "../../Components/Card/CardBody";
+import Table from "../../Components/Table/Table";
+import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner"
 
 
 //Styles
-import dashboardStyle from "../../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
 // Hoc's
-import ErrorWrapper from '../../../Hoc/ErrorWrapper/ErrorWrapper';
+import ErrorWrapper from '../../Hoc/ErrorWrapper/ErrorWrapper';
 
 import Axios from 'axios'
 

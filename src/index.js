@@ -11,8 +11,8 @@ import { install } from '@material-ui/styles'
 
 install()
 
-// axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.baseURL = 'https://api.myragpblog.com';
+axios.defaults.baseURL = 'http://localhost:8000';
+// axios.defaults.baseURL = 'https://api.myragpblog.com';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.withCredentials = true;
 const RCRedux = () => {

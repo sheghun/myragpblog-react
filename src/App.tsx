@@ -29,7 +29,7 @@ const Signin = loadable(() => import("./Views/Signin/Signin"), {
 const Dashboard = loadable(() => import("./Layouts/Dashboard/Dashboard"), {
 	fallback: <Spinner />,
 });
-const Register = loadable(() => import("./Layouts/Register/Register"), {
+const Register = loadable(() => import("./Views/Register/Register"), {
 	fallback: <Spinner />,
 });
 const Payment = loadable(() => import("./Layouts/Payment/Payment"), {

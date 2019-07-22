@@ -2,6 +2,7 @@ import React from "react";
 import Axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 
+
 // @material-ui/core
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -62,7 +63,7 @@ class Dashboard extends React.Component {
 		const { classes } = this.props;
 		const { ...state } = this.state
 		return (
-			<ErrorWrapper>
+			<>
 				<GridContainer>
 					<GridItem xs={12} sm={6} md={6}>
 						<Card>
@@ -214,7 +215,7 @@ class Dashboard extends React.Component {
 						</Card>
 					</GridItem>
 				</GridContainer>
-			</ErrorWrapper>
+			</>
 		);
 	}
 }

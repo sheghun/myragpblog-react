@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import HeadLinks from "./HeadLinks";
 
-import subBackgroundImage from "../../assets/images/subscribe-background.jpg"
+import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
 
 const Web = () => {
 
