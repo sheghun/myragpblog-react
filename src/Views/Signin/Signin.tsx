@@ -88,7 +88,7 @@ const SignIn = (props: IProps) => {
 		}
 	}
 	// Current form to display
-	const [currentForm, setCurrentForm] = useState("");
+	const [currentForm, setCurrentForm] = useState("second");
 
 	// Try logging user in on page mount
 	useEffect(() => {
@@ -239,7 +239,10 @@ const SignIn = (props: IProps) => {
 
 const SecondForm = (props: IProps) => {
 	// Get the props
-	const { classes, history } = props;
+	const { history } = props;
+	const theme = useTheme() as Theme;
+	const xsmall = useMediaQuery(theme.breakpoints.down("xs"));
+	const classes = useStyles();
 	// Loading animation flag
 	const [loading, setLoading] = useState(false);
 	// List of banks
@@ -247,18 +250,20 @@ const SecondForm = (props: IProps) => {
 	// List of account types to be fetched from the backend
 	const [bankAccountTypes, setBankAccountTypes] = useState([{ id: 0, name: "Choose your account type" }]);
 	const [ragpReferalId, setRagpReferalId] = useState("");
-	const [ragpReferalIdError, setRagpReferalIdError] = useState("");
 	const [whatsappNumber, setWhatsappNumber] = useState("");
-	const [whatsappNumberError, setWhatsappNumberError] = useState("");
-	const [accountName, setAccountName] = useState("");
-	const [accountNameError, setAccountNameError] = useState("");
 	const [accountNumber, setAccountNumber] = useState("");
-	const [accountNumberError, setAccountNumberError] = useState("");
+	const [accountName, setAccountName] = useState("");
 	const [bankAccountType, setBankAccountType] = useState(0);
-	const [bankAccountTypeError, setBankAccountTypeError] = useState("");
 	const [bank, setBank] = useState(0);
-	const [bankError, setBankError] = useState("");
 	const [submitted, setSubmitted] = useState(false);
+	const [errors, setErrors] = useState({
+		accountName: "",
+		accountNumber: "",
+		bank: "",
+		bankAccountType: "",
+		ragpReferalId: "",
+		whatsappNumber: "",
+	});
 
 	// For retrieving the bank list on page load
 	useEffect(() => {
@@ -290,38 +295,40 @@ const SecondForm = (props: IProps) => {
 
 	const validate = (): boolean => {
 		let passed = true;
-		// Clear all errors
-		setRagpReferalIdError("");
-		setWhatsappNumberError("");
-		setAccountNameError("");
-		setAccountNumberError("");
-		setBankError("");
-		setBankAccountTypeError("");
+		const err = {
+			accountName: "",
+			accountNumber: "",
+			bank: "",
+			bankAccountType: "",
+			ragpReferalId: "",
+			whatsappNumber: "",
+		};
 
 		if (ragpReferalId.length <= 4) {
-			setRagpReferalIdError("RAGP Referal Id is required");
+			err.ragpReferalId = "RAGP Referal Id is required";
 			passed = false;
 		}
 		if (whatsappNumber.length !== 11) {
-			setWhatsappNumberError("Whatsapp number must be 11 digits");
+			err.whatsappNumber = "Whatsapp number must be 11 digits";
 			passed = false;
 		}
 		if (accountName.length <= 1) {
-			setAccountNameError("Account name is required");
+			err.accountName = "Account name is required";
 			passed = false;
 		}
 		if (accountNumber.length < 10) {
-			setAccountNumberError("Account Number should contain a minimum of 10 digits");
+			err.accountNumber = "Account Number should contain a minimum of 10 digits";
 			passed = false;
 		}
 		if (bank === 0) {
-			setBankError("Bank is required");
+			err.bank = "Bank is required";
 			passed = false;
 		}
 		if (bankAccountType === 0) {
-			setBankAccountTypeError("Bank account type is required");
+			err.bankAccountType = "Bank account type is required";
 			passed = false;
 		}
+		setErrors(err);
 		return passed;
 	};
 
@@ -355,138 +362,176 @@ const SecondForm = (props: IProps) => {
 	};
 
 	return (
-		<>
-			<SnackbarSpinner loading={loading} onClose={() => { /** NO code */ }} />
-			<main className={classes.subMain}>
-				<Paper className={classes.paper}>
-					<Typography variant="h6">
-						Continue Your Registration
+		<div
+			className={classes.wrapper}
+		>
+			<SnackbarSpinner
+				loading={loading}
+			/>
+			<Grid
+				container={true}
+				style={{
+					height: "100%",
+					width: "100%",
+				}}
+				justify="center"
+				alignItems="center"
+			>
+				<Grid
+					item={true}
+					xs={12}
+					sm={8}
+					md={6}
+					style={{ height: "auto" }}
+				>
+					<Paper
+						className={classes.paper}
+						elevation={0}
+					>
+						<Typography variant="h6">
+							Continue Your Registration
                     </Typography>
-					<Typography>
-						Feel the form below to continue your registration
+						<Typography>
+							Feel the form below to continue your registration
                     </Typography>
-					<br />
-					<Grid container={true} spacing={24}>
-						<Grid item={true} xs={12} md={6}>
-							<TextField
-								required={true}
-								id="cardName"
-								label="Recharge And Get Paid Referal Id"
-								name="ragpReferalId"
-								onBlur={() => { if (submitted) { validate(); } }}
-								fullWidth={true}
-								error={!!ragpReferalIdError}
-								helperText={ragpReferalIdError}
-								onChange={(event) => setRagpReferalId(event.currentTarget.value)}
-								value={ragpReferalId}
-							/>
-
-						</Grid>
-						<Grid item={true} xs={12} md={6}>
-							<TextField
-								required={true}
-								id="cardNumber"
-								label="Whatsapp number"
-								name="whatsappNumber"
-								onBlur={() => { if (submitted) { validate(); } }}
-								fullWidth={true}
-								error={!!whatsappNumberError}
-								helperText={whatsappNumberError}
-								onChange={(event) => setWhatsappNumber(event.currentTarget.value)}
-								value={whatsappNumber}
-
-							/>
-						</Grid>
-						<Grid item={true} xs={12} md={6}>
-							<TextField
-								required={true}
-								id="expDate"
-								label="Account name"
-								name="accountName"
-								onBlur={() => { if (submitted) { validate(); } }}
-								fullWidth={true}
-								error={!!accountNameError}
-								helperText={accountNameError}
-								value={accountName}
-								onChange={(event) => setAccountName(event.currentTarget.value)}
-							/>
-						</Grid>
-						<Grid item={true} xs={12} md={6}>
-							<TextField
-								required={true}
-								id="cvv"
-								label="Account number"
-								name="accountNumber"
-								onBlur={() => { if (submitted) { validate(); } }}
-								fullWidth={true}
-								error={!!accountNumberError}
-								helperText={accountNumberError}
-								value={accountNumber}
-								onChange={(event) => setAccountNumber(event.currentTarget.value)}
-							/>
-						</Grid>
-						<Grid item={true} xs={12} md={6}>
-							<FormControl fullWidth={true} error={!!bankAccountTypeError}>
-								<InputLabel htmlFor="bankAccountType">Account Type</InputLabel>
-								<Select
-									native={true}
-									value={bankAccountType}
-									onChange={(event) => setBankAccountType(Number(event.currentTarget.value))}
-									inputProps={{
-										id: "bankAccountType",
-										name: "bankAccountType",
-									}}
+						<br />
+						<Grid container={true} spacing={24}>
+							<Grid item={true} xs={12} md={6}>
+								<TextField
+									required={true}
+									id="cardName"
+									label="Recharge And Get Paid Referal Id"
+									name="ragpReferalId"
 									onBlur={() => { if (submitted) { validate(); } }}
-								>
-									<option value={0}>Choose Your Account Type</option>
-									{bankAccountTypes.map((accountType, index) => (
-										<option value={accountType.id} key={index}>
-											{accountType.name.charAt(0).toUpperCase() + accountType.name.slice(1)}
-										</option>
-									))}
-								</Select>
-								<FormHelperText>
-									{bankAccountTypeError}
-								</FormHelperText>
-							</FormControl>
-						</Grid>
-						<Grid item={true} xs={12} md={6}>
-							<FormControl fullWidth={true} error={!!bankError}>
-								<InputLabel htmlFor="bank">Bank</InputLabel>
-								<Select
-									native={true}
-									onChange={(event) => setBank(Number(event.currentTarget.value))}
-									value={bank}
+									fullWidth={true}
+									error={!!errors.ragpReferalId}
+									helperText={errors.ragpReferalId}
+									onChange={(event) => setRagpReferalId(event.currentTarget.value)}
+									value={ragpReferalId}
+								/>
+
+							</Grid>
+							<Grid item={true} xs={12} md={6}>
+								<TextField
+									required={true}
+									id="cardNumber"
+									label="Whatsapp number"
+									name="whatsappNumber"
 									onBlur={() => { if (submitted) { validate(); } }}
-									inputProps={{
-										id: "bank",
-										name: "bank",
-									}}
+									fullWidth={true}
+									error={!!errors.whatsappNumber}
+									helperText={errors.whatsappNumber}
+									onChange={(event) => setWhatsappNumber(event.currentTarget.value)}
+									value={whatsappNumber}
+
+								/>
+							</Grid>
+							<Grid item={true} xs={12} md={6}>
+								<TextField
+									required={true}
+									id="expDate"
+									label="Account name"
+									name="accountName"
+									onBlur={() => { if (submitted) { validate(); } }}
+									fullWidth={true}
+									error={!!errors.accountName}
+									helperText={errors.accountName}
+									value={accountName}
+									onChange={(event) => setAccountName(event.currentTarget.value)}
+								/>
+							</Grid>
+							<Grid item={true} xs={12} md={6}>
+								<TextField
+									required={true}
+									id="cvv"
+									label="Account number"
+									name="accountNumber"
+									onBlur={() => { if (submitted) { validate(); } }}
+									fullWidth={true}
+									error={!!errors.accountNumber}
+									helperText={errors.accountNumber}
+									value={accountNumber}
+									onChange={(event) => setAccountNumber(event.currentTarget.value)}
+								/>
+							</Grid>
+							<Grid
+								item={true}
+								xs={12}
+								md={6}
+							>
+								<FormControl
+									fullWidth={true}
+									error={!!errors.bankAccountType}
 								>
-									<option value={0}>Choose your bank</option>
-									{banks.map((b, i) => (
-										<option value={b.id} key={i}>{b.name}</option>
-									))}
-								</Select>
-								<FormHelperText>
-									{bankError}
-								</FormHelperText>
-							</FormControl>
+									<InputLabel htmlFor="bankAccountType">Account Type</InputLabel>
+									<Select
+
+										value={bankAccountType}
+										onChange={(event) => setBankAccountType(Number(event.currentTarget.value))}
+										inputProps={{
+											id: "bankAccountType",
+											name: "bankAccountType",
+										}}
+										onBlur={() => { if (submitted) { validate(); } }}
+									>
+										<option value={0}>Choose Your Account Type</option>
+										{bankAccountTypes.map((accountType, index) => (
+											<option value={accountType.id} key={index}>
+												{accountType.name.charAt(0).toUpperCase() + accountType.name.slice(1)}
+											</option>
+										))}
+									</Select>
+									<FormHelperText>
+										{errors.bankAccountType}
+									</FormHelperText>
+								</FormControl>
+							</Grid>
+							<Grid
+								item={true}
+								xs={12}
+								md={6}
+							>
+								<FormControl
+									fullWidth={true}
+									error={!!errors.bank}
+								>
+									<InputLabel htmlFor="bank">Bank</InputLabel>
+									<Select
+										onChange={(event) => setBank(Number(event.currentTarget.value))}
+										value={bank}
+										onBlur={() => { if (submitted) { validate(); } }}
+										inputProps={{
+											id: "bank",
+											name: "bank",
+										}}
+									>
+										<option value={0}>Choose your bank</option>
+										{banks.map((b, i) => (
+											<option value={b.id} key={i}>{b.name}</option>
+										))}
+									</Select>
+									<FormHelperText>
+										{errors.bank}
+									</FormHelperText>
+								</FormControl>
+							</Grid>
 						</Grid>
-					</Grid>
-					<div style={{ display: "flex", justifyContent: "flex-end" }}>
-						<Button
-							variant="contained"
-							color="primary"
-							onClick={submit}
-							style={{ marginTop: "32px", marginLeft: "32px" }}
+						<div
+							style={{ display: "flex", justifyContent: "flex-end" }}
 						>
-							Next
-						</Button>
-					</div>
-				</Paper>
-			</main>
-		</>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={submit}
+								style={{ marginTop: "32px", marginLeft: "32px" }}
+							>
+								Next
+							</Button>
+						</div>
+					</Paper>
+				</Grid>
+			</Grid>
+		</div>
 	);
 
 };
