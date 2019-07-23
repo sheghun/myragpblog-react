@@ -11,14 +11,14 @@ import { Theme } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import StarIcon from "@material-ui/icons/StarBorder";
 import ArrowBackwardIcon from '@material-ui/icons/ArrowBack'
+import StarIcon from "@material-ui/icons/StarBorder";
 import { makeStyles } from "@material-ui/styles";
-import React, { useState } from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
 import Axios, { AxiosError } from "axios";
+import React, { useState } from "react";
 // @ts-ignore
 import PaystackButton from 'react-paystack';
+import { Link, RouteComponentProps } from "react-router-dom";
 import Progress from "../../Components/Progress/Progress";
 
 // Type for the tier
@@ -46,7 +46,7 @@ const useStyles = ((theme: Theme) => ({
 		`,
 
 			boxSizing: "border-box",
-			height: "100vh"
+			height: "100vh",
 		},
 		ul: {
 			margin: 0,
@@ -89,7 +89,7 @@ const useStyles = ((theme: Theme) => ({
 		[theme.breakpoints.down("sm")]: {
 			paddingLeft: theme.spacing.unit * 2,
 			paddingRight: theme.spacing.unit * 2,
-		}
+		},
 	},
 	"cardHeader": {
 		backgroundColor: "#fff",
@@ -117,7 +117,7 @@ const useStyles = ((theme: Theme) => ({
 		// marginTop: "16px !important",
 	},
 	"toolbar": {
-		...theme.mixins.toolbar
+		...theme.mixins.toolbar,
 	},
 }));
 
@@ -203,12 +203,11 @@ const MakePayment = (props: IProps) => {
 		// send payment request to the server
 		try {
 			const response = await Axios.post("payment/pay-subscription");
-			console.log(response);
 		} catch (error) {
 			const err = error as AxiosError;
 			if (err.response) {
 				if (err.response.status === 403) {
-					history.push("/login?returnUrl" + location.pathname)
+					history.push("/login?returnUrl" + location.pathname);
 				}
 			}
 		}
