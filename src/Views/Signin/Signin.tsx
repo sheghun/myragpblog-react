@@ -1,30 +1,28 @@
 // @material-ui components
+import { StyleRulesCallback, Theme } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
-
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-// axios
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Axios, { AxiosError } from "axios";
 import queryString from "query-string";
 import React, { useContext, useEffect, useState } from "react";
-// React router dependencies
 import { RouteComponentProps } from "react-router-dom";
+import banks from "../../_data/banks.json";
 
 // Personal Components
-import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
-import { makeStyles, useTheme } from "@material-ui/styles";
 import Progress from "../../Components/Progress/Progress";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 // Context
 import Context from "../../Context";
-
-import { StyleRulesCallback, Theme } from "@material-ui/core";
 
 // Background Image
 
@@ -68,7 +66,7 @@ const SignIn = (props: IProps) => {
 	// Extract properties from props
 	const { location, history } = props;
 
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const dispatch = useContext(Context).dispatch;
 	const [username, setUserName] = useState("");
 	const [password, setPassword] = useState("");
@@ -88,7 +86,7 @@ const SignIn = (props: IProps) => {
 		}
 	}
 	// Current form to display
-	const [currentForm, setCurrentForm] = useState("second");
+	const [currentForm, setCurrentForm] = useState("");
 
 	// Try logging user in on page mount
 	useEffect(() => {
@@ -237,6 +235,12 @@ const SignIn = (props: IProps) => {
 
 };
 
+const bankAccountTypes = [
+	"Savings",
+	"Current",
+	"Co-operate",
+];
+
 const SecondForm = (props: IProps) => {
 	// Get the props
 	const { history } = props;
@@ -245,61 +249,30 @@ const SecondForm = (props: IProps) => {
 	const classes = useStyles();
 	// Loading animation flag
 	const [loading, setLoading] = useState(false);
-	// List of banks
-	const [banks, setBanks] = useState([{ id: 0, name: "Choose a bank", gateway: "" }]);
-	// List of account types to be fetched from the backend
-	const [bankAccountTypes, setBankAccountTypes] = useState([{ id: 0, name: "Choose your account type" }]);
+	// List of bankAccount types to be fetched from the backend
+	const [bank, setBank] = useState("");
 	const [ragpReferalId, setRagpReferalId] = useState("");
 	const [whatsappNumber, setWhatsappNumber] = useState("");
-	const [accountNumber, setAccountNumber] = useState("");
-	const [accountName, setAccountName] = useState("");
-	const [bankAccountType, setBankAccountType] = useState(0);
-	const [bank, setBank] = useState(0);
+	const [bankAccountNumber, setBankAccountNumber] = useState("");
+	const [bankAccountName, setBankAccountName] = useState("");
+	const [bankAccountType, setBankAccountType] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 	const [errors, setErrors] = useState({
-		accountName: "",
-		accountNumber: "",
-		bank: "",
+		bankAccountName: "",
+		bankAccountNumber: "",
 		bankAccountType: "",
+		bank: "",
 		ragpReferalId: "",
 		whatsappNumber: "",
 	});
 
-	// For retrieving the bank list on page load
-	useEffect(() => {
-		(async () => {
-			// Start the loading animation
-			setLoading(true);
-			try {
-				const response = await Axios.get("/banks");
-				setBanks(response.data);
-			} catch (error) {
-				const err = error as AxiosError;
-				if (err.response) {
-					alert("Try again");
-				}
-			}
-			try {
-				const response = await Axios.get("/bank-account-types");
-				setBankAccountTypes(response.data);
-			} catch (error) {
-				const err = error as AxiosError;
-				if (err.response) {
-					alert("Try again");
-				}
-			}
-			// Remove the loading animation
-			setLoading(false);
-		})();
-	}, []);
-
 	const validate = (): boolean => {
 		let passed = true;
 		const err = {
-			accountName: "",
-			accountNumber: "",
-			bank: "",
+			bankAccountName: "",
+			bankAccountNumber: "",
 			bankAccountType: "",
+			bank: "",
 			ragpReferalId: "",
 			whatsappNumber: "",
 		};
@@ -312,20 +285,20 @@ const SecondForm = (props: IProps) => {
 			err.whatsappNumber = "Whatsapp number must be 11 digits";
 			passed = false;
 		}
-		if (accountName.length <= 1) {
-			err.accountName = "Account name is required";
+		if (bankAccountName.length <= 1) {
+			err.bankAccountName = "Account name is required";
 			passed = false;
 		}
-		if (accountNumber.length < 10) {
-			err.accountNumber = "Account Number should contain a minimum of 10 digits";
+		if (bankAccountNumber.length < 10) {
+			err.bankAccountNumber = "Account Number should contain a minimum of 10 digits";
 			passed = false;
 		}
-		if (bank === 0) {
+		if (bank === "") {
 			err.bank = "Bank is required";
 			passed = false;
 		}
-		if (bankAccountType === 0) {
-			err.bankAccountType = "Bank account type is required";
+		if (bankAccountType === "") {
+			err.bankAccountType = "Bank bankAccount type is required";
 			passed = false;
 		}
 		setErrors(err);
@@ -344,8 +317,8 @@ const SecondForm = (props: IProps) => {
 		// Post data to the server
 		try {
 			// Construct the data
-			const data = { ragpReferalId, whatsappNumber, accountName, accountNumber, bankAccountType, bank };
-			const response = await Axios.put("/member", data);
+			const data = { ragpReferalId, whatsappNumber, bankAccountName, bankAccountNumber, bankAccountType, bank };
+			const response = await Axios.put("/user", data);
 			if (response.status === 200) {
 				history.push("/payment");
 			}
@@ -431,13 +404,13 @@ const SecondForm = (props: IProps) => {
 									required={true}
 									id="expDate"
 									label="Account name"
-									name="accountName"
+									name="bankAccountName"
 									onBlur={() => { if (submitted) { validate(); } }}
 									fullWidth={true}
-									error={!!errors.accountName}
-									helperText={errors.accountName}
-									value={accountName}
-									onChange={(event) => setAccountName(event.currentTarget.value)}
+									error={!!errors.bankAccountName}
+									helperText={errors.bankAccountName}
+									value={bankAccountName}
+									onChange={(event) => setBankAccountName(event.currentTarget.value)}
 								/>
 							</Grid>
 							<Grid item={true} xs={12} md={6}>
@@ -445,13 +418,13 @@ const SecondForm = (props: IProps) => {
 									required={true}
 									id="cvv"
 									label="Account number"
-									name="accountNumber"
+									name="bankAccountNumber"
 									onBlur={() => { if (submitted) { validate(); } }}
 									fullWidth={true}
-									error={!!errors.accountNumber}
-									helperText={errors.accountNumber}
-									value={accountNumber}
-									onChange={(event) => setAccountNumber(event.currentTarget.value)}
+									error={!!errors.bankAccountNumber}
+									helperText={errors.bankAccountNumber}
+									value={bankAccountNumber}
+									onChange={(event) => setBankAccountNumber(event.currentTarget.value)}
 								/>
 							</Grid>
 							<Grid
@@ -467,18 +440,18 @@ const SecondForm = (props: IProps) => {
 									<Select
 
 										value={bankAccountType}
-										onChange={(event) => setBankAccountType(Number(event.currentTarget.value))}
+										onChange={(event) => setBankAccountType(event.target.value)}
 										inputProps={{
 											id: "bankAccountType",
 											name: "bankAccountType",
 										}}
 										onBlur={() => { if (submitted) { validate(); } }}
 									>
-										<option value={0}>Choose Your Account Type</option>
-										{bankAccountTypes.map((accountType, index) => (
-											<option value={accountType.id} key={index}>
-												{accountType.name.charAt(0).toUpperCase() + accountType.name.slice(1)}
-											</option>
+										<MenuItem value={0}>Choose Your Account Type</MenuItem>
+										{bankAccountTypes.map((a, i) => (
+											<MenuItem value={a} key={i}>
+												{a}
+											</MenuItem>
 										))}
 									</Select>
 									<FormHelperText>
@@ -497,17 +470,17 @@ const SecondForm = (props: IProps) => {
 								>
 									<InputLabel htmlFor="bank">Bank</InputLabel>
 									<Select
-										onChange={(event) => setBank(Number(event.currentTarget.value))}
 										value={bank}
+										onChange={(event) => setBank(event.target.value)}
 										onBlur={() => { if (submitted) { validate(); } }}
 										inputProps={{
 											id: "bank",
 											name: "bank",
 										}}
 									>
-										<option value={0}>Choose your bank</option>
+										<MenuItem value="">Choose your bank</MenuItem>
 										{banks.map((b, i) => (
-											<option value={b.id} key={i}>{b.name}</option>
+											<MenuItem value={b} key={i}>{b}</MenuItem>
 										))}
 									</Select>
 									<FormHelperText>
