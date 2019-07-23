@@ -39,8 +39,14 @@ interface IProps extends RouteComponentProps {
 const useStyles = ((theme: Theme) => ({
 	"@global": {
 		body: {
-			backgroundColor: "white",
+			background: `
+			linear-gradient(
+				to bottom right, ${theme.palette.primary.main} 49%, #f5f5f5 50%, #f5f5f5 100%
+			)
+		`,
+
 			boxSizing: "border-box",
+			height: "100vh"
 		},
 		ul: {
 			margin: 0,
@@ -172,7 +178,7 @@ const MakePayment = (props: IProps) => {
 		setLoading(true);
 		// send payment request to the server
 		try {
-			const response = await Axios.post("payment/pay-once", { packageId: 1 });
+			const response = await Axios.post("payment/pay-once", { id: 1 });
 			if (response.status === 200) {
 				// Grab the data
 				const { data } = response;
@@ -223,7 +229,7 @@ const MakePayment = (props: IProps) => {
 	};
 
 	return (
-		<>
+		<div>
 			{/* <AppBar color="secondary">
 				<Toolbar>
 					<ArrowBackwardIcon />
@@ -231,12 +237,11 @@ const MakePayment = (props: IProps) => {
 			</AppBar> */}
 			<div className={classes.toolbar} />
 			<Progress show={loading} />
-			<CssBaseline />
 			<main style={{ maxWidth: "600px" }} className={classes.heroContent}>
-				<Typography variant="h4" align="center" color="textPrimary" gutterBottom={true}>
+				<Typography variant="h4" align="center" style={{ color: "white" }} gutterBottom={true}>
 					Pricing
 			</Typography>
-				<Typography variant="h6" align="center" color="textSecondary" component="p">
+				<Typography variant="h6" align="center" style={{ color: "white" }} component="p">
 					Select your package
 			</Typography>
 			</main>
@@ -269,7 +274,8 @@ const MakePayment = (props: IProps) => {
 									<Button
 										className={classes.button}
 										fullWidth={true}
-										onClick={submit(tier.title)} variant={tier.buttonVariant}
+										onClick={submit(tier.title)}
+										variant={tier.buttonVariant}
 										color="primary"
 									>
 										{tier.buttonText}
@@ -280,7 +286,7 @@ const MakePayment = (props: IProps) => {
 					))}
 				</Grid>
 			</main>
-		</>
+		</div>
 	);
 };
 
