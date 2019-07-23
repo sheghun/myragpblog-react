@@ -10,9 +10,9 @@ import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMe
 import { makeStyles, useTheme } from "@material-ui/styles";
 import Axios, { AxiosError } from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 import { IApiError } from "../../types";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
 	paper: {
@@ -227,7 +227,7 @@ const Register = () => {
 						// @ts-ignore
 						er[e.param] = e.msg;
 					});
-					setErrors(er)
+					setErrors(er);
 				}
 			}
 		}
@@ -450,7 +450,6 @@ const Register = () => {
 		</div>
 	);
 };
-
 
 const Successful = () => {
 

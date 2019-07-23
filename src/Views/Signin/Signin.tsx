@@ -1,18 +1,14 @@
 // @material-ui components
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
-// Styles dependencies
-import withStyles from "@material-ui/core/styles/withStyles";
+
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import LockIcon from "@material-ui/icons/LockOutlined";
 // axios
 import Axios, { AxiosError } from "axios";
 import queryString from "query-string";
@@ -21,12 +17,43 @@ import React, { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 // Personal Components
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Progress from "../../Components/Progress/Progress";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 // Context
 import Context from "../../Context";
-// Import personal styles
-import useStyles from "./styles";
+
+import { StyleRulesCallback, Theme } from "@material-ui/core";
+
+// Background Image
+
+const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
+	form: {
+		marginTop: theme.spacing.unit,
+		width: "100%", // Fix IE 11 issue.
+	},
+	paper: {
+		alignItems: "center",
+		background: "transparent",
+		display: "flex",
+		flexDirection: "column",
+		padding: theme.spacing.unit * 1,
+		width: "100%",
+	},
+	submit: {
+		marginTop: theme.spacing.unit * 3,
+	},
+	wrapper: {
+		background: `
+			linear-gradient(
+				to bottom right, #fff 49%, #f5f5f5 30%, #f5f5f5 89%
+				)
+		`,
+		height: "100vh",
+		width: "100vw",
+	},
+}));
 
 interface IProps extends RouteComponentProps {
 	classes: any;
@@ -34,19 +61,18 @@ interface IProps extends RouteComponentProps {
 
 const SignIn = (props: IProps) => {
 
+	const theme = useTheme() as Theme;
+	const xsmall = useMediaQuery(theme.breakpoints.down("xs"));
+	const classes = useStyles();
+
 	// Extract properties from props
-	const { location, history, classes } = props;
-	// Loading animation
-	const [loading, setLoading] = useState(false);
-	// Get the context from the global state
+	const { location, history } = props;
+
+	const [loading, setLoading] = useState(true);
 	const dispatch = useContext(Context).dispatch;
-	// username state
 	const [username, setUserName] = useState("");
-	// password state
 	const [password, setPassword] = useState("");
-	// Error state
 	const [error, setError] = useState("");
-	// Error username state
 	const queryUrl = queryString.parse(location.search);
 	// Check if the former url is the logout url redirect to the dashboard
 	let returnUrl = !queryUrl.returnUrl ? "/user/dashboard" : queryUrl.returnUrl === "/user/logout" ?
@@ -94,10 +120,9 @@ const SignIn = (props: IProps) => {
 
 	const submit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// Loading animation
+
 		setLoading(true);
-		// Run the validation before requesting the server
-		if (false === validate()) {
+		if (!validate()) {
 			return;
 		}
 		// Try sending request to the server
@@ -112,12 +137,8 @@ const SignIn = (props: IProps) => {
 				history.push(returnUrl as string);
 			}
 		} catch (error) {
-			// Type alias
 			const err = error as AxiosError;
 			if (err.response) {
-				if (err.response.status === 422) {
-					setError("Inputs incorrect");
-				}
 				// @ts-ignore
 				if (err.response.status === 401) {
 					setError("Username Or Password Incorrect");
@@ -133,59 +154,84 @@ const SignIn = (props: IProps) => {
 
 		default:
 			return (
-				<>
-					<CssBaseline />
-					<div className={classes.body} />
-					{/* <SnackbarSpinner type="success" loading={loading} onClose={() => { }} /> */}
-					<main className={classes.main}>
-						<Paper className={classes.paper}>
-							<Avatar className={classes.avatar}>
-								<LockIcon />
-							</Avatar>
-							<Typography component="h1" variant="h5">
-								Sign in
-                        </Typography>
-							<Typography variant="body1" color="error">
-								{error}
-							</Typography>
-							<form className={classes.form} onSubmit={submit}>
-								<TextField
-									margin="normal"
-									required={true}
-									fullWidth={true}
-									label="Username"
-									id="username"
-									name="username"
-									type="text"
-									onChange={(event) => setUserName(event.target.value)}
-									value={username}
-									autoFocus={true}
-								/>
-								<TextField
-									margin="normal"
-									required={true}
-									fullWidth={true}
-									label="Password"
-									name="password"
-									type="password"
-									id="password"
-									autoComplete="current-password"
-									onChange={(event) => setPassword(event.target.value)}
-									value={password}
-								/>
-								<Button
-									type="submit"
-									fullWidth={true}
-									variant="contained"
-									color="primary"
-									className={classes.submit}
+				<div
+					className={classes.wrapper}
+				>
+					<SnackbarSpinner
+						loading={loading}
+					/>
+					<Grid
+						container={true}
+						style={{
+							height: "100%",
+							width: "100%",
+						}}
+						justify="center"
+						alignItems="center"
+					>
+						<Grid
+							item={true}
+							xs={12}
+							sm={8}
+							md={6}
+						>
+							<Paper
+								className={classes.paper}
+								elevation={0}
+							>
+								<Typography
+									component="h1"
+									variant="h5"
 								>
 									Sign in
-								</Button>
-							</form>
-						</Paper>
-					</main>
-				</>
+								</Typography>
+								<Typography
+									variant="body1"
+									color="error"
+									style={{ marginTop: "1rem" }}
+								>
+									{error}
+								</Typography>
+								<form className={classes.form} onSubmit={submit}>
+									<TextField
+										margin="normal"
+										required={true}
+										fullWidth={true}
+										label="Username"
+										id="username"
+										name="username"
+										type="text"
+										onChange={(event) => setUserName(event.target.value)}
+										value={username}
+										autoFocus={true}
+									/>
+									<TextField
+										margin="normal"
+										required={true}
+										fullWidth={true}
+										label="Password"
+										name="password"
+										id="password"
+										autoComplete="current-password"
+										onChange={(event) => setPassword(event.target.value)}
+										value={password}
+										inputProps={{
+											type: "password",
+										}}
+									/>
+									<Button
+										type="submit"
+										variant="contained"
+										color="primary"
+										className={classes.submit}
+									>
+										Sign in
+									</Button>
+								</form>
+							</Paper>
+						</Grid>
+					</Grid>
+				</div>
 			);
 	}
 
@@ -310,10 +356,8 @@ const SecondForm = (props: IProps) => {
 
 	return (
 		<>
-			<CssBaseline />
-			<SnackbarSpinner loading={loading} onClose={() => { /** NO code */}} />
+			<SnackbarSpinner loading={loading} onClose={() => { /** NO code */ }} />
 			<main className={classes.subMain}>
-				<CssBaseline />
 				<Paper className={classes.paper}>
 					<Typography variant="h6">
 						Continue Your Registration
@@ -447,4 +491,4 @@ const SecondForm = (props: IProps) => {
 
 };
 
-export default withStyles(useStyles as any)(SignIn);
+export default SignIn;
