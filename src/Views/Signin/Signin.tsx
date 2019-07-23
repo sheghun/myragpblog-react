@@ -181,7 +181,7 @@ const SignIn = (props: IProps) => {
 									className={classes.submit}
 								>
 									Sign in
-                                </Button>
+								</Button>
 							</form>
 						</Paper>
 					</main>
@@ -311,7 +311,7 @@ const SecondForm = (props: IProps) => {
 	return (
 		<>
 			<CssBaseline />
-			<SnackbarSpinner type="success" loading={loading} onClose={() => { }} />
+			<SnackbarSpinner loading={loading} onClose={() => { /** NO code */}} />
 			<main className={classes.subMain}>
 				<CssBaseline />
 				<Paper className={classes.paper}>
@@ -355,7 +355,8 @@ const SecondForm = (props: IProps) => {
 						</Grid>
 						<Grid item={true} xs={12} md={6}>
 							<TextField
-								required={true} id="expDate"
+								required={true}
+								id="expDate"
 								label="Account name"
 								name="accountName"
 								onBlur={() => { if (submitted) { validate(); } }}
@@ -386,10 +387,10 @@ const SecondForm = (props: IProps) => {
 								<Select
 									native={true}
 									value={bankAccountType}
-									onChange={(event) => setBankAccountType(parseInt(event.currentTarget.value))}
+									onChange={(event) => setBankAccountType(Number(event.currentTarget.value))}
 									inputProps={{
-										name: "bankAccountType",
 										id: "bankAccountType",
+										name: "bankAccountType",
 									}}
 									onBlur={() => { if (submitted) { validate(); } }}
 								>
@@ -410,17 +411,17 @@ const SecondForm = (props: IProps) => {
 								<InputLabel htmlFor="bank">Bank</InputLabel>
 								<Select
 									native={true}
-									onChange={(event) => setBank(parseInt(event.currentTarget.value))}
+									onChange={(event) => setBank(Number(event.currentTarget.value))}
 									value={bank}
 									onBlur={() => { if (submitted) { validate(); } }}
 									inputProps={{
-										name: "bank",
 										id: "bank",
+										name: "bank",
 									}}
 								>
 									<option value={0}>Choose your bank</option>
-									{banks.map((bank, index) => (
-										<option value={bank.id} key={index}>{bank.name}</option>
+									{banks.map((b, i) => (
+										<option value={b.id} key={i}>{b.name}</option>
 									))}
 								</Select>
 								<FormHelperText>
@@ -437,7 +438,7 @@ const SecondForm = (props: IProps) => {
 							style={{ marginTop: "32px", marginLeft: "32px" }}
 						>
 							Next
-                    </Button>
+						</Button>
 					</div>
 				</Paper>
 			</main>
