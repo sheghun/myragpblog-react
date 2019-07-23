@@ -258,10 +258,10 @@ const SecondForm = (props: IProps) => {
 	const [bankAccountType, setBankAccountType] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 	const [errors, setErrors] = useState({
+		bank: "",
 		bankAccountName: "",
 		bankAccountNumber: "",
 		bankAccountType: "",
-		bank: "",
 		ragpReferalId: "",
 		whatsappNumber: "",
 	});
@@ -269,10 +269,10 @@ const SecondForm = (props: IProps) => {
 	const validate = (): boolean => {
 		let passed = true;
 		const err = {
+			bank: "",
 			bankAccountName: "",
 			bankAccountNumber: "",
 			bankAccountType: "",
-			bank: "",
 			ragpReferalId: "",
 			whatsappNumber: "",
 		};
