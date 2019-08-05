@@ -47,7 +47,7 @@ const VerifyPayment = (props: IProps) => {
 		(async () => {
 			try {
 				setLoading(true);
-				const response = await Axios.post("/payment/verify-transaction", { ...queryUrl });
+				const response = await Axios.post("/payment/verify-payment", { ...queryUrl });
 				if (response.status === 200) {
 					setSuccessful(true);
 

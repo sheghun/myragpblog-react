@@ -11,15 +11,17 @@ import { Theme } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import ArrowBackwardIcon from '@material-ui/icons/ArrowBack'
+import ArrowBackwardIcon from "@material-ui/icons/ArrowBack";
 import StarIcon from "@material-ui/icons/StarBorder";
 import { makeStyles } from "@material-ui/styles";
 import Axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 // @ts-ignore
-import PaystackButton from 'react-paystack';
+import PaystackButton from "react-paystack";
 import { Link, RouteComponentProps } from "react-router-dom";
 import Progress from "../../Components/Progress/Progress";
+import Snackbar from "../../Components/Snackbar/Snackbar";
+import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 
 // Type for the tier
 interface ITier {
@@ -44,16 +46,16 @@ const useStyles = ((theme: Theme) => ({
 				to bottom right, ${theme.palette.primary.main} 49%, #f5f5f5 50%, #f5f5f5 100%
 			)
 		`,
-
+			backgroundRepeat: "none",
 			boxSizing: "border-box",
 			height: "100vh",
+		},
+		li: {
+			listStyle: "none",
 		},
 		ul: {
 			margin: 0,
 			padding: 0,
-		},
-		li: {
-			listStyle: "none",
 		},
 	},
 	"appBar": {
@@ -72,24 +74,6 @@ const useStyles = ((theme: Theme) => ({
 		flexDirection: "column",
 		justifyContent: "space-evenly",
 		minHeight: "250px",
-	},
-	"link": {
-		margin: theme.spacing.unit * 1 + " " + theme.spacing.unit * 1.5,
-	},
-	"heroContent": {
-		boxSizing: "border-box",
-		marginLeft: "auto",
-		marginRight: "auto",
-		padding: theme.spacing.unit * 1.2 + "px " + theme.spacing.unit * 0 + "px " + theme.spacing.unit * 4 + "px",
-	},
-	"tiers": {
-		marginLeft: "auto",
-		marginRight: "auto",
-		maxWidth: "960px",
-		[theme.breakpoints.down("sm")]: {
-			paddingLeft: theme.spacing.unit * 2,
-			paddingRight: theme.spacing.unit * 2,
-		},
 	},
 	"cardHeader": {
 		backgroundColor: "#fff",
@@ -112,9 +96,23 @@ const useStyles = ((theme: Theme) => ({
 			paddingTop: theme.spacing.unit * 6,
 		},
 	},
-	"subHeader": {
-		// lineHeight: "1.2 !important",
-		// marginTop: "16px !important",
+	"heroContent": {
+		boxSizing: "border-box",
+		marginLeft: "auto",
+		marginRight: "auto",
+		padding: theme.spacing.unit * 1.2 + "px " + theme.spacing.unit * 0 + "px " + theme.spacing.unit * 4 + "px",
+	},
+	"link": {
+		margin: theme.spacing.unit * 1 + " " + theme.spacing.unit * 1.5,
+	},
+	"tiers": {
+		marginLeft: "auto",
+		marginRight: "auto",
+		maxWidth: "960px",
+		[theme.breakpoints.down("sm")]: {
+			paddingLeft: theme.spacing.unit * 2,
+			paddingRight: theme.spacing.unit * 2,
+		},
 	},
 	"toolbar": {
 		...theme.mixins.toolbar,
@@ -145,30 +143,17 @@ const tiers: any = [
 		title: "Subscription",
 	},
 ];
-const footers = [
-	{
-		description: ["Team", "History", "Contact us", "Locations"],
-		title: "Company",
-	},
-	{
-		description: ["Cool stuff", "Random feature", "Team feature", "Developer stuff", "Another one"],
-		title: "Features",
-	},
-	{
-		description: ["Resource", "Resource name", "Another resource", "Final resource"],
-		title: "Resources",
-	},
-	{
-		description: ["Privacy policy", "Terms of use"],
-		title: "Legal",
-	},
-];
 
 const MakePayment = (props: IProps) => {
 
 	const { classes, location, history } = props;
 
 	const [loading, setLoading] = useState(false);
+	const [snackbar, setSnackbar] = useState({
+		message: "",
+		show: false,
+		type: "",
+	})
 
 	/**
 	 * Processes the one time payment method
@@ -182,6 +167,12 @@ const MakePayment = (props: IProps) => {
 			if (response.status === 200) {
 				// Grab the data
 				const { data } = response;
+				if (!data.authorizationUrl) {
+					setLoading(false);
+					setSnackbar({ type: "error", message: "Error, check your network", show: true });
+					return
+				}
+				setSnackbar({ type: "success", message: "Redirecting to Paystack", show: true });
 				window.location.href = data.authorizationUrl;
 			}
 		} catch (error) {
@@ -229,13 +220,18 @@ const MakePayment = (props: IProps) => {
 
 	return (
 		<div>
-			{/* <AppBar color="secondary">
-				<Toolbar>
-					<ArrowBackwardIcon />
-			</Toolbar>
-			</AppBar> */}
+			{
+				// @ts-ignore
+				<Snackbar
+					type={snackbar.type}
+					open={snackbar.show}
+					message={snackbar.message}
+					onClose={() => setSnackbar((s) => ({ ...s, show: false }))}
+				/>
+			}
 			<div className={classes.toolbar} />
 			<Progress show={loading} />
+			<SnackbarSpinner loading={loading} />
 			<main style={{ maxWidth: "600px" }} className={classes.heroContent}>
 				<Typography variant="h4" align="center" style={{ color: "white" }} gutterBottom={true}>
 					Pricing
