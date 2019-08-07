@@ -13,8 +13,6 @@ import Header from "../../Components/HeaderDashboard/HeaderDashboard";
 import Footer from "../../Components/Footer/Footer.jsx";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 
-// Hoc's
-import ErrorWrapper from '../../Hoc/ErrorWrapper/ErrorWrapper';
 
 import dashboardRoutes from "../../Routes/Dashboard";
 
@@ -79,51 +77,49 @@ class Dashboard extends React.Component {
 
 		return (
 			<>
-				{!context.loggedIn ?
-					<Redirect to={'/login?returnUrl=' + location.pathname} />
-					:
+				<div
+					className={classes.wrapper}
+				>
+					<Sidebar
+						routes={dashboardRoutes}
+						logoText={"My Ragp's Blog"}
+						logo={logo}
+						image={image}
+						handleDrawerToggle={this.handleDrawerToggle}
+						open={this.state.mobileOpen}
+						color="purple"
+						location={location}
+						{...rest}
+					/>
 					<div
-						className={classes.wrapper}
+						className={classes.mainPanel}
+						ref="mainPanel"
 					>
-						<Sidebar
+						<Header
 							routes={dashboardRoutes}
-							logoText={"My Ragp's Blog"}
-							logo={logo}
-							image={image}
+							color="primary"
 							handleDrawerToggle={this.handleDrawerToggle}
-							open={this.state.mobileOpen}
-							color="purple"
-							location={location}
 							{...rest}
 						/>
-						<div
-							className={classes.mainPanel}
-							ref="mainPanel"
-						>
-							<Header
-								routes={dashboardRoutes}
-								color="primary"
-								handleDrawerToggle={this.handleDrawerToggle}
-								{...rest}
-							/>
-							{this.getRoute() ? (
+						{this.getRoute() ? (
+							<div
+								className={classes.content}
+							>
 								<div
-									className={classes.content}
+									className={classes.container}
 								>
-									<div
-										className={classes.container}
-									>
-										{dashboardRoutes.map((prop, key) => {
-											return <Route exact path={prop.path} component={prop.component} key={key} />;
-										})}
-									</div>
+									{dashboardRoutes.map((prop, key) => {
+										return <Route exact path={prop.path} component={prop.component} key={key} />;
+									})}
 								</div>
-							) : (
-									<div className={classes.map}>{switchRoutes}</div>
-								)}
-						</div>
+							</div>
+						) : (
+								<div className={classes.map}>{switchRoutes}</div>
+							)}
 					</div>
+				</div>
 				}
+				<Footer />
 			</>
 		);
 	}

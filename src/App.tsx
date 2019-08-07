@@ -1,7 +1,7 @@
 import React, { Component, Suspense, useEffect, useReducer } from "react";
 
 // React router dependencies
-import { Redirect, Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
+import { Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
 
 // For lazy loading
 import loadable from "@loadable/component";

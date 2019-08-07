@@ -39,16 +39,20 @@ const VerifyPayment = (props: IProps) => {
 	const queryUrl = queryString.parse(location.search);
 	const [loading, setLoading] = useState(false);
 	const [successful, setSuccessful] = useState(false);
-	const [notSuccessful, setNotSucessful] = useState(false);
+	const [notSuccessful, setNotSuccessful] = useState(false);
 	const [invalidReference, setInvalidReference] = useState(false);
 	const [networkFailed, setNetworkFailed] = useState(false);
+
+	if (!queryUrl.trxref || !queryUrl.reference) {
+		history.push("/");
+	}
 
 	useEffect(() => {
 		(async () => {
 			try {
 				setLoading(true);
 				const response = await Axios.post("/payment/verify-payment", { ...queryUrl });
-				if (response.status === 200) {
+				if (response.status === 202) {
 					setSuccessful(true);
 
 					setTimeout(() => {
@@ -58,19 +62,24 @@ const VerifyPayment = (props: IProps) => {
 			} catch (error) {
 				const err = error as AxiosError;
 				if (err.response) {
+					setLoading(false);
 					if (err.response.status === 400) {
-						setNotSucessful(true);
+						setNotSuccessful(true);
+						return;
 					}
 					if (err.response.status === 403) {
 						// Format the string
 						const urlQueries = location.search.replace("?", "&");
 						history.push("/login?returnUrl=" + location.pathname + urlQueries);
+						return;
 					}
 					if (err.response.status === 404) {
 						setInvalidReference(true);
+						return;
 					}
-					if (err.response.status === 500) {
+					if (err.response.status === 408) {
 						setNetworkFailed(true);
+						return;
 					}
 				}
 			}

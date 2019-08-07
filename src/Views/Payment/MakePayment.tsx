@@ -5,13 +5,10 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { Theme } from "@material-ui/core/styles";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Toolbar from "@material-ui/core/Toolbar";
+import withStyles, { StyleRulesCallback } from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
-import ArrowBackwardIcon from "@material-ui/icons/ArrowBack";
 import StarIcon from "@material-ui/icons/StarBorder";
 import { makeStyles } from "@material-ui/styles";
 import Axios, { AxiosError } from "axios";
@@ -38,7 +35,7 @@ interface IProps extends RouteComponentProps {
 	classes: any;
 }
 
-const useStyles = ((theme: Theme) => ({
+const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
 	"@global": {
 		body: {
 			background: `
@@ -146,14 +143,15 @@ const tiers: any = [
 
 const MakePayment = (props: IProps) => {
 
-	const { classes, location, history } = props;
+	const { location, history } = props;
+	const classes = useStyles();
 
 	const [loading, setLoading] = useState(false);
 	const [snackbar, setSnackbar] = useState({
 		message: "",
 		show: false,
 		type: "",
-	})
+	});
 
 	/**
 	 * Processes the one time payment method
@@ -170,7 +168,7 @@ const MakePayment = (props: IProps) => {
 				if (!data.authorizationUrl) {
 					setLoading(false);
 					setSnackbar({ type: "error", message: "Error, check your network", show: true });
-					return
+					return;
 				}
 				setSnackbar({ type: "success", message: "Redirecting to Paystack", show: true });
 				window.location.href = data.authorizationUrl;
@@ -285,4 +283,4 @@ const MakePayment = (props: IProps) => {
 	);
 };
 
-export default withStyles(useStyles as any)(MakePayment);
+export default MakePayment;

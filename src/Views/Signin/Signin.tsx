@@ -93,7 +93,7 @@ const SignIn = (props: IProps) => {
 		(async () => {
 			try {
 
-				const response = await Axios.get("/member/verify-token");
+				const response = await Axios.get("/user/verify-token");
 				if (response.status === 200) {
 					dispatch({ type: "LOGIN" });
 					history.push(returnUrl as string);
@@ -129,6 +129,10 @@ const SignIn = (props: IProps) => {
 			if (response.status === 200) {
 				if (response.data.notDone) {
 					setCurrentForm("second");
+					return;
+				}
+				if (response.data.notPaid) {
+					history.push("/payment");
 					return;
 				}
 				dispatch({ type: "LOGIN" });
