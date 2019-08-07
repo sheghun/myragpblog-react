@@ -2,10 +2,8 @@
 
 // cSpell: ignore scrollbar segun's accbtn mobilebutton
 
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { connect } from 'react-redux'
 // @material-ui/core Components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core Components
@@ -31,98 +29,84 @@ const switchRoutes = (
 	</Switch>
 );
 
-class Dashboard extends React.Component {
+const Dashboard = (props) => {
 
-	// Get the context
-	static contextType = Context;
+	const { classes, location, match, ...rest } = props
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			mobileOpen: false
+	const [mobileOpen, setMobileOpen] = useState(false);
+
+	useEffect(() => {
+		window.addEventListener("resize", resizeFunction);
+		return () => {
+			window.removeEventListener("resize", resizeFunction);
 		};
-		this.resizeFunction = this.resizeFunction.bind(this);
-	}
-	handleDrawerToggle = () => {
-		this.setState({ mobileOpen: !this.state.mobileOpen });
+	}, [])
+
+	useEffect(() => { }, [])
+
+	const handleDrawerToggle = () => {
+		setMobileOpen(!mobileOpen);
 	};
-	getRoute() {
-		return this.props.location.pathname !== "/maps";
+
+	const getRoute = () => {
+		return props.location.pathname !== "/maps";
 	}
-	resizeFunction() {
+
+	const resizeFunction = () => {
 		if (window.innerWidth >= 960) {
-			this.setState({ mobileOpen: false });
+			setMobileOpen(false);
 		}
 	}
-	componentDidMount() {
-		window.addEventListener("resize", this.resizeFunction);
-	}
-	componentDidUpdate(e) {
-		if (e.history.location.pathname !== e.location.pathname) {
-			this.refs.mainPanel.scrollTop = 0;
-			if (this.state.mobileOpen) {
-				this.setState({ mobileOpen: false });
-			}
-		}
-	}
-	componentWillUnmount() {
-		window.removeEventListener("resize", this.resizeFunction);
-	}
-	render() {
-		const { classes, location, match, ...rest } = this.props
-		// Get the context from the state
-		const context = this.context.state;
-		console.log(location)
+
+	console.log(location)
 
 
-		return (
-			<>
+	return (
+		<>
+			<div
+				className={classes.wrapper}
+			>
+				<Sidebar
+					routes={dashboardRoutes}
+					logoText={"My Ragp's Blog"}
+					logo={logo}
+					image={image}
+					handleDrawerToggle={handleDrawerToggle}
+					open={mobileOpen}
+					color="purple"
+					location={location}
+					{...rest}
+				/>
 				<div
-					className={classes.wrapper}
+					className={classes.mainPanel}
 				>
-					<Sidebar
+					<Header
 						routes={dashboardRoutes}
-						logoText={"My Ragp's Blog"}
-						logo={logo}
-						image={image}
-						handleDrawerToggle={this.handleDrawerToggle}
-						open={this.state.mobileOpen}
-						color="purple"
-						location={location}
+						color="primary"
+						handleDrawerToggle={handleDrawerToggle}
 						{...rest}
 					/>
-					<div
-						className={classes.mainPanel}
-						ref="mainPanel"
-					>
-						<Header
-							routes={dashboardRoutes}
-							color="primary"
-							handleDrawerToggle={this.handleDrawerToggle}
-							{...rest}
-						/>
-						{this.getRoute() ? (
+					{getRoute() ? (
+						<div
+							className={classes.content}
+						>
 							<div
-								className={classes.content}
+								className={classes.container}
 							>
-								<div
-									className={classes.container}
-								>
-									{dashboardRoutes.map((prop, key) => {
-										return <Route exact path={prop.path} component={prop.component} key={key} />;
-									})}
-								</div>
+								{dashboardRoutes.map((prop, key) => {
+									return <Route exact path={prop.path} component={prop.component} key={key} />;
+								})}
 							</div>
-						) : (
-								<div className={classes.map}>{switchRoutes}</div>
-							)}
-					</div>
+						</div>
+					) : (
+							<div className={classes.map}>{switchRoutes}</div>
+						)}
 				</div>
-				}
+			</div>
+			}
 				<Footer />
-			</>
-		);
-	}
+		</>
+	);
 }
 
 export default withRouter(withStyles(dashboardStyle)(Dashboard))
