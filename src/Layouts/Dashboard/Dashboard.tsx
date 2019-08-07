@@ -2,36 +2,37 @@
 
 // cSpell: ignore scrollbar segun's accbtn mobilebutton
 
-import React, { useContext, useEffect, useState } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 // @material-ui/core Components
 import withStyles from "@material-ui/core/styles/withStyles";
+import React, { useContext, useEffect, useState } from "react";
+import { Redirect, Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
+import Footer from "../../Components/Footer/Footer";
 // core Components
 import Header from "../../Components/HeaderDashboard/HeaderDashboard";
-import Footer from "../../Components/Footer/Footer";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-
 
 import dashboardRoutes from "../../Routes/Dashboard";
 
-import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
-import image from "../../assets/img/sidebar-2.jpg";
 import logo from "../../assets/img/reactlogo.png";
+import image from "../../assets/img/sidebar-2.jpg";
+import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
 import Context from "../../Context";
 
 const switchRoutes = (
 	<Switch>
 		{dashboardRoutes.map((prop, key) => {
-			if (prop.redirect)
-				return <Redirect from={prop.path} to={prop.to} key={key} />;
 			return <Route path={prop.path} component={prop.component} key={key} />;
 		})}
 	</Switch>
 );
 
-const Dashboard = (props) => {
+interface IProps extends RouteComponentProps {
+	classes: any;
+}
 
-	const { classes, location, match, ...rest } = props
+const Dashboard = (props: IProps) => {
+
+	const { classes, location, match, ...rest } = props;
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -40,9 +41,7 @@ const Dashboard = (props) => {
 		return () => {
 			window.removeEventListener("resize", resizeFunction);
 		};
-	}, [])
-
-	useEffect(() => { }, [])
+	}, []);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -50,16 +49,13 @@ const Dashboard = (props) => {
 
 	const getRoute = () => {
 		return props.location.pathname !== "/maps";
-	}
+	};
 
 	const resizeFunction = () => {
 		if (window.innerWidth >= 960) {
 			setMobileOpen(false);
 		}
-	}
-
-	console.log(location)
-
+	};
 
 	return (
 		<>
@@ -94,7 +90,7 @@ const Dashboard = (props) => {
 								className={classes.container}
 							>
 								{dashboardRoutes.map((prop, key) => {
-									return <Route exact path={prop.path} component={prop.component} key={key} />;
+									return <Route exact={true} path={prop.path} component={prop.component} key={key} />;
 								})}
 							</div>
 						</div>
@@ -107,6 +103,6 @@ const Dashboard = (props) => {
 				<Footer />
 		</>
 	);
-}
+};
 
-export default withRouter(withStyles(dashboardStyle)(Dashboard))
+export default withRouter(withStyles(dashboardStyle as any)(Dashboard));
