@@ -6,7 +6,7 @@ import ToggleOff from "@material-ui/icons/ToggleOff";
 
 // core components/views
 import Notifications from "../Views/Base/Notifications/Notifications";
-import DashboardPage from "../Views/Dashboard/Dashboard.jsx";
+import DashboardPage from "../Views/Dashboard/Dashboard";
 import LogOut from "../Views/Dashboard/Logout";
 import Transactions from "../Views/Dashboard/Transactions";
 import UserProfile from "../Views/Dashboard/UserProfile";

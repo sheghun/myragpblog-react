@@ -1,61 +1,56 @@
-import React, { useState, useEffect } from "react";
-import Axios from 'axios'
-import { Link, withRouter } from 'react-router-dom'
-
-
 // @material-ui/core
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import Typography from "@material-ui/core/Typography";
 // @material-ui/icons
 import DateRange from "@material-ui/icons/DateRange";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import MoneyIcon from "@material-ui/icons/Money";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp"
-
+import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 // * Personal components
-import GridItem from "../../Components/Grid/GridItem.jsx";
-import GridContainer from "../../Components/Grid/GridContainer.jsx";
-import Table from "../../Components/Table/Table";
 import Card from "../../Components/Card/Card.jsx";
-import CardHeader from "../../Components/Card/CardHeader.jsx";
-import CardIcon from "../../Components/Card/CardIcon.jsx";
 import CardBody from "../../Components/Card/CardBody.jsx";
 import CardFooter from "../../Components/Card/CardFooter.jsx";
+import CardHeader from "../../Components/Card/CardHeader.jsx";
+import CardIcon from "../../Components/Card/CardIcon.jsx";
+import GridContainer from "../../Components/Grid/GridContainer.jsx";
+import GridItem from "../../Components/Grid/GridItem.jsx";
 import SnackbarContent from "../../Components/Snackbar/SnackbarContent.jsx";
+import Table from "../../Components/Table/Table";
 
+interface IProps extends RouteComponentProps {
+	classes: any;
+}
 
-//Styles
-import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-//Hoc's
-import Typography from "@material-ui/core/Typography";
-
-const Dashboard = (props) => {
+const Dashboard = (props: IProps) => {
 	const [state, setState] = useState({
-		pv: 0,
+		cummulative_pv: 0,
+		daysleft: 0,
+		earnings: 0,
 		id: 0,
 		network: 0,
-		earnings: 0,
-		daysleft: 0,
+		notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
+		pv: 0,
 		transactions: [],
-		cummulative_pv: 0,
-		notifications: [],
 	});
-
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await Axios.get("/dashboard")
-				setState({ ...response.data })
+				const response = await Axios.get("/dashboard");
+				setState({ ...response.data });
 			} catch (error) {
 				if (error.response) {
 					if (error.response.status === 403) {
-						props.history.push("/login" + props.location.pathname)
+						props.history.push("/login" + props.location.pathname);
 					}
 				}
 			}
 		})();
-	}, [])
+	}, []);
 
 	const { classes } = props;
 	return (
@@ -63,7 +58,7 @@ const Dashboard = (props) => {
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
-						<CardHeader color="warning" stats icon>
+						<CardHeader color="warning" stats={true} icon={true}>
 							<CardIcon color="warning">
 								<PeopleOutlineIcon />
 							</CardIcon>
@@ -71,27 +66,25 @@ const Dashboard = (props) => {
 							<p className={classes.cardCategory}>My Network</p>
 							<h3 className={classes.cardTitle}>{state.network}</h3>
 						</CardHeader>
-						<CardFooter stats>
-						</CardFooter>
+						<CardFooter stats={true}/>
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
-						<CardHeader color="success" stats icon>
+						<CardHeader color="success" stats={true} icon={true}>
 							<CardIcon color="success">
 								<MoneyIcon />
 							</CardIcon>
 							<br />
 							<p className={classes.cardCategory}>Wallet</p>
-							<h3 className={classes.cardTitle}>&#8358;{state.earnings.toLocaleString(3)}</h3>
+							<h3 className={classes.cardTitle}>&#8358;{state.earnings.toLocaleString()}</h3>
 						</CardHeader>
-						<CardFooter stats>
-						</CardFooter>
+						<CardFooter stats={true}/>
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
-						<CardHeader color="success" stats icon>
+						<CardHeader color="success" stats={true} icon={true}>
 							<CardIcon color="success">
 								<DateRange />
 							</CardIcon>
@@ -99,13 +92,12 @@ const Dashboard = (props) => {
 							<p className={classes.cardCategory}>Days Left</p>
 							<h3 className={classes.cardTitle}>{state.daysleft}</h3>
 						</CardHeader>
-						<CardFooter stats>
-						</CardFooter>
+						<CardFooter stats={true}/>
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
-						<CardHeader color="success" stats icon>
+						<CardHeader color="success" stats={true} icon={true}>
 							<CardIcon color="success">
 								<TrendingUpIcon />
 							</CardIcon>
@@ -113,8 +105,7 @@ const Dashboard = (props) => {
 							<p className={classes.cardCategory}>Visits</p>
 							<h3 className={classes.cardTitle}>{state.daysleft}</h3>
 						</CardHeader>
-						<CardFooter stats>
-						</CardFooter>
+						<CardFooter stats={true}/>
 					</Card>
 				</GridItem>
 			</GridContainer>
@@ -130,7 +121,7 @@ const Dashboard = (props) => {
 						<CardBody>
 							<GridContainer>
 								<GridItem xs={6} sm={6} md={6}>
-									<Typography style={{ marginBottom: '1rem' }} align="center" variant="h5">
+									<Typography style={{ marginBottom: "1rem" }} align="center" variant="h5">
 										Monthly Pv
                                         </Typography>
 									<Typography align="center" variant="h4">
@@ -138,7 +129,7 @@ const Dashboard = (props) => {
 									</Typography>
 								</GridItem>
 								<GridItem xs={6} sm={6} md={6}>
-									<Typography style={{ marginBottom: '1rem' }} align="center" variant="h5">
+									<Typography style={{ marginBottom: "1rem" }} align="center" variant="h5">
 										Cummulative Pv
                                         </Typography>
 									<Typography align="center" variant="h4">
@@ -158,27 +149,11 @@ const Dashboard = (props) => {
                                 </p>
 						</CardHeader>
 						<CardBody>
-							{state.daysleft < 5 ?
+							{state.notifications.map((notification, i) => (
 								<SnackbarContent
+									key={i}
 									message={
-										<Typography variant="overline" style={{ color: 'white', fontWeight: '700' }}>
-											Your Account {state.daysLeft < 5 ? 'will soon expire' :
-												'is not active pay'} to activate your account<br />
-											Pay <Link to={{
-												pathname: '/payment/makepayment',
-												search: `?id=${state.id}&redirectUrl=${state.redirectUrl}`
-											}} >Here</Link>
-										</Typography>
-									}
-									close
-									color="danger"
-								/>
-								: null
-							}
-							{state.notifications.map(notification => (
-								<SnackbarContent
-									message={
-										<Typography variant="overline" style={{ color: 'white', fontWeight: '700' }}>
+										<Typography variant="overline" style={{ color: "white", fontWeight: 700 }}>
 											{notification.message}<br />
 											{notification.link ?
 												<Link to={notification.link.path}>{notification.link.message}</Link>
@@ -186,7 +161,7 @@ const Dashboard = (props) => {
 											}
 										</Typography>
 									}
-									close
+									close={true}
 									color={notification.type}
 								/>
 							))}
@@ -213,6 +188,6 @@ const Dashboard = (props) => {
 			</GridContainer>
 		</>
 	);
-}
+};
 
-export default withRouter(withStyles(dashboardStyle)(Dashboard));
+export default withRouter(withStyles(dashboardStyle as any)(Dashboard));

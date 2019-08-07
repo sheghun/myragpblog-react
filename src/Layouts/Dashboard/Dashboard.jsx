@@ -10,13 +10,13 @@ import { connect } from 'react-redux'
 import withStyles from "@material-ui/core/styles/withStyles";
 // core Components
 import Header from "../../Components/HeaderDashboard/HeaderDashboard";
-import Footer from "../../Components/Footer/Footer.jsx";
+import Footer from "../../Components/Footer/Footer";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 
 
 import dashboardRoutes from "../../Routes/Dashboard";
 
-import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx";
+import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
 import image from "../../assets/img/sidebar-2.jpg";
 import logo from "../../assets/img/reactlogo.png";
 import Context from "../../Context";
