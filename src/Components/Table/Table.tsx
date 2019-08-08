@@ -13,6 +13,7 @@ import TablePagination from "@material-ui/core/TablePagination"
 import tableStyle from "../../assets/jss/material-dashboard-react/components/tableStyle.jsx";
 import TablePaginationActionsWrapped from "./TablePagination";
 
+
 function CustomTable({ ...props }: any) {
     const { classes, tableHead, tableData, tableHeaderColor } = props;
     let number = 0

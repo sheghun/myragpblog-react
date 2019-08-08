@@ -17,6 +17,7 @@ import logo from "../../assets/img/reactlogo.png";
 import image from "../../assets/img/sidebar-2.jpg";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
 import Context from "../../Context";
+import Axios, { AxiosError } from "axios";
 
 const switchRoutes = (
 	<Switch>
@@ -32,16 +33,23 @@ interface IProps extends RouteComponentProps {
 
 const Dashboard = (props: IProps) => {
 
-	const { classes, location, match, ...rest } = props;
+	const { classes, location, history, match, ...rest } = props;
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	useEffect(() => {
-		window.addEventListener("resize", resizeFunction);
-		return () => {
-			window.removeEventListener("resize", resizeFunction);
-		};
-	}, []);
+		Axios.interceptors.response.use(
+			(response) => Promise.resolve(response),
+			(error) => {
+				const err = error as AxiosError;
+				if (err.response) {
+					if (err.response.status === 403) {
+						history.push("/login");
+					}
+				}
+			}
+		);
+	}, [])
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -51,11 +59,6 @@ const Dashboard = (props: IProps) => {
 		return props.location.pathname !== "/maps";
 	};
 
-	const resizeFunction = () => {
-		if (window.innerWidth >= 960) {
-			setMobileOpen(false);
-		}
-	};
 
 	return (
 		<>

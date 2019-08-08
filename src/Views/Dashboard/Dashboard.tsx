@@ -27,9 +27,9 @@ interface IProps extends RouteComponentProps {
 
 const Dashboard = (props: IProps) => {
 	const [state, setState] = useState({
-		cummulative_pv: 0,
+		cummulativePv: 0,
 		daysleft: 0,
-		earnings: 0,
+		wallet: 0,
 		id: 0,
 		network: 0,
 		notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
@@ -40,8 +40,8 @@ const Dashboard = (props: IProps) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await Axios.get("/dashboard");
-				setState({ ...response.data });
+				const response = await Axios.get("/user/dashboard");
+				setState(s => ({ ...s, ...response.data }));
 			} catch (error) {
 				if (error.response) {
 					if (error.response.status === 403) {
@@ -66,7 +66,7 @@ const Dashboard = (props: IProps) => {
 							<p className={classes.cardCategory}>My Network</p>
 							<h3 className={classes.cardTitle}>{state.network}</h3>
 						</CardHeader>
-						<CardFooter stats={true}/>
+						<CardFooter stats={true} />
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={6} md={6}>
@@ -77,12 +77,12 @@ const Dashboard = (props: IProps) => {
 							</CardIcon>
 							<br />
 							<p className={classes.cardCategory}>Wallet</p>
-							<h3 className={classes.cardTitle}>&#8358;{state.earnings.toLocaleString()}</h3>
+							<h3 className={classes.cardTitle}>&#8358;{state.wallet.toLocaleString()}</h3>
 						</CardHeader>
-						<CardFooter stats={true}/>
+						<CardFooter stats={true} />
 					</Card>
 				</GridItem>
-				<GridItem xs={12} sm={6} md={6}>
+				{/* <GridItem xs={12} sm={6} md={6}>
 					<Card>
 						<CardHeader color="success" stats={true} icon={true}>
 							<CardIcon color="success">
@@ -94,8 +94,8 @@ const Dashboard = (props: IProps) => {
 						</CardHeader>
 						<CardFooter stats={true}/>
 					</Card>
-				</GridItem>
-				<GridItem xs={12} sm={6} md={6}>
+				</GridItem> */}
+				{/* <GridItem xs={12} sm={6} md={6}>
 					<Card>
 						<CardHeader color="success" stats={true} icon={true}>
 							<CardIcon color="success">
@@ -107,7 +107,7 @@ const Dashboard = (props: IProps) => {
 						</CardHeader>
 						<CardFooter stats={true}/>
 					</Card>
-				</GridItem>
+				</GridItem> */}
 			</GridContainer>
 			<GridContainer>
 				<GridItem xs={12} sm={12} md={12}>
@@ -120,20 +120,28 @@ const Dashboard = (props: IProps) => {
 						</CardHeader>
 						<CardBody>
 							<GridContainer>
-								<GridItem xs={6} sm={6} md={6}>
-									<Typography style={{ marginBottom: "1rem" }} align="center" variant="h5">
+								<GridItem xs={12} sm={6} md={6}>
+									<Typography
+										style={{ marginBottom: "1rem" }}
+										align="center"
+										variant="h5"
+									>
 										Monthly Pv
-                                        </Typography>
+                                	</Typography>
 									<Typography align="center" variant="h4">
 										{state.pv}
 									</Typography>
 								</GridItem>
-								<GridItem xs={6} sm={6} md={6}>
-									<Typography style={{ marginBottom: "1rem" }} align="center" variant="h5">
+								<GridItem xs={12} sm={6} md={6}>
+									<Typography
+										style={{ marginBottom: "1rem" }}
+										align="center"
+										variant="h5"
+									>
 										Cummulative Pv
-                                        </Typography>
+                                    </Typography>
 									<Typography align="center" variant="h4">
-										{state.cummulative_pv}
+										{state.cummulativePv}
 									</Typography>
 								</GridItem>
 							</GridContainer>
