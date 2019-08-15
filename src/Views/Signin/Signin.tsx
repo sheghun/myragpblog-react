@@ -73,8 +73,8 @@ const SignIn = (props: IProps) => {
 	const [error, setError] = useState("");
 	const queryUrl = queryString.parse(location.search);
 	// Check if the former url is the logout url redirect to the dashboard
-	let returnUrl = !queryUrl.returnUrl ? "/user/dashboard" : queryUrl.returnUrl === "/user/logout" ?
-		"/user/dashboard" : queryUrl.returnUrl;
+	let returnUrl = !queryUrl.returnUrl ? "/dashboard/overview" : queryUrl.returnUrl === "/dashboard/logout" ?
+		"/dashboard" : queryUrl.returnUrl;
 
 	// Loop through the queryUrl to get the current
 	if (Object.keys(queryUrl).length > 1 && typeof (queryUrl) === "object") {

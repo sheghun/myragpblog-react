@@ -55,7 +55,7 @@ export interface IState {
 const routes = [
 	{ path: "/login", component: Signin },
 	{ exact: true, path: "/", component: Web },
-	{ path: "/user", component: Dashboard },
+	{ path: "/dashboard", component: Dashboard },
 	{ path: "/payment", component: Payment },
 	{ path: "/register", component: Register },
 	{ path: "/:username", component: Blog },

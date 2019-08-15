@@ -13,11 +13,11 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 
 import dashboardRoutes from "../../Routes/Dashboard";
 
+import Axios, { AxiosError } from "axios";
 import logo from "../../assets/img/reactlogo.png";
 import image from "../../assets/img/sidebar-2.jpg";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
 import Context from "../../Context";
-import Axios, { AxiosError } from "axios";
 
 const switchRoutes = (
 	<Switch>
@@ -47,9 +47,9 @@ const Dashboard = (props: IProps) => {
 						history.push("/login");
 					}
 				}
-			}
+			},
 		);
-	}, [])
+	}, []);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -58,7 +58,6 @@ const Dashboard = (props: IProps) => {
 	const getRoute = () => {
 		return props.location.pathname !== "/maps";
 	};
-
 
 	return (
 		<>
