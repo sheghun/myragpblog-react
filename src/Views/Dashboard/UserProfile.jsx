@@ -25,6 +25,7 @@ import Snackbar from '../../Components/Snackbar/Snackbar';
 import CircularProgress from '../../Components/CircularProgress/CircularProgress';
 import Modal from '../../Components/Modal/Modal';
 import CardFooter from "../../Components/Card/CardFooter.jsx";
+import BanksList from "../../_data/banks.json"
 
 import Axios from 'axios';
 import * as helpers from '../../_helpers';
@@ -105,24 +106,22 @@ class UserProfile extends Component {
 				name: '',
 				paid: '',
 				image: '',
-				email: '',
-				banks: [],
-				number: '',
-				package: '',
+				phoneNumber: '',
+				package: 'Novice',
 				bank_id: '',
-				whatsapp: '',
-				lastname: '',
+				whatsappNumber: '',
+				lastName: '',
 				username: '',
 				about_me: '',
-				firstname: '',
+				firstName: '',
 				old_password: '',
 				new_password: '',
 				new_password_2: '',
-				ragp_referal_id: '',
-				bank_account_name: '',
-				bank_account_types: [],
-				bank_account_number: '',
-				bank_account_type_id: 0
+				ragpReferalId: '',
+				bankAccountName: '',
+				bank_account_types: ["Savings", "Current", "Corporate"],
+				bankAccountNumber: '',
+				bankAccountType: 0
 			},
 
 			// Snackbar settings
@@ -165,21 +164,18 @@ class UserProfile extends Component {
 
 	componentDidMount() {
 		this.setState({ snackbar: { loading: true } })
-		Axios.get('/dashboard/user_profile', {
-			withCredentials: true
-		}).then(response => {
-			if (response.data.success) {
-				console.log(response.data.success)
-				this.setState(prevState => ({
-					inputs: { ...response.data.success, image: helpers.baseUrl + response.data.success.image },
+		const self = this;
+		(async () => {
+			try {
+				const res = await Axios.get('/user/profile')
+				self.setState((prevState) => ({
+					inputs: { ...prevState.inputs, ...res.data },
 					snackbar: { loading: false }
 				}));
-			} else if (response.data.errors) {
-				this.props.history.push(`/login?returnUrl=${this.props.location.pathname}`);
+			} catch (error) {
+
 			}
-
-		});
-
+		})();
 	}
 
 	inputHandler = event => {
@@ -203,8 +199,6 @@ class UserProfile extends Component {
 				}
 			}))
 		}
-
-		console.log(name)
 
 	}
 
@@ -236,10 +230,10 @@ class UserProfile extends Component {
 			})
 	}
 
-    /**
-     * Update Password
-     * Required old_password, new_password, new_password_2
-     */
+	/**
+	 * Update Password
+	 * Required old_password, new_password, new_password_2
+	 */
 	updatePassword = () => {
 		// Clear all password errors
 		this.setState(prevState => ({ error: { ...prevState.error, password: '' } }))
@@ -310,15 +304,15 @@ class UserProfile extends Component {
 		}
 	}
 
-    /**
-     * * Update Bank Details
-     * * Required bank_account_name, bank_account_number
-     */
+	/**
+	 * * Update Bank Details
+	 * * Required bankAccountName, bank_account_phoneNumber
+	 */
 	updateBankDetails = () => {
 		this.setState(prevState => ({ snackbar: { ...prevState.snackbar, loading: true } }))
 		this.setState({ error: { password: '', bank_details: '' } })
 		const { inputs } = this.state;
-		const data = { bank_account_name: inputs.bank_account_name, bank_account_number: inputs.bank_account_number, bank_id: inputs.bank_id, bank_account_type_id: inputs.bank_account_type_id }
+		const data = { bankAccountName: inputs.bankAccountName, bank_account_phoneNumber: inputs.bank_account_phoneNumber, bank_id: inputs.bank_id, bankAccountType: inputs.bankAccountType }
 		console.log(data)
 		Axios.post('/dashboard/user_profile/update_bank', { ...data }, {
 			withCredentials: true
@@ -456,10 +450,10 @@ class UserProfile extends Component {
 
 	render() {
 		const { classes } = this.props;
+		console.log(this.state.inputs)
 		return (
 			<>
 				{this.state.inputs.loading ? <Spinner /> : null}
-				<CircularProgress show={this.state.snackbar.loading} />
 				<Snackbar
 					type={this.state.snackbar.type}
 					open={this.state.snackbar.open}
@@ -551,8 +545,8 @@ class UserProfile extends Component {
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.firstname,
-												name: 'firstname',
+												value: this.state.inputs.firstName,
+												name: 'firstName',
 												onChange: (e) => this.inputHandler(e)
 											}}
 										/>
@@ -565,8 +559,8 @@ class UserProfile extends Component {
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.lastname,
-												name: 'lastname',
+												value: this.state.inputs.lastName,
+												name: 'lastName',
 												onChange: (e) => this.inputHandler(e)
 											}}
 										/>
@@ -581,8 +575,8 @@ class UserProfile extends Component {
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.number,
-												name: 'number',
+												value: this.state.inputs.phoneNumber,
+												name: 'phoneNumber',
 												onChange: (e) => this.inputHandler(e)
 											}}
 										/>
@@ -595,8 +589,8 @@ class UserProfile extends Component {
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.whatsapp,
-												name: 'whatsapp',
+												value: this.state.inputs.whatsappNumber,
+												name: 'whatsappNumber',
 												onChange: (e) => this.inputHandler(e)
 											}}
 										/>
@@ -604,13 +598,13 @@ class UserProfile extends Component {
 									<GridItem xs={12} sm={12} md={4}>
 										<CustomInput
 											labelText="Recharge And Get Paid Referal Id"
-											id="ragp_referal_id"
+											id="ragpReferalId"
 											formControlProps={{
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.ragp_referal_id,
-												name: 'ragp_referal_id',
+												value: this.state.inputs.ragpReferalId,
+												name: 'ragpReferalId',
 												onChange: (e) => this.inputHandler(e)
 											}}
 										/>
@@ -672,12 +666,12 @@ class UserProfile extends Component {
 						<Card profile>
 							<CardAvatar profile>
 								<Link to={this.props.match.url + '#profile'} onClick={this.profileView}>
-									<img src={this.state.inputs.image} alt="Profile" />
+									<img src={helpers.baseUrl + this.state.inputs.image} alt="Profile" />
 								</Link>
 							</CardAvatar>
 							<CardBody profile>
 								<h6 className={classes.cardCategory}>RAGP BLOG / MEMBER</h6>
-								<h4 className={classes.cardTitle}>{this.state.inputs.firstname + ' ' + this.state.inputs.lastname}</h4>
+								<h4 className={classes.cardTitle}>{this.state.inputs.firstName + ' ' + this.state.inputs.lastName}</h4>
 								<p className={classes.description}>
 									{this.state.inputs.about_me}
 								</p>
@@ -702,8 +696,8 @@ class UserProfile extends Component {
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.bank_account_name,
-												name: 'bank_account_name',
+												value: this.state.inputs.bankAccountName,
+												name: 'bankAccountName',
 												type: 'text',
 												onChange: (e) => this.inputHandler(e)
 											}}
@@ -712,13 +706,13 @@ class UserProfile extends Component {
 									<GridItem xs={12} sm={12} md={12}>
 										<CustomInput
 											labelText="Bank Account Number"
-											id="bank_account_number"
+											id="bank_account_phoneNumber"
 											formControlProps={{
 												fullWidth: true
 											}}
 											inputProps={{
-												value: this.state.inputs.bank_account_number,
-												name: 'bank_account_number',
+												value: this.state.inputs.bank_account_phoneNumber,
+												name: 'bank_account_phoneNumber',
 												type: 'text',
 												onChange: (e) => this.inputHandler(e)
 											}}
@@ -731,16 +725,18 @@ class UserProfile extends Component {
 											value={this.state.inputs.bank_id}
 											onChange={this.inputHandler}
 											label="Bank"
-											style={{ marginTop: '2rem' }}
+											style={{ marginTop: '2rem', height: "40px" }}
+
 											inputProps={{
+												style: { height: "40px" },
 												name: 'bank_id',
 												id: 'bank_id',
 											}}
 										>
 											<option disabled value={0}>Choose Your Bank</option>
-											{this.state.inputs.banks.map((bank, index) => (
-												<option value={bank.id} key={index}>
-													{bank.name.charAt(0).toUpperCase() + bank.name.slice(1)}
+											{BanksList.map((bank, index) => (
+												<option value={bank} key={index}>
+													{bank}
 												</option>
 											))}
 										</Select>
@@ -749,20 +745,21 @@ class UserProfile extends Component {
 									<GridItem xs={12} sm={12} md={12}>
 										<Select
 											native
-											value={this.state.inputs.bank_account_type_id}
+											value={this.state.inputs.bankAccountType}
 											onChange={this.inputHandler}
 											label="Bank"
 											fullWidth
 											style={{ marginTop: '2rem', marginBottom: '2rem' }}
 											inputProps={{
-												name: 'bank_account_type_id',
-												id: 'bank_account_type_id',
+												style: { height: "40px" },
+												name: 'bankAccountType',
+												id: 'bankAccountType',
 											}}
 										>
 											<option disabled value={0}>Choose Your Account Type</option>
 											{this.state.inputs.bank_account_types.map((accountType, index) => (
-												<option value={accountType.id} key={index}>
-													{accountType.name.charAt(0).toUpperCase() + accountType.name.slice(1)}
+												<option value={accountType} key={index}>
+													{accountType}
 												</option>
 											))}
 										</Select>
