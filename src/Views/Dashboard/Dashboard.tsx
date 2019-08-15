@@ -2,10 +2,8 @@
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 // @material-ui/icons
-import DateRange from "@material-ui/icons/DateRange";
 import MoneyIcon from "@material-ui/icons/Money";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";

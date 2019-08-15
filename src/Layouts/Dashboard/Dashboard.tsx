@@ -17,7 +17,6 @@ import Axios, { AxiosError } from "axios";
 import logo from "../../assets/img/reactlogo.png";
 import image from "../../assets/img/sidebar-2.jpg";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
-import Context from "../../Context";
 
 const switchRoutes = (
 	<Switch>

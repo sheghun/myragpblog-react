@@ -7,7 +7,7 @@ import { Route, RouteComponentProps, Switch, withRouter } from "react-router-dom
 import loadable from "@loadable/component";
 
 // Global Context
-import Context from "./Context";
+import { Context } from "./Context";
 
 // Material-ui Components
 import { MuiThemeProvider } from "@material-ui/core";
@@ -20,7 +20,7 @@ import "./App.css";
 // Personal Components
 import Spinner from "./Components/Spinner/Spinner";
 
-const Blog = loadable(() => import("./Layouts/Blog/Blog.jsx"), {
+const Blog = loadable(() => import("./Layouts/Blog/Blog"), {
 	fallback: <Spinner />,
 });
 const Signin = loadable(() => import("./Views/Signin/Signin"), {

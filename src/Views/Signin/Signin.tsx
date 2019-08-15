@@ -21,7 +21,7 @@ import banks from "../../_data/banks.json";
 // Personal Components
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 // Context
-import Context from "../../Context";
+import { Context } from "../../Context";
 
 // Background Image
 
