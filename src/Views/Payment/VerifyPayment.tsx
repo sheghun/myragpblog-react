@@ -56,7 +56,7 @@ const VerifyPayment = (props: IProps) => {
 					setSuccessful(true);
 
 					setTimeout(() => {
-						history.push("/user/dashboard");
+						history.push("/dashboard/overview");
 					}, 3000);
 				}
 			} catch (error) {

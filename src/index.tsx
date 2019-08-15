@@ -10,8 +10,8 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import store from "./Store/configureStore";
 
-axios.defaults.baseURL = "http://localhost:8000";
-// axios.defaults.baseURL = "https://api.myragpblog.com";
+// axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://api.myragpblog.com";
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;
 const RCRedux = () => {
