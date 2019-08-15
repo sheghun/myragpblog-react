@@ -9,16 +9,17 @@ import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 // * Personal components
-import Card from "../../Components/Card/Card.jsx";
-import CardBody from "../../Components/Card/CardBody.jsx";
-import CardFooter from "../../Components/Card/CardFooter.jsx";
-import CardHeader from "../../Components/Card/CardHeader.jsx";
-import CardIcon from "../../Components/Card/CardIcon.jsx";
-import GridContainer from "../../Components/Grid/GridContainer.jsx";
-import GridItem from "../../Components/Grid/GridItem.jsx";
-import SnackbarContent from "../../Components/Snackbar/SnackbarContent.jsx";
+import Card from "../../Components/Card/Card";
+import CardBody from "../../Components/Card/CardBody";
+import CardFooter from "../../Components/Card/CardFooter";
+import CardHeader from "../../Components/Card/CardHeader";
+import CardIcon from "../../Components/Card/CardIcon";
+import GridContainer from "../../Components/Grid/GridContainer";
+import GridItem from "../../Components/Grid/GridItem";
+import SnackbarContent from "../../Components/Snackbar/SnackbarContent";
+import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 import Table from "../../Components/Table/Table";
 
 interface IProps extends RouteComponentProps {
@@ -29,19 +30,22 @@ const Dashboard = (props: IProps) => {
 	const [state, setState] = useState({
 		cummulativePv: 0,
 		daysleft: 0,
-		wallet: 0,
 		id: 0,
 		network: 0,
 		notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
 		pv: 0,
 		transactions: [],
+		wallet: 0,
 	});
+
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		(async () => {
+			setLoading(true);
 			try {
 				const response = await Axios.get("/user/dashboard");
-				setState(s => ({ ...s, ...response.data }));
+				setState((s) => ({ ...s, ...response.data }));
 			} catch (error) {
 				if (error.response) {
 					if (error.response.status === 403) {
@@ -49,12 +53,16 @@ const Dashboard = (props: IProps) => {
 					}
 				}
 			}
+			setLoading(false);
 		})();
 	}, []);
 
 	const { classes } = props;
 	return (
 		<>
+			<SnackbarSpinner
+				loading={loading}
+			/>
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
@@ -82,32 +90,6 @@ const Dashboard = (props: IProps) => {
 						<CardFooter stats={true} />
 					</Card>
 				</GridItem>
-				{/* <GridItem xs={12} sm={6} md={6}>
-					<Card>
-						<CardHeader color="success" stats={true} icon={true}>
-							<CardIcon color="success">
-								<DateRange />
-							</CardIcon>
-							<br />
-							<p className={classes.cardCategory}>Days Left</p>
-							<h3 className={classes.cardTitle}>{state.daysleft}</h3>
-						</CardHeader>
-						<CardFooter stats={true}/>
-					</Card>
-				</GridItem> */}
-				{/* <GridItem xs={12} sm={6} md={6}>
-					<Card>
-						<CardHeader color="success" stats={true} icon={true}>
-							<CardIcon color="success">
-								<TrendingUpIcon />
-							</CardIcon>
-							<br />
-							<p className={classes.cardCategory}>Visits</p>
-							<h3 className={classes.cardTitle}>{state.daysleft}</h3>
-						</CardHeader>
-						<CardFooter stats={true}/>
-					</Card>
-				</GridItem> */}
 			</GridContainer>
 			<GridContainer>
 				<GridItem xs={12} sm={12} md={12}>

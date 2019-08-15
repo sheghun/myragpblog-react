@@ -19,7 +19,6 @@ import { RouteComponentProps } from "react-router-dom";
 import banks from "../../_data/banks.json";
 
 // Personal Components
-import Progress from "../../Components/Progress/Progress";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 // Context
 import Context from "../../Context";

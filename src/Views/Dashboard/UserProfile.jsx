@@ -182,39 +182,15 @@ class UserProfile extends Component {
 		const target = event.target
 		const value = target.value
 		const name = target.name
-		console.log(value)
-		if (!this.state.edit) {
-			this.setState({
-				dialog: {
-					open: true,
-					type: 'edit',
-					message: 'Are you sure you want to edit your information?'
-				}
-			})
-		} else {
-			this.setState(prevState => ({
-				inputs: {
-					...prevState.inputs,
-					[name]: value
-				}
-			}))
-		}
-
+		this.setState(prevState => ({
+			inputs: {
+				...prevState.inputs,
+				[name]: value
+			}
+		}))
 	}
 
 	updateProfile = () => {
-		// Check the type of the update
-		if (!this.state.submit || this.state.updateType !== 'information') {
-			this.setState({
-				dialog: {
-					open: true,
-					type: 'submit',
-					message: 'Are you sure you want to update your information?'
-				},
-				updateType: 'information'
-			})
-			return
-		}
 		this.setState(prevState => ({ snackbar: { ...prevState.snackbar, loading: true } }))
 		Axios.post('/dashboard/user_profile/update', this.state.inputs, {
 			withCredentials: true
@@ -308,45 +284,8 @@ class UserProfile extends Component {
 	 * * Update Bank Details
 	 * * Required bankAccountName, bank_account_phoneNumber
 	 */
-	updateBankDetails = () => {
-		this.setState(prevState => ({ snackbar: { ...prevState.snackbar, loading: true } }))
-		this.setState({ error: { password: '', bank_details: '' } })
-		const { inputs } = this.state;
-		const data = { bankAccountName: inputs.bankAccountName, bank_account_phoneNumber: inputs.bank_account_phoneNumber, bank_id: inputs.bank_id, bankAccountType: inputs.bankAccountType }
-		console.log(data)
-		Axios.post('/dashboard/user_profile/update_bank', { ...data }, {
-			withCredentials: true
-		}).then(response => {
-			const resp = response.data
-			if (resp.success) {
-				this.setState({
-					updateType: '',
-					snackbar: { type: 'success', loading: false, open: true, message: resp.success }
-				})
-			} else if (resp.error) {
-				this.setState({
-					updateType: '',
-					snackbar: { type: 'error', loading: false, open: true, message: resp.error }
-				})
-			}
-		})
-	}
-
 	snackbarClose = () => {
 		this.setState(prevState => ({ snackbar: { ...prevState.snackbar, open: false, } }))
-	}
-
-	agreeHandler = () => {
-		this.setState(prevState => ({
-			[prevState.dialog.type === 'edit' ? 'edit' : 'submit']: true,
-			dialog: { open: false }
-		}))
-		if (this.state.dialog.type === 'submit' && this.state.updateType === 'information') this.updateProfile()
-		if (this.state.dialog.type === 'submit' && this.state.updateType === 'password') this.updatePassword()
-	}
-
-	profileView = event => {
-		this.setState(prevState => ({ ...prevState, profile: { fullImage: true } }))
 	}
 
 	profileImageUpdateHandler = event => {
@@ -482,16 +421,16 @@ class UserProfile extends Component {
 							/>
 							<img alt="author" ref={ref => this.imageCanvas = ref} className={classes.fullProfile} />
 							<div className={classes.modalOptions}>
-								<IconButton onClick={() => (this.props.history.replace(this.props.match.url))}>
+								<IconButton>
 									<CloseIcon style={{ color: 'white' }} />
 								</IconButton>
 								{this.state.profile.changed ?
-									<IconButton onClick={this.profileImageUpdateSave}>
+									<IconButton>
 										<SaveIcon style={{ color: 'white' }} />
 									</IconButton>
 									: null
 								}
-								<IconButton onClick={() => { this.profileImageInput.click(); this.profileImageInput.value = '' }}>
+								<IconButton>
 									<EditIcon style={{ color: 'white' }} />
 									<input aria-label="Input to upload image" accept="image/*" ref={ref => this.profileImageInput = ref} style={{ display: 'none' }}
 										type="file" onChange={this.profileImageUpdateHandler}
@@ -658,7 +597,7 @@ class UserProfile extends Component {
 								</GridContainer>
 							</CardBody>
 							<CardFooter>
-								<Button color="primary" onClick={this.updateProfile}>Update Profile</Button>
+								<Button color="primary">Update Profile</Button>
 							</CardFooter>
 						</Card>
 					</GridItem>
@@ -765,7 +704,7 @@ class UserProfile extends Component {
 										</Select>
 									</GridItem>
 								</GridContainer>
-								<Button color="primary" onClick={this.updateBankDetails} round>
+								<Button color="primary" round>
 									Update Bank Details
                                 </Button>
 							</CardBody>
@@ -827,7 +766,7 @@ class UserProfile extends Component {
 										/>
 									</GridItem>
 								</GridContainer>
-								<Button color="primary" onClick={this.updatePassword} round>
+								<Button color="primary" round>
 									Update Password
                                 </Button>
 							</CardBody>
