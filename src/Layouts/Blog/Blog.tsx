@@ -5,7 +5,6 @@ import { StyleRulesCallback, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 import React, { Component, useEffect, useMemo, useState } from "react";
-"react";
 
 // Personal Components
 // For lazy loading
@@ -15,9 +14,11 @@ import Avatar from "../../Components/Avatar/Avatar";
 // react-router dependencies
 import { Route, RouteComponentProps, Switch } from "react-router-dom";
 
+import Axios, { AxiosError } from "axios";
 import BlogHeader from "../../Components/BlogHeader/BlogHeader";
 import Spinner from "../../Components/Spinner/Spinner";
-import Axios from "axios";
+import { BlogContext } from "../../Context";
+import * as helpers from "../../_helpers";
 
 // react-router dependencies
 
@@ -86,21 +87,28 @@ const Blog = ({ match }: RouteComponentProps) => {
 	const [userDetails, setUserDetails] = useState({
 		image: "",
 		name: "",
-		referalId: "",
+		ragpReferalId: "",
 		whatsappNumber: "",
 	});
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const res = Axios.get(`/blog/${username}`);
+				const { data } = await Axios.get(`/blog?username=${username}`);
+				data.name = data.firstName + " " + data.lastName;
+				setUserDetails(data);
 			} catch (error) {
+				const { response } = error as AxiosError;
+				if (response) {
+					if (response.status === 404) {
 
+					}
+				}
 			}
 		})();
 	}, []);
 
-	if (!localStorage.getItem("usernae")) {
+	if (!localStorage.getItem("username")) {
 		localStorage.setItem("username", username);
 	}
 
@@ -113,48 +121,59 @@ const Blog = ({ match }: RouteComponentProps) => {
 		]
 	), []);
 	return (
-		// @ts-ignore
-		<BlogHeader
-			routes={routes}
+		<BlogContext.Provider
+			value={{
+				image: userDetails.image,
+				name: userDetails.name,
+				ragpReferalId: userDetails.ragpReferalId,
+				whatsappNumber: userDetails.whatsappNumber,
+			}}
 		>
-			<div className={classes.blog}>
-				<article className={classes.articleIntro}>
-					<div className={classes.hero}>
-						<div className={classes.heroIntro}>
-							<Typography variant="overline">
-								Ragp blog
+			{
+				// @ts-ignore
+				<BlogHeader
+					routes={routes}
+				>
+					<div className={classes.blog}>
+						<article className={classes.articleIntro}>
+							<div className={classes.hero}>
+								<div className={classes.heroIntro}>
+									<Typography variant="overline">
+										Ragp blog
                                     </Typography>
-						</div>
-						<div className={classes.avatar}>
-							<Avatar
-								src={`/assets/images/UR52f4XXovuRDWH8sHHrJb3TD6WohPzI8NQvDOqa.jpeg`}
-								size={100}
-							/>
-							<div className={classes.captionsWrapper}>
-								<div className={classes.captions}>
-									<Typography variant="caption">Name: </Typography>
-									<Typography variant="overline">Oladiran Segun</Typography>
 								</div>
-								<div className={classes.captions}>
-									<Typography variant="caption">Referal ID: </Typography>
-									<Typography variant="overline">godwin01</Typography>
+								<div className={classes.avatar}>
+									<Avatar
+										src={helpers.baseUrl + userDetails.image}
+										size={100}
+									/>
+									<div className={classes.captionsWrapper}>
+										<div className={classes.captions}>
+											<Typography variant="caption">Name:</Typography>
+											<Typography variant="overline">{userDetails.name}</Typography>
+										</div>
+										<div className={classes.captions}>
+											<Typography variant="caption">Referal ID: </Typography>
+											<Typography variant="overline">{userDetails.ragpReferalId}</Typography>
+										</div>
+										<div className={classes.captions}>
+											<Typography variant="caption">Whatsapp: </Typography>
+											<Typography variant="overline">{userDetails.whatsappNumber}</Typography>
+										</div>
+										<div />
+									</div>
 								</div>
-								<div className={classes.captions}>
-									<Typography variant="caption">Whatsapp: </Typography>
-									<Typography variant="overline">08143112637</Typography>
-								</div>
-								<div />
 							</div>
-						</div>
+						</article>
+						<Switch>
+							{routes.map((route, index) =>
+								<Route path={route.path} key={index} component={route.component} />,
+							)}
+						</Switch>
 					</div>
-				</article>
-				<Switch>
-					{routes.map((route, index) =>
-						<Route path={route.path} key={index} component={route.component} />,
-					)}
-				</Switch>
-			</div>
-		</BlogHeader>
+				</BlogHeader>
+			}
+		</BlogContext.Provider>
 	);
 };
 

@@ -15,12 +15,12 @@ const Context = React.createContext({ state, dispatch });
 
 const name = "";
 const image = "";
-const referalId = "";
+const ragpReferalId = "";
 const whatsappNumber = "";
 const BlogContext = React.createContext({
-	name,
 	image,
-	referalId,
+	name,
+	ragpReferalId,
 	whatsappNumber,
 });
 
