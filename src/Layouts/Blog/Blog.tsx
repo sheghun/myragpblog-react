@@ -97,6 +97,7 @@ const Blog = ({ match }: RouteComponentProps) => {
 				const { data } = await Axios.get(`/blog?username=${username}`);
 				data.name = data.firstName + " " + data.lastName;
 				setUserDetails(data);
+				console.log(data)
 			} catch (error) {
 				const { response } = error as AxiosError;
 				if (response) {
@@ -120,6 +121,7 @@ const Blog = ({ match }: RouteComponentProps) => {
 			{ path: `/${username}/company-profile`, component: CompanyProfile },
 		]
 	), []);
+	console.log(helpers)
 	return (
 		<BlogContext.Provider
 			value={{
@@ -144,7 +146,7 @@ const Blog = ({ match }: RouteComponentProps) => {
 								</div>
 								<div className={classes.avatar}>
 									<Avatar
-										src={helpers.baseUrl + userDetails.image}
+										src={`${helpers.baseUrl}${userDetails.image}`}
 										size={100}
 									/>
 									<div className={classes.captionsWrapper}>
