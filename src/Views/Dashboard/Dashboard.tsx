@@ -42,8 +42,10 @@ const Dashboard = (props: IProps) => {
 		(async () => {
 			setLoading(true);
 			try {
-				const response = await Axios.get("/user/dashboard");
-				setState((s) => ({ ...s, ...response.data }));
+				const res = await Axios.get("/user/dashboard");
+				if (res.status === 200) {
+					setState((s) => ({ ...s, ...res.data }));
+				}
 			} catch (error) {
 				if (error.response) {
 					if (error.response.status === 403) {
@@ -107,7 +109,7 @@ const Dashboard = (props: IProps) => {
 										variant="h5"
 									>
 										Monthly Pv
-                                	</Typography>
+									</Typography>
 									<Typography align="center" variant="h4">
 										{state.pv}
 									</Typography>
@@ -119,7 +121,7 @@ const Dashboard = (props: IProps) => {
 										variant="h5"
 									>
 										Cummulative Pv
-                                    </Typography>
+									</Typography>
 									<Typography align="center" variant="h4">
 										{state.cummulativePv}
 									</Typography>

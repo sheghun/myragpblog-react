@@ -4,7 +4,7 @@
 import { StyleRulesCallback, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
-import React, { Component, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 // Personal Components
 // For lazy loading
