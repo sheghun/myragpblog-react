@@ -15,10 +15,11 @@ import Avatar from "../../Components/Avatar/Avatar";
 import { Route, RouteComponentProps, Switch } from "react-router-dom";
 
 import Axios, { AxiosError } from "axios";
+import * as helpers from "../../_helpers";
 import BlogHeader from "../../Components/BlogHeader/BlogHeader";
+import Progress from "../../Components/Progress/Progress";
 import Spinner from "../../Components/Spinner/Spinner";
 import { BlogContext } from "../../Context";
-import * as helpers from "../../_helpers";
 
 // react-router dependencies
 
@@ -79,40 +80,11 @@ const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
 	},
 }));
 
-const Blog = ({ match }: RouteComponentProps) => {
+const Blog = ({ match, history }: RouteComponentProps) => {
 
 	const classes = useStyles();
 
 	const { username } = match.params as any;
-	const [userDetails, setUserDetails] = useState({
-		image: "",
-		name: "",
-		ragpReferalId: "",
-		whatsappNumber: "",
-	});
-
-	useEffect(() => {
-		(async () => {
-			try {
-				const { data } = await Axios.get(`/blog?username=${username}`);
-				data.name = data.firstName + " " + data.lastName;
-				setUserDetails(data);
-				console.log(data)
-			} catch (error) {
-				const { response } = error as AxiosError;
-				if (response) {
-					if (response.status === 404) {
-
-					}
-				}
-			}
-		})();
-	}, []);
-
-	if (!localStorage.getItem("username")) {
-		localStorage.setItem("username", username);
-	}
-
 	const routes = useMemo(() => (
 		[
 			{ path: `/${username}/welcome-note`, component: Welcome },
@@ -121,7 +93,48 @@ const Blog = ({ match }: RouteComponentProps) => {
 			{ path: `/${username}/company-profile`, component: CompanyProfile },
 		]
 	), []);
-	console.log(helpers)
+	const [routers, setRouters] = useState("") as any;
+	const [userDetails, setUserDetails] = useState({
+		image: "",
+		name: "",
+		ragpReferalId: "",
+		whatsappNumber: "",
+	});
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		(async () => {
+			setLoading(true);
+			try {
+				// Try sending request to the server
+
+				const { data } = await Axios.get(`/blog?username=${username}`);
+				data.name = data.firstName + " " + data.lastName;
+
+				setUserDetails(data);
+
+				// Mount the routes
+				setRouters(routes.map((route, index) => (
+					<Route path={route.path} key={index} component={route.component} />
+				)));
+
+				history.push(`/${username}/welcome-note`);
+			} catch (error) {
+				const { response } = error as AxiosError;
+				if (response) {
+					if (response.status === 404) {
+						history.push("/not-found");
+					}
+				}
+			}
+			setLoading(false);
+		})();
+	}, []);
+
+	if (!localStorage.getItem("username")) {
+		localStorage.setItem("username", username);
+	}
+
 	return (
 		<BlogContext.Provider
 			value={{
@@ -131,6 +144,7 @@ const Blog = ({ match }: RouteComponentProps) => {
 				whatsappNumber: userDetails.whatsappNumber,
 			}}
 		>
+			{loading && (<Spinner />)}
 			{
 				// @ts-ignore
 				<BlogHeader
@@ -168,9 +182,7 @@ const Blog = ({ match }: RouteComponentProps) => {
 							</div>
 						</article>
 						<Switch>
-							{routes.map((route, index) =>
-								<Route path={route.path} key={index} component={route.component} />,
-							)}
+							{routers}
 						</Switch>
 					</div>
 				</BlogHeader>

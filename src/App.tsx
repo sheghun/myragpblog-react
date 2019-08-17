@@ -38,6 +38,9 @@ const Payment = loadable(() => import("./Layouts/Payment/Payment"), {
 const Web = loadable(() => import("./Views/Web/Web"), {
 	fallback: <Spinner />,
 });
+const NotFound = loadable(() => import("./Views/NotFound/NotFound"), {
+	fallback: <Spinner />,
+});
 
 interface IProps extends RouteComponentProps {
 	loginUserAction: CallableFunction;
@@ -58,6 +61,7 @@ const routes = [
 	{ path: "/dashboard", component: Dashboard },
 	{ path: "/payment", component: Payment },
 	{ path: "/register", component: Register },
+	{ path: "/not-found", component: NotFound },
 	{ path: "/:username", component: Blog },
 ];
 
