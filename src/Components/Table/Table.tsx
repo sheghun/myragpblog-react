@@ -1,35 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableFooter from "@material-ui/core/TableFooter"
-import TablePagination from "@material-ui/core/TablePagination"
+import TableFooter from "@material-ui/core/TableFooter";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import React from "react";
 // core components
 import tableStyle from "../../assets/jss/material-dashboard-react/components/tableStyle.jsx";
 import TablePaginationActionsWrapped from "./TablePagination";
 
-
 function CustomTable({ ...props }: any) {
 	const { classes, tableHead, tableData, tableHeaderColor } = props;
-	let number = 0
+
 	return (
 		<div className={classes.tableResponsive}>
 			<Table className={classes.table}>
 				{tableHead !== undefined ? (
 					<TableHead className={classes[tableHeaderColor + "TableHeader"]}>
 						<TableRow>
-							{tableHead.map((prop: any, key: any) => {
+							{tableHead.map((t: any, i: any) => {
 								return (
 									<TableCell
 										className={classes.tableCell + " " + classes.tableHeadCell}
-										key={key}
+										key={i}
 									>
-										{prop}
+										{t}
 									</TableCell>
 								);
 							})}
@@ -37,13 +35,13 @@ function CustomTable({ ...props }: any) {
 					</TableHead>
 				) : null}
 				<TableBody>
-					{tableData.map((prop: any, key: any) => {
+					{tableData.map((t: any, i: any) => {
 						return (
-							<TableRow key={key}>
-								{prop.map((prop: any, key: any) => {
+							<TableRow key={i}>
+								{t.map((tr: any, ir: any) => {
 									return (
-										<TableCell className={classes.tableCell} key={key}>
-											{prop}
+										<TableCell className={classes.tableCell} key={ir}>
+											{tr}
 										</TableCell>
 									);
 								})}
@@ -56,9 +54,9 @@ function CustomTable({ ...props }: any) {
 						<TableRow >
 							<TableCell rowSpan={4} />
 							<TableCell rowSpan={4} />
-							<TableCell colSpan={3} align='left' >
+							<TableCell colSpan={3} align="left" >
 								{
-									//@ts-ignore
+									// @ts-ignore
 									<TablePaginationActionsWrapped nextPage={props.nextPage as any} prevPage={props.prevPage} />
 								}
 							</TableCell>
@@ -70,25 +68,5 @@ function CustomTable({ ...props }: any) {
 		</div>
 	);
 }
-
-CustomTable.defaultProps = {
-	tableHeaderColor: "gray"
-};
-
-CustomTable.propTypes = {
-	classes: PropTypes.object.isRequired,
-	tableHeaderColor: PropTypes.oneOf([
-		"warning",
-		"primary",
-		"danger",
-		"success",
-		"info",
-		"rose",
-		"gray"
-	]),
-	tableHead: PropTypes.arrayOf(PropTypes.string),
-	tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
-};
-
 // @ts-ignore
 export default withStyles(tableStyle)(CustomTable);

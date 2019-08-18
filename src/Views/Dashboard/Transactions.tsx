@@ -27,8 +27,6 @@ const Transactions = (props: any) => {
 
 	const { transactions } = useContext(DashboardContext);
 
-
-
 	return (
 		<>
 			<Card>
