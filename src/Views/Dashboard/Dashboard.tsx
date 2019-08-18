@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import MoneyIcon from "@material-ui/icons/Money";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 // * Personal components
@@ -19,50 +19,20 @@ import GridItem from "../../Components/Grid/GridItem";
 import SnackbarContent from "../../Components/Snackbar/SnackbarContent";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 import Table from "../../Components/Table/Table";
+import { DashboardContext } from "../../Context";
 
 interface IProps extends RouteComponentProps {
 	classes: any;
 }
 
 const Dashboard = (props: IProps) => {
-	const [state, setState] = useState({
-		cummulativePv: 0,
-		daysleft: 0,
-		id: 0,
-		network: 0,
-		notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
-		pv: 0,
-		transactions: [],
-		wallet: 0,
-	});
 
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		(async () => {
-			setLoading(true);
-			try {
-				const res = await Axios.get("/user/dashboard");
-				if (res.status === 200) {
-					setState((s) => ({ ...s, ...res.data }));
-				}
-			} catch (error) {
-				if (error.response) {
-					if (error.response.status === 403) {
-						props.history.push("/login" + props.location.pathname);
-					}
-				}
-			}
-			setLoading(false);
-		})();
-	}, []);
+	const { wallet, pv, cummulativePv, network, transactions } = useContext(DashboardContext);
 
 	const { classes } = props;
 	return (
 		<>
-			<SnackbarSpinner
-				loading={loading}
-			/>
+
 			<GridContainer>
 				<GridItem xs={12} sm={6} md={6}>
 					<Card>
@@ -72,7 +42,7 @@ const Dashboard = (props: IProps) => {
 							</CardIcon>
 							<br />
 							<p className={classes.cardCategory}>My Network</p>
-							<h3 className={classes.cardTitle}>{state.network}</h3>
+							<h3 className={classes.cardTitle}>{network}</h3>
 						</CardHeader>
 						<CardFooter stats={true} />
 					</Card>
@@ -85,7 +55,7 @@ const Dashboard = (props: IProps) => {
 							</CardIcon>
 							<br />
 							<p className={classes.cardCategory}>Wallet</p>
-							<h3 className={classes.cardTitle}>&#8358;{state.wallet.toLocaleString()}</h3>
+							<h3 className={classes.cardTitle}>&#8358;{wallet.toLocaleString()}</h3>
 						</CardHeader>
 						<CardFooter stats={true} />
 					</Card>
@@ -111,7 +81,7 @@ const Dashboard = (props: IProps) => {
 										Monthly Pv
 									</Typography>
 									<Typography align="center" variant="h4">
-										{state.pv}
+										{pv}
 									</Typography>
 								</GridItem>
 								<GridItem xs={12} sm={6} md={6}>
@@ -123,7 +93,7 @@ const Dashboard = (props: IProps) => {
 										Cummulative Pv
 									</Typography>
 									<Typography align="center" variant="h4">
-										{state.cummulativePv}
+										{cummulativePv}
 									</Typography>
 								</GridItem>
 							</GridContainer>
@@ -131,7 +101,7 @@ const Dashboard = (props: IProps) => {
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={12} md={12}>
-					<Card>
+					{/* <Card>
 						<CardHeader color="primary">
 							<h4 className={classes.cardTitleWhite}>Notifications</h4>
 							<p className={classes.cardCategoryWhite}>
@@ -139,7 +109,7 @@ const Dashboard = (props: IProps) => {
                                 </p>
 						</CardHeader>
 						<CardBody>
-							{state.notifications.map((notification, i) => (
+							{notifications.map((notification, i) => (
 								<SnackbarContent
 									key={i}
 									message={
@@ -156,7 +126,7 @@ const Dashboard = (props: IProps) => {
 								/>
 							))}
 						</CardBody>
-					</Card>
+					</Card> */}
 				</GridItem>
 				<GridItem xs={12} sm={12} md={12}>
 					<Card>
@@ -170,7 +140,7 @@ const Dashboard = (props: IProps) => {
 							<Table
 								tableHeaderColor="warning"
 								tableHead={["S/N", "Amount", "Downline", "Description"]}
-								tableData={state.transactions}
+								tableData={transactions}
 							/>
 						</CardBody>
 					</Card>

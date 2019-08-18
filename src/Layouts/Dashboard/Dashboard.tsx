@@ -17,6 +17,8 @@ import Axios, { AxiosError } from "axios";
 import logo from "../../assets/img/reactlogo.png";
 import image from "../../assets/img/sidebar-2.jpg";
 import dashboardStyle from "../../assets/jss/material-dashboard-react/layouts/dashboardStyle";
+import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
+import { DashboardContext } from "../../Context";
 
 const switchRoutes = (
 	<Switch>
@@ -36,6 +38,44 @@ const Dashboard = (props: IProps) => {
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 
+	const [state, setState] = useState({
+		cummulativePv: 0,
+		// id: 0,
+		network: 0,
+		// notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
+		pv: 0,
+		transactions: [],
+		wallet: 0,
+	});
+
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		(async () => {
+			setLoading(true);
+			try {
+				const res = await Axios.get("/user/dashboard");
+				if (res.status === 200) {
+					// Append the serial number to the table data
+					let i = 0;
+					const transactions = res.data.transactions.map((t: string[]) => {
+						i++;
+						t.unshift(String(i));
+						return t;
+					});
+					setState((s) => ({ ...s, ...res.data, transactions }));
+				}
+			} catch (error) {
+				if (error.response) {
+					if (error.response.status === 403) {
+						props.history.push("/login" + props.location.pathname);
+					}
+				}
+			}
+			setLoading(false);
+		})();
+	}, []);
+
 	useEffect(() => {
 		Axios.interceptors.response.use(
 			(response) => Promise.resolve(response),
@@ -46,6 +86,7 @@ const Dashboard = (props: IProps) => {
 						history.push("/login");
 					}
 				}
+				return Promise.reject(error);
 			},
 		);
 	}, []);
@@ -90,9 +131,18 @@ const Dashboard = (props: IProps) => {
 							<div
 								className={classes.container}
 							>
-								{dashboardRoutes.map((prop, key) => {
-									return <Route exact={true} path={prop.path} component={prop.component} key={key} />;
-								})}
+								<DashboardContext.Provider
+									value={{
+										...state,
+									}}
+								>
+									<SnackbarSpinner
+										loading={loading}
+									/>
+									{dashboardRoutes.map((prop, key) => {
+										return <Route exact={true} path={prop.path} component={prop.component} key={key} />;
+									})}
+								</DashboardContext.Provider>
 							</div>
 						</div>
 					) : (
