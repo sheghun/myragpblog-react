@@ -1,23 +1,25 @@
-import Axios from "axios";
 import React, { useEffect } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import Axios from "axios";
+import { withRouter, RouteComponentProps } from "react-router";
 import Spinner from "../../Components/Spinner/Spinner";
 
-const LogOut = (props: RouteComponentProps) => {
+interface IProps extends RouteComponentProps { }
 
-	const { history } = props;
+const LogOut = (props: IProps) => {
 
-	useEffect(() => {
-		// Asynchronous function
-		(async () => {
-			const response = await Axios.get("/user/logout");
-			if (response.status === 200) {
-				history.push("/");
-			}
-		})();
-	});
+    const { history } = props;
 
-	return <Spinner />;
-};
+    useEffect(() => {
+        // Asynchronous function
+        (async () => {
+            const response = await Axios.get('/member/logout');
+            if (response.status === 200) {
+                history.push('/');
+            }
+		})()
+    })
+
+    return <Spinner />
+}
 
 export default withRouter(LogOut);
