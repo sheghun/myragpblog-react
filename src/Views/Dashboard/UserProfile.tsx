@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/styles";
 import Axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import BanksList from "../../_data/banks.json";
-import * as helpers from "../../_helpers";
+import { baseUrl } from "../../_helpers";
 import Card from "../../Components/Card/Card.jsx";
 import CardAvatar from "../../Components/Card/CardAvatar.jsx";
 import CardBody from "../../Components/Card/CardBody.jsx";
@@ -101,7 +101,7 @@ const UserProfile = (props: any) => {
 
 	let profileImageEl = "" as any as HTMLImageElement;
 	let profileImageInput = "" as any as HTMLInputElement;
-	let imageCanvas = "" as any as HTMLImageElement;
+	let profileImageCanvas = "" as any as HTMLImageElement;
 
 	const [inputs, setInputs] = useState({
 		about_me: "",
@@ -156,7 +156,8 @@ const UserProfile = (props: any) => {
 
 	useEffect(() => {
 		setSnackbar((s) => ({ ...s, loading: false }));
-
+		// Hide the image canvas
+		profileImageCanvas.style.display = "none";
 		(async () => {
 			try {
 				const res = await Axios.get("/user/profile");
@@ -167,6 +168,7 @@ const UserProfile = (props: any) => {
 			} catch (errors) { /* No code */ }
 		})();
 	}, []);
+
 
 	const inputHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const target = event.target;
@@ -275,22 +277,22 @@ const UserProfile = (props: any) => {
 				{/* <ProfileDialog
                         open={props.location.hash === '#profile' ? true : false}
                         onClose={() => (props.history.replace(props.match.url))}
-                        img={helpers.baseUrl + inputs.image}
+                        img={baseUrl + inputs.image}
                     /> */}
 				<Modal
-					open={props.location.hash === "#profile" ? true : false}
+					open={props.location.hash === "#profile"}
 					onClose={() => (props.history.replace(props.match.url))}
 				>
 					<div className={classes.modalBody}>
 						<img
 							alt="full profile"
-							src={inputs.image}
+							src={baseUrl + inputs.image}
 							className={classes.fullProfile}
 							ref={(ref) => profileImageEl = ref as HTMLImageElement}
 						/>
 						<img
 							alt="author"
-							ref={(ref) => imageCanvas = ref as HTMLImageElement}
+							ref={(ref) => profileImageCanvas = ref as HTMLImageElement}
 							className={classes.fullProfile}
 						/>
 						<div
@@ -489,7 +491,7 @@ const UserProfile = (props: any) => {
 					<Card profile={true}>
 						<CardAvatar profile={true}>
 							<Link to={props.match.url + "#profile"}>
-								<img src={helpers.baseUrl + inputs.image} alt="Profile" />
+								<img src={baseUrl + inputs.image} alt="Profile" />
 							</Link>
 						</CardAvatar>
 						<CardBody profile={true}>

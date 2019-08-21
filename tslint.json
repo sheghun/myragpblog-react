@@ -6,6 +6,7 @@
 	"rules": {
 		"jsx-wrap-multiline": false,
 		"no-submodule-imports": false,
+		"no-shadowed-variable": false,
 		"indent": false,
 		"max-line-length": false,
 		"jsx-no-multiline-js": false,
