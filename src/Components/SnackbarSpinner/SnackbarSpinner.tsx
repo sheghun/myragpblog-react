@@ -1,9 +1,19 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useEffect } from "react";
 import Snackbar from "../Snackbar/Snackbar.jsx";
 
 const SnackbarSpinner = (props: { loading: boolean, onClose?: any }) => {
+	useEffect(() => {
+		if (props.loading) {
+			setTimeout(() => {
+				if (props.onClose) {
+					props.onClose();
+				}
+			}, 6000);
+		}
+	}, [props.loading]);
+
 	return props.loading ?
 		// @ts-ignore
 		<Snackbar

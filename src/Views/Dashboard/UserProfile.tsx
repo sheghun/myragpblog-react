@@ -28,7 +28,7 @@ import GridContainer from "../../Components/Grid/GridContainer.jsx";
 import GridItem from "../../Components/Grid/GridItem.jsx";
 import Modal from "../../Components/Modal/Modal";
 import Snackbar from "../../Components/Snackbar/Snackbar";
-import Spinner from "../../Components/Spinner/Spinner";
+import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 
 // @ts-ignore
 const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
@@ -73,24 +73,31 @@ const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
 		},
 		fullProfile: {
 			display: "block",
-			height: "85vh",
+			height: "auto",
 			maxHeight: "100%",
 			maxWidth: "100%",
-			width: "auto",
+			width: "98vw",
 		},
 		modalBody: {
 			alignItems: "center",
 			flexDirection: "column",
+			justifyContent: "space-between",
+
+		},
+		modalImage: {
+			display: "flex",
+			flexBasis: "88vh",
+			flexDirection: "column",
+			justifyContent: "center",
 		},
 		modalOptions: {
-			bottom: "-45vh",
 			display: "flex",
 			flexDirection: "row",
 			justifyContent: "space-around",
-			left: "-1rem",
-			margin: "0 auto 0",
+			left: "0",
 			padding: "16px",
-			position: "absolute",
+			position: "relative",
+			right: "0",
 			width: "100%",
 		},
 
@@ -101,7 +108,7 @@ const UserProfile = (props: any) => {
 
 	let profileImageEl = "" as any as HTMLImageElement;
 	let profileImageInput = "" as any as HTMLInputElement;
-	let profileImageCanvas = "" as any as HTMLImageElement;
+	const classes = useStyles();
 
 	const [inputs, setInputs] = useState({
 		about_me: "",
@@ -127,48 +134,39 @@ const UserProfile = (props: any) => {
 	});
 
 	const [snackbar, setSnackbar] = useState({
-		loading: false,
 		message: "",
 		open: false,
 		type: "success",
 	});
 
-	const [edit, setEdit] = useState(false);
 	const [submit, setSubmit] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [dialog, setDialog] = useState({
 		message: "",
 		open: false,
 		type: "",
 	});
+	const [profileImage, setProfileImage] = useState(null as Blob | File | null);
+	const [imageSrc, setImageSrc] = useState("");
 
 	const [errors, setErrors] = useState({
 		bank_details: "",
 		password: "",
 	});
 
-	const [updateType, setUpdateType] = useState("");
-	const [profile, setProfile] = useState({
-		changed: false,
-		fullImage: false,
-		newImage: null as Blob | null,
-		updated: true,
-	});
-
 	useEffect(() => {
 		setSnackbar((s) => ({ ...s, loading: false }));
-		// Hide the image canvas
-		profileImageCanvas.style.display = "none";
 		(async () => {
 			try {
 				const res = await Axios.get("/user/profile");
 				if (res.status === 200) {
 					setInputs((i) => ({ ...i, ...res.data }));
+					setImageSrc(baseUrl + res.data.image);
 					setSnackbar((s) => ({ ...s, loading: false }));
 				}
 			} catch (errors) { /* No code */ }
 		})();
 	}, []);
-
 
 	const inputHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const target = event.target;
@@ -193,10 +191,10 @@ const UserProfile = (props: any) => {
 	};
 
 	const profileImageUpdateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		// Set profile image changed by user
+		let changedByUser = true;
 		// Get the element
 		const element = event.target as EventTarget & HTMLInputElement;
-		// Set the update profile to false
-		setProfile((p) => ({ ...p, updated: false }));
 		// Check if files are present
 		if (!element.files) {
 			return;
@@ -208,52 +206,73 @@ const UserProfile = (props: any) => {
 		const file = element.files[0];
 		// Set the new url and append to the state
 		const url = window.URL.createObjectURL(file);
-
-		profileImageEl.src = url;
+		setImageSrc(url);
 		profileImageEl.onload = () => {
-
-			// Check if profile has been updated before stop execution
-			if (!profile.updated) {
-
-				// If the file size is greater than 300kb run the compression
-				if (file.size > 300000) {
-
-					// Set the width
-					const width = 300;
-
-					// Set the scale factor
-					const scaleFactor = width / profileImageEl.width;
-
-					// Set up the canvas element
-					const canvas = document.createElement("canvas");
-					canvas.width = profileImageEl.width * scaleFactor;
-					canvas.height = profileImageEl.height * scaleFactor;
-
-					const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-					ctx.drawImage(profileImageEl, 0, 0, canvas.width, canvas.height);
-
-					canvas.toBlob(
-						(blob) => setProfile((p) => ({ ...p, newImage: blob, updated: true, changed: true })),
-						"image/png",
-						0.5,
-					);
-				} else {
-
-					// Just use the file
-					setProfile((p) => ({ ...p, updated: true, newImage: file, changed: true }));
-				}
-				// Clear the image input element
-				profileImageInput.value = "";
+			const profileImageEl = document.getElementById("profileImageEl") as HTMLImageElement;
+			const profileImageCanvas = document.getElementById("profileImageCanvas") as HTMLCanvasElement;
+			const profileImageInput = document.getElementById("profileImageInput") as HTMLInputElement;
+			// if a file was not loaded
+			if (!file || !changedByUser) {
+				return;
 			}
+			changedByUser = false;
+			// If the file size is greater than 300kb run the compression
+			if (file.size < 300000) {
+				profileImageEl.style.display = "block";
+				profileImageCanvas.style.display = "none";
+				setProfileImage(file);
+				return;
+			}
+
+			// Set the width
+			const width = 300;
+
+			// Set the scale factor
+			const scaleFactor = width / profileImageEl.width;
+
+			// Set up the canvas element
+			profileImageCanvas.width = profileImageEl.width * scaleFactor;
+			profileImageCanvas.height = profileImageEl.height * scaleFactor;
+
+			const ctx = profileImageCanvas.getContext("2d") as CanvasRenderingContext2D;
+			ctx.drawImage(profileImageEl, 0, 0, profileImageCanvas.width, profileImageCanvas.height);
+			profileImageCanvas.style.display = "none";
+			profileImageEl.style.display = "block";
+
+			const compressedImage = profileImageCanvas.toDataURL("image/png", 0.5);
+			profileImageCanvas.toBlob(
+				(blob) => setProfileImage(blob),
+				"image/png",
+				0.5,
+			);
+			profileImageInput.value = "";
+			setImageSrc(compressedImage);
 		};
 	};
 
-	const profileImageUpdateSave = (event: any) => {
-		// Create a javascript dialog to confirm
+	const submitProfileImage = async () => {
 		const check = window.confirm("Are you sure you want to update your profile picture");
-	};
+		if (!check) {
+			return;
+		}
 
-	const classes = useStyles();
+		setLoading(true);
+		try {
+			const formData = new FormData();
+			formData.append("image", profileImage as Blob | File);
+			const res = await Axios.post("/user/update-image", formData);
+			if (res.status === 202) {
+				setSnackbar({
+					message: "Profile image updated successfully",
+					open: true,
+					type: "success",
+				});
+				setInputs((i) => ({ ...i, image: res.data }))
+			}
+		} catch (error) { /* No code */ }
+		setLoading(false);
+
+	};
 
 	return (
 		<>
@@ -267,55 +286,62 @@ const UserProfile = (props: any) => {
 				/>
 			}
 
+			<SnackbarSpinner
+				loading={loading}
+				onClose={() => setLoading(false)}
+			/>
+
 			<GridContainer>
-				{/* <Dialog
-					open={dialog.open}
-					agree={agreeHandler}
-					disagree={() => setDialog((d) => ({ ...d, open: false })}
-					message={dialog.message}
-				/> */}
-				{/* <ProfileDialog
-                        open={props.location.hash === '#profile' ? true : false}
-                        onClose={() => (props.history.replace(props.match.url))}
-                        img={baseUrl + inputs.image}
-                    /> */}
 				<Modal
 					open={props.location.hash === "#profile"}
 					onClose={() => (props.history.replace(props.match.url))}
 				>
 					<div className={classes.modalBody}>
-						<img
-							alt="full profile"
-							src={baseUrl + inputs.image}
-							className={classes.fullProfile}
-							ref={(ref) => profileImageEl = ref as HTMLImageElement}
-						/>
-						<img
-							alt="author"
-							ref={(ref) => profileImageCanvas = ref as HTMLImageElement}
-							className={classes.fullProfile}
-						/>
+						<div className={classes.modalImage}>
+							<img
+								alt="Full profile"
+								id="profileImageEl"
+								src={imageSrc}
+								className={classes.fullProfile}
+								ref={(ref) => profileImageEl = ref as HTMLImageElement}
+							/>
+							<canvas
+								style={{ display: "none" }}
+								id="profileImageCanvas"
+								className={classes.fullProfile}
+							/>
+
+						</div>
 						<div
 							className={classes.modalOptions}
 						>
 							<IconButton>
-								<CloseIcon style={{ color: "white" }} />
+								<CloseIcon
+									style={{ color: "white" }}
+									onClick={() => {
+										props.history.replace(props.match.url);
+										setImageSrc(baseUrl + inputs.image);
+										setProfileImage(null);
+									}}
+								/>
 							</IconButton>
-							{profile.changed ?
+							{profileImage && (
 								<IconButton>
 									<SaveIcon
+										onClick={submitProfileImage}
 										style={{ color: "white" }}
 									/>
 								</IconButton>
-								: null
-							}
+							)}
 							<IconButton>
 								<EditIcon
+									onClick={() => profileImageInput.click()}
 									style={{ color: "white" }}
 								/>
 								<input
 									aria-label="Input to upload image"
 									accept="image/*"
+									id="profileImageInput"
 									ref={(ref) => profileImageInput = ref as HTMLInputElement}
 									style={{ display: "none" }}
 									type="file"
@@ -491,7 +517,7 @@ const UserProfile = (props: any) => {
 					<Card profile={true}>
 						<CardAvatar profile={true}>
 							<Link to={props.match.url + "#profile"}>
-								<img src={baseUrl + inputs.image} alt="Profile" />
+								<img src={imageSrc} alt="Profile" />
 							</Link>
 						</CardAvatar>
 						<CardBody profile={true}>
