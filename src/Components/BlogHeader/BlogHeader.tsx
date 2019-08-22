@@ -15,9 +15,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import styles from "./styles";
+import { BlogContext } from "../../Context";
 
 interface ICollapse {
 	[key: number]: boolean;
@@ -59,6 +60,9 @@ const posts = [
 const BlogHeader = (props: IProps) => {
 
 	const { classes, routes, location } = props;
+
+	const { username } = useContext(BlogContext);
+
 	// Initialize the current route to be the first route
 	const [currentRoute, setCurrentRoute] = useState(routes[0]) as [IRoute, React.Dispatch<React.SetStateAction<IRoute>>];
 
@@ -95,7 +99,7 @@ const BlogHeader = (props: IProps) => {
 		setCollapse((c) => ({ ...c, [index]: !c[index] }));
 	};
 
-	const username = localStorage.getItem("username");
+	console.log(username);
 
 	const drawer = (
 		<>

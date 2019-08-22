@@ -102,6 +102,10 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 	});
 	const [loading, setLoading] = useState(false);
 
+	if (!localStorage.getItem("username")) {
+		localStorage.setItem("username", username);
+	}
+
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
@@ -142,6 +146,7 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 				name: userDetails.name,
 				ragpReferalId: userDetails.ragpReferalId,
 				whatsappNumber: userDetails.whatsappNumber,
+				username,
 			}}
 		>
 			{loading && (<Spinner />)}

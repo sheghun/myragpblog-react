@@ -17,8 +17,10 @@ const name = "";
 const image = "";
 const ragpReferalId = "";
 const whatsappNumber = "";
+const username = "";
 const BlogContext = React.createContext({
 	image,
+	username,
 	name,
 	ragpReferalId,
 	whatsappNumber,

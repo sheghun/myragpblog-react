@@ -94,12 +94,11 @@ const useStyles = (theme: Theme) => ({
 		marginLeft: "16px",
 	},
 	sidebarActiveLink: {
-		color: "black",
-		backgroundColor: "red !important",
+		color: theme.palette.primary.main + " !important"
 
 	},
 	sidebarMainLink: {
-		color: "red !important",
+		// color: "red !important",
 		fontWeight: "400"
 	},
 	sidebarMainLinkActive: {
