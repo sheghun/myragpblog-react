@@ -83,9 +83,9 @@ const Web = () => {
 
 										<h1
 											className="sm-heading"
+											id="first-section-h1"
 											style={{
 												color: "black",
-												marginTop: "4rem",
 											}}
 										>
 											<Typed
