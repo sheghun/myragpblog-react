@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import Typed from "react-typed";
 import styled, { keyframes } from "styled-components";
 import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import PeopleImage from "../../assets/images/undraw_people_search_wctu.svg";
+import SegunPhoto from "../../assets/images/oladiran-segun.jpg";
 import Header from "./Header";
 import HeadLinks from "./HeadLinks";
 
@@ -26,6 +29,11 @@ const PeopleSearchImage = styled.img`
 		width: 90%;
 	}
 `;
+
+const AnimateDiv = styled.div`
+	animation: ${Displace} 3s ease-in-out infinite alternate;
+`;
+
 const Web = () => {
 
 	return (
@@ -597,33 +605,49 @@ const Web = () => {
 									</div>
 								</div>
 
-								<div className="col-md-offset-3 col-md-3 col-sm-6 team-block team-block-style-2">
+								<AnimateDiv className="col-md-offset-3 col-md-3 col-sm-6 team-block team-block-style-2">
 
 									<div className="team-block-container">
 
 										<div className="image-block">
 
 											<div className="image-block-container">
-												<img src="images/team/team-036.jpg" alt="Image Block" />
+												<img src={SegunPhoto} alt="Image Block" />
 											</div>
 										</div>
 
 										<div className="team-block-title">
-											<h4><a href="#" title="Oladiran Segun Solomon">OLADIRAN SEGUN</a></h4>
-											<h6 className="main-color">DEVELOPER</h6>
+											<h4><a href="#" title="Oladiran Segun Solomon">Oladiran Segun</a></h4>
+											<h6 className="main-color">Software Engineer</h6>
 										</div>
 
 										<div className="social-icons-block social-icons-block-sm social-icons-block-style-2">
 											<ul>
-												<li><a href="#" title="Facebook"><i className="fa fa-facebook" /></a></li>
-												<li><a href="#" title="Twitter"><i className="fa fa-twitter" /></a></li>
-												<li><a href="#" title="Github"><i className="fa fa-github" /></a></li>
+												<li
+													style={{
+														backgroundColor: "#3d5e99 !important",
+														color: "#ffffff !important",
+													}}
+												>
+													<a target="_blank" href="http://twitter.com/sheghun_" title="Twitter">
+														<i className="fa fa-twitter">
+															<FontAwesomeIcon icon={faTwitter} style={{ color: "white" }} />
+														</i>
+													</a>
+												</li>
+												<li>
+													<a href="http://github.com/sheghun" title="Github">
+														<i className="fa fa-github">
+															<FontAwesomeIcon icon={faGithub} style={{ color: "white" }} />
+														</i>
+													</a>
+												</li>
 											</ul>
 										</div>
 									</div>
-								</div>
+								</AnimateDiv>
 
-								<div className="col-md-3 col-sm-6 team-block team-block-style-2">
+								<AnimateDiv className="col-md-3 col-sm-6 team-block team-block-style-2">
 
 									<div className="team-block-container">
 
@@ -635,19 +659,30 @@ const Web = () => {
 										</div>
 
 										<div className="team-block-title">
-											<h4><a href="#" title="APOLLINE">MARK PHILIP</a></h4>
-											<h6 className="main-color">CONTENT WRITTER</h6>
+											<h4><a href="#" title="Mark Philip">Mark Philip</a></h4>
+											<h6 className="main-color">Content Writer</h6>
 										</div>
 
 										<div className="social-icons-block social-icons-block-sm social-icons-block-style-2">
 											<ul>
-												<li><a href="#" title="Twitter"><i className="fa fa-twitter" /></a></li>
-												<li><a href="#" title="Behance"><i className="fa fa-behance" /></a></li>
-												<li><a href="#" title="Dribbble"><i className="fa fa-dribbble" /></a></li>
+												<li>
+													<a href="#" title="Facebook">
+														<i className="fa fa-facebook" >
+															<FontAwesomeIcon icon={faFacebookF} style={{ color: "white" }} />
+														</i>
+													</a>
+												</li>
+												<li>
+													<a href="#" title="Twitter">
+														<i className="fa fa-twitter">
+															<FontAwesomeIcon icon={faTwitter} style={{ color: "white" }} />
+														</i>
+													</a>
+												</li>
 											</ul>
 										</div>
 									</div>
-								</div>
+								</AnimateDiv>
 							</div>
 						</div>
 					</div>
@@ -677,7 +712,7 @@ const Web = () => {
 
 									<div style={{ display: "flex", justifyContent: "center" }}>
 										<div style={{ textAlign: "center", fontWeight: 700 }}>
-											<span>Customer Care:</span> 09123472902
+											<span>Customer Care:</span> Pending
 										</div>
 									</div>
 								</div>
@@ -686,7 +721,7 @@ const Web = () => {
 					</div>
 				</div>
 
-				<div id="social-section-17" className="social-section grey-section section-xs-padding">
+				{/* <div id="social-section-17" className="social-section grey-section section-xs-padding">
 
 					<div className="section-container">
 
@@ -744,36 +779,7 @@ const Web = () => {
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<footer id="footer-section-4" className="footer-section white-section section-xs-padding">
-
-					<div className="section-container">
-
-						<div className="container">
-
-							<div className="row">
-
-								<div className="col-md-12 widget-block link-widget-block link-widget-block-style-1">
-
-									<div className="widget-block-container">
-
-										<div className="widget-block-content">
-											<ul>
-												<li><a href="#" title="About">ABOUT US</a></li>
-												<li><a href="#" title="Blog">BLOG</a></li>
-												<li><a href="#" title="Privacy Policy">PRIVACY POLICY</a></li>
-												<li><a href="#" title="Terms of use">TERMS OF USE</a></li>
-												<li><a href="#" title="Advertise">ADVERTISE</a></li>
-												<li><a href="#" title="Contact us">CONTACT US</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
+				</div> */}
 
 				<footer id="copyright-section-1" className="copyright-section copyright-section-style-1 white-section">
 
@@ -787,7 +793,7 @@ const Web = () => {
 
 									<div className="copyright-block-container text-center">
 
-										<p>&copy; 2016 <a href="#" title="Graphicfort">Graphicfort</a>, all rights reserved.</p>
+										<p>&copy; 2018-2019 Developed By Oladiran Segun</p>
 									</div>
 								</div>
 							</div>

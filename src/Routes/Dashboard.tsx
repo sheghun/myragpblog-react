@@ -33,13 +33,13 @@ const dashboardRoutes = [
 		path: "/dashboard/transactions",
 		sidebarName: "TRANSACTIONS",
 	},
-	{
-		component: Notifications,
-		icon: Wallet,
-		navbarName: "NOTIFICATIONS",
-		path: "/dashboard/notifications",
-		sidebarName: "NOTIFICATIONS",
-	},
+	// {
+	// 	component: Notifications,
+	// 	icon: Wallet,
+	// 	navbarName: "NOTIFICATIONS",
+	// 	path: "/dashboard/notifications",
+	// 	sidebarName: "NOTIFICATIONS",
+	// },
 	{
 		component: LogOut,
 		icon: ToggleOff,

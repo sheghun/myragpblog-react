@@ -26,10 +26,10 @@ const HeadLinks = () => {
 		<Helmet>
 			<title>My Ragp Blog</title>
 			<meta charSet="utf-8" />
-			<meta name="author" content="Graphicfort" />
+			<meta name="author" content="My Ragp Blog" />
 			<meta name="robots" content="index follow" />
 			<meta name="googlebot" content="index follow" />
-			<meta name="keywords" content="LUNE, HTML5, CSS3, Creative, Landing Page, Pack, Template, Create a website fast" />
+			<meta name="keywords" content="" />
 			<meta name="description" content="HTML5 Landing Pages Pack Template, Create a website fast" />
 
 			<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -46,21 +46,11 @@ const HeadLinks = () => {
 			<link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144.png" />
 			<link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-touch-icon-152x152.png" />
 			<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon-180x180.png" />
-
-			<link
-				href="../../../../fonts.googleapis.com/csse3e5.css?family=Montserrat:400,700"
-				rel="stylesheet"
-				type="text/css"
-			/>
-			<link
-				href="../../../../fonts.googleapis.com/css6109.css?family=Poppins:400,500,600,700"
-				rel="stylesheet"
-				type="text/css"
-			/>
 			<link data-linkRole="stylesheet" rel="stylesheet" href={process.env.PUBLIC_URL + "/css/bootstrap.min.css"} />
 			<link data-linkRole="stylesheet" rel="stylesheet" href={process.env.PUBLIC_URL + "/css/style.css"} />
 			<link data-linkRole="stylesheet" rel="stylesheet" href={process.env.PUBLIC_URL + "/css/responsive.css"} />
 			<link data-linkRole="stylesheet" rel="stylesheet" href={process.env.PUBLIC_URL + "/css/color.css"} />
+			<link data-linkRole="stylesheet" rel="stylesheet" href={process.env.PUBLIC_URL + "/css/social-icons.css"} />
 		</Helmet>
 	);
 };
