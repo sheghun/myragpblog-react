@@ -118,8 +118,15 @@ Mid Grey background color:  ebebeb
 69. UP Button
 */
 
+/*
+	Modified code
+*/
 
-
+@media (max-width: 600px) {
+	.section-container {
+		padding-top: 1rem !important;
+	}
+}
 
 /* =============================================================================
    1. General Styles
@@ -588,7 +595,7 @@ h2,
 .btn-gfort,
 .navbar-brand,
 .btn-gfort-white {
-    font-family: Montserrat, Helvetica, sans-serif, serif;
+    font-family: Lato, Montserrat, Helvetica, sans-serif, serif;
 }
 
 
@@ -596,7 +603,7 @@ h2,
 /* Poppins Font
 ============================================================================= */
 .popover {
-    font-family: poppins, Helvetica, sans-serif, serif;
+    font-family: Lato, poppins, Helvetica, sans-serif, serif;
 }
 
 

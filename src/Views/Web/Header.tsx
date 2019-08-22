@@ -34,7 +34,9 @@ const Header = () => {
 	};
 
 	return (
-		<header id="header-section-1" className="header-section header-style-1">
+		<header id="header-section-1"
+			className="header-section header-style-1"
+		>
 
 			<div className="header-section-container">
 
@@ -53,10 +55,19 @@ const Header = () => {
 										<div className="navbar-header">
 
 											<a href="#header-section-1" className="navbar-brand" title="LUNE">
-												<img
-													src=""
+												{/* <img
+													src="#"
 													alt="LUNE Logo"
-												/>
+												/> */}
+												<p
+													style={{
+														fontFamily: "Great Vibes, cursive",
+														fontSize: "24px",
+														padding: "1rem",
+													}}
+												>
+													MY RAGP BLOG
+												</p>
 											</a>
 
 											<button
@@ -74,10 +85,7 @@ const Header = () => {
 													<a href="#header-section-1" title="Home">Home</a>
 												</li>
 												<li>
-													<a href="#content-section-28" title="Features">Features</a>
-												</li>
-												<li>
-													<a href="#portfolio-section-9" title="Screenshots">Screenshots</a>
+													<a href="#features-of-the-blog" title="Features">Features</a>
 												</li>
 												<li>
 													<a href="#team-section-8" title="Team">Team</a>
@@ -86,7 +94,7 @@ const Header = () => {
 													<Link to="/login" title="Login">Login</Link>
 												</li>
 												<li>
-													<a href="#contact-section-14" title="Contact">Contact</a>
+													<a href="#contact-section-14" title="Contact">Contact Us</a>
 												</li>
 												<li>
 													<Link to="/register" title="Purchase" className="btn btn-gfort wave-effect">

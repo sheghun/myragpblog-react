@@ -1,9 +1,31 @@
+import { StyleRulesCallback } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import { Link } from "react-router-dom";
+import Typed from "react-typed";
+import styled, { keyframes } from "styled-components";
+import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
+import PeopleImage from "../../assets/images/undraw_people_search_wctu.svg";
 import Header from "./Header";
 import HeadLinks from "./HeadLinks";
 
-import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
+const Displace = keyframes`
+	from {
+		transform: translateY(-2%)
+	}
 
+	to {
+		transform: translateY(2%)
+	}
+`;
+
+const PeopleSearchImage = styled.img`
+	animation: ${Displace} 3s ease-in-out infinite alternate;
+	width: 100%;
+	@media (max-width: 600px) {
+		width: 90%;
+	}
+`;
 const Web = () => {
 
 	return (
@@ -27,28 +49,58 @@ const Web = () => {
 
 				<div id="hero-section-11" className="hero-section black-section section-lg-padding">
 
-					<div className="section-container">
+					<div
+						className={`section-container`}
+						id="first-section"
+						style={{
+							backgroundColor: "white",
+						}}
+					>
 
-						<div className="background-image-block parallax-effect gfort-background">
-							<img src="images/hero/hero-013.jpg" alt="Parallax Image" />
-						</div>
+						{/* <div className="background-image-block parallax-effect gfort-background">
+							<img src={PeopleImage} alt="Parallax Image" />
+						</div> */}
 
-						<div className="container">
+						<div
+							className="container bg-white"
+						>
 
 							<div className="row">
 
-								<div className="col-lg-6 col-md-8 title-block">
+								<div className="col-lg-8 col-md-8 title-block">
 
-									<div className="title-block-container white-content">
+									<div
+										className="title-block-container white-content"
+									>
 
-										<h1 className="sm-heading">
-											THE ULTIMATE THIRD PARTY TOOL
-											<br />
-											A FULLY AUTOMATED MARKETING
-											<br />
-											NETWORK BUILDING SYSTEM.
-                                        </h1>
+										<h1
+											className="sm-heading"
+											style={{
+												color: "black",
+												marginTop: "4rem",
+											}}
+										>
+											<Typed
+												strings={[
+													"THE ULTIMATE THIRD PARTY TOOL",
+													"A FULLY AUTOMATED MARKETING NETWORK BUILDING SYSTEM",
+												]}
+												typeSpeed={40}
+												showCursor={false}
+												backDelay={5000}
+												backSpeed={60}
+												loop={true}
+											/>
+										</h1>
 									</div>
+								</div>
+								<div
+									className="col-lg-4 col-md-4"
+								>
+									<PeopleSearchImage
+										src={PeopleImage}
+										width="100%"
+									/>
 								</div>
 							</div>
 						</div>
@@ -132,8 +184,9 @@ const Web = () => {
 					</div>
 				</div>
 
-
-				<div id="content-section-32" className="content-section white-section">
+				<div id="content-section-32"
+					className="content-section white-section"
+				>
 
 					<div className="section-container">
 
@@ -176,8 +229,10 @@ const Web = () => {
 											</div>
 										</div>
 
-										<div className="col-md-12 content-block content-block-style-3"
-											data-gfort-swiper-slide-to="2">
+										<div
+											className="col-md-12 content-block content-block-style-3"
+											data-gfort-swiper-slide-to="2"
+										>
 
 											<div className="content-block-container text-right">
 
@@ -258,13 +313,13 @@ const Web = () => {
 								<div className="col-lg-8 col-lg-offset-2 col-md-12 form-block subscribe-form-block">
 
 									<div className="form-block-container white-content text-center">
-										<form method="post" action="#">
-											<div className="col-sm-offset-4 col-md-4">
-												<div className="form-group">
-													<button type="submit" className="btn btn-gfort wave-effect">REGISTER</button>
-												</div>
+										<div className="col-sm-offset-4 col-md-4">
+											<div className="form-group">
+												<Link to="/register" type="submit" className="btn btn-gfort wave-effect">
+													REGISTER
+												</Link>
 											</div>
-										</form>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -286,7 +341,7 @@ const Web = () => {
 
 										<div className="col-md-12 title-block">
 
-											<div className="title-block-container">
+											<div className="title-block-container" id="features-of-the-blog">
 
 												<h2>Features Of The Blog</h2>
 
@@ -620,8 +675,8 @@ const Web = () => {
 
 								<div className="col-md-12 form-block contact-form-block">
 
-									<div style={{display: "flex", justifyContent: "center"}}>
-										<div style={{ textAlign: "center", fontWeight: 700}}>
+									<div style={{ display: "flex", justifyContent: "center" }}>
+										<div style={{ textAlign: "center", fontWeight: 700 }}>
 											<span>Customer Care:</span> 09123472902
 										</div>
 									</div>
