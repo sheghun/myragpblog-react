@@ -143,7 +143,7 @@ body {
 	overflow-x: hidden;
 	font-weight: normal;
 	background-color: #ebebeb;
-	font: 16px/1.6 Lato, Helvetica, sans-serif, serif;
+	font: 18px/1.6 Lato, Helvetica, sans-serif, serif;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -1223,7 +1223,7 @@ ul.navbar-nav>li>a.btn {
 .navbar-toggle>span {
 	width: 21px;
 	height: 21px;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	line-height: 21px;
 	position: relative;
@@ -1566,7 +1566,7 @@ ul.navbar-nav>li>a.btn {
 .menu-arrow {
 	width: 11px;
 	height: 20px;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	margin-left: 5px;
 	line-height: 20px;
@@ -3152,7 +3152,7 @@ div[class*='col-'][data-gfort-swiper-slide-to]>div {
 ----------------------------------------------------------------------------- */
 .gfort-swiper-slider .post-block-container .meta-block-container {
 	color: #ffffff;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .gfort-swiper-slider .post-block-container .meta-block-container span {
@@ -3801,7 +3801,7 @@ div[class*='col-'][data-gfort-swiper-slide-to]>div {
 ----------------------------------------------------------------------------- */
 .portfolio-block-style-3 .portfolio-block-container>h4 {
 	width: auto;
-	font-size: 16px;
+	font-size: 18px;
 	display: inline-block;
 	padding: 10px 25px 9px;
 	background-color: #ffffff;
@@ -4377,7 +4377,7 @@ nav.gfort-pagination ul.pagination>li>span {
 }
 
 nav.gfort-pagination ul.pagination>li>a span {
-	font-size: 16px;
+	font-size: 18px;
 }
 
 
@@ -5126,7 +5126,7 @@ div[class*='col-'] .image-block-container img~img {
 	margin: 5px;
 	z-index: 99999;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 18px;
 	position: absolute;
 	text-align: center;
 	outline: none !important;
@@ -5379,7 +5379,7 @@ i.circle-icon-block-sm {
 
 i.circle-icon-block-sm.fa-phone,
 i.circle-icon-block-sm.fa-clock-o {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 33px;
 }
 
@@ -5473,7 +5473,7 @@ i.circle-icon-block-sm.fa-clock-o {
 /* Medium Icon
 --------------------------------------------------------- */
 .info-block-container>a.main-link i.circle-icon-block-md~p {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 48px;
 }
 
@@ -5907,7 +5907,7 @@ i.circle-icon-block-sm.fa-clock-o {
 	height: 44px;
 	color: #121212;
 	padding: 10px 0;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	border-radius: 0;
 	line-height: 24px;
@@ -6114,7 +6114,7 @@ ul.select-menu-list li {
 	color: #515151;
 	display: block;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	font-weight: 500;
 	line-height: 24px;
@@ -6370,7 +6370,7 @@ ul.select-menu-list li {
 	width: 16px;
 	height: 16px;
 	opacity: 0.90;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	line-height: 16px;
 	position: absolute;
@@ -7158,7 +7158,7 @@ iframe {
 ----------------------------------------------------------------------------- */
 .content-block-style-1 .content-block-container {
 	padding: 25px;
-	font-size: 16px;
+	font-size: 18px;
 	border-radius: 2px;
 	background-color: #ffffff;
 
@@ -8245,7 +8245,7 @@ audio {
 .audio-block-fullwidth .mejs-controls h4 {
 	bottom: 0;
 	opacity: 1;
-	font-size: 16px;
+	font-size: 18px;
 	position: relative;
 	padding: 6px 0 0 10px;
 
@@ -8277,7 +8277,7 @@ audio {
 ----------------------------------------------------------------------------- */
 .date-block-container {
 	line-height: 1;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	position: relative;
 	margin: 0 auto 15px;
@@ -8333,7 +8333,7 @@ audio {
 	display: block;
 	line-height: 1;
 	margin: 0 -15px;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	font-weight: 500;
 	position: relative;
@@ -8442,7 +8442,7 @@ audio {
 	height: 36px;
 	color: #ffffff;
 	max-width: 100%;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	text-align: left;
 	line-height: 16px;
@@ -8459,7 +8459,7 @@ audio {
 	height: 16px;
 	color: #ffffff;
 	max-width: 100%;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 	font-weight: 600;
 	line-height: 16px;
@@ -8593,7 +8593,7 @@ audio {
 ----------------------------------------------------------------------------- */
 .infoWindow-block-container {
 	width: 100%;
-	font-size: 16px;
+	font-size: 18px;
 	cursor: default;
 	position: relative;
 	margin-bottom: 60px;
@@ -9189,7 +9189,7 @@ audio {
 --------------------------------------------------------- */
 .ui-datepicker-header {
 	color: #121212;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	overflow: hidden;
 	line-height: 45px;
@@ -9617,7 +9617,7 @@ audio {
 }
 
 .event-block-container a.main-link .date-block span:nth-child(2) {
-	font-size: 16px;
+	font-size: 18px;
 	padding-top: 10px;
 }
 
@@ -9627,7 +9627,7 @@ audio {
 	width: 200px;
 	color: #ffffff;
 	padding: 8px 0;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	text-align: center;
 	position: absolute;
@@ -12071,7 +12071,7 @@ ul.nav-tabs>li.tab-button>a:hover::after {
 ------------------------------------- */
 .pricing-block-container .pricing-block-price p {
 	color: #d32f2f;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	padding-top: 10px;
 	line-height: 25px;

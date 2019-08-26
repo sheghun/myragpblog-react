@@ -71,7 +71,15 @@ class Post extends Component {
                     </Typography>
                 </div>
                 <h1>Introduction</h1>
-                <iframe title="Introduction" className={classes.video} height="315" src="https://www.youtube.com/embed/zo-MIQR9x60" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+				{/* <iframe
+					title="Introduction"
+					className={classes.video}
+					height="315"
+					src="https://www.youtube.com/embed/zo-MIQR9x60"
+					frameborder="0" allow="accelerometer; autoplay;
+					encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen
+				/> */}
                 <Typography variant="caption"><em>A short video on the introduction</em></Typography>
                 <br /><br />
                 <Typography variant="body2" style={{ color: faintColor }}>
