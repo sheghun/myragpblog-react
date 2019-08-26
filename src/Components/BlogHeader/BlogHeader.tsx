@@ -15,10 +15,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
-import styles from "./styles";
 import { BlogContext } from "../../Context";
+import styles from "./styles";
 
 interface ICollapse {
 	[key: number]: boolean;
@@ -68,6 +68,7 @@ const BlogHeader = (props: IProps) => {
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [slide, setSlide] = useState(true);
+	const scrollPos = useRef(0);
 	const [collapse, setCollapse] = useState({ 0: false }) as unknown as [ICollapse, React.Dispatch<React.SetStateAction<ICollapse>>];
 
 	useEffect(() => {
@@ -87,8 +88,22 @@ const BlogHeader = (props: IProps) => {
 	}, [location.pathname]);
 
 	const handleScroll = () => {
-		if (window.pageYOffset > 200) { return setSlide(false); }
-		setSlide(true);
+
+		if ((window.pageYOffset - scrollPos.current) > 100) {
+			if (slide) {
+				setSlide(false);
+			}
+			console.log(scrollPos);
+			scrollPos.current = window.pageYOffset;
+		}
+
+		if ((scrollPos.current - window.pageYOffset) > 100) {
+			if (!slide) {
+				setSlide(true);
+			}
+			console.log(scrollPos);
+			scrollPos.current = window.pageYOffset;
+		}
 	};
 
 	const handleDrawerToggle = () => {
@@ -98,8 +113,6 @@ const BlogHeader = (props: IProps) => {
 	const collapseMenu = (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
 		setCollapse((c) => ({ ...c, [index]: !c[index] }));
 	};
-
-	console.log(username);
 
 	const drawer = (
 		<>
