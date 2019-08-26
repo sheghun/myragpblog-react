@@ -95,15 +95,15 @@ const Welcome: React.FC<any> = (props) => {
 			<Typography>
 				<Link to={`/${username}/why-ragp`}>
 					<Typography className={classes.nextButton}>
-						What is RAGP    <ArrowForwardIcon style={{ marginBottom: "-0.35rem" }} />
+						Why Ragp    <ArrowForwardIcon style={{ marginBottom: "-0.35rem" }} />
 					</Typography>
 				</Link>
 				<Typography>
 					Or
-		     </Typography>
+				</Typography>
 				<Typography>
 					Click this icon <MenuIcon style={{ marginBottom: "-0.35rem" }} /> at the header to jump to a section
-		     </Typography>
+				</Typography>
 			</Typography>
 		</>
 	);

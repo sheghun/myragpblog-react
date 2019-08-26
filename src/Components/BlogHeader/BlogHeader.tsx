@@ -69,7 +69,7 @@ const BlogHeader = (props: IProps) => {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [slide, setSlide] = useState(true);
 	const scrollPos = useRef(0);
-	const [collapse, setCollapse] = useState({ 0: false }) as unknown as [ICollapse, React.Dispatch<React.SetStateAction<ICollapse>>];
+	const [collapse, setCollapse] = useState({ 0: false } as ICollapse);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
