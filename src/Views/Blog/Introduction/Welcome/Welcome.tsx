@@ -3,15 +3,14 @@ import { StyleRulesCallback } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import MenuIcon from "@material-ui/icons/Menu";
-import React from "react";
+import React, { useContext } from "react";
 // react-router-dom
 import { Link, withRouter } from "react-router-dom";
-// Helpers
-import { username } from "../../../../_helpers";
 
 // Styles
 import { makeStyles } from "@material-ui/styles";
 import { faintColor } from "../../../../baseStyles";
+import { BlogContext } from "../../../../Context";
 
 const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
 	breadCrumbsSeparator: {
@@ -51,6 +50,7 @@ const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
 
 const Welcome: React.FC<any> = (props) => {
 	const classes = useStyles();
+	const { username } = useContext(BlogContext);
 
 	return (
 		<>

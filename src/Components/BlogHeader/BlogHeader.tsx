@@ -15,7 +15,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import { BlogContext } from "../../Context";
 import styles from "./styles";
@@ -89,19 +89,17 @@ const BlogHeader = (props: IProps) => {
 
 	const handleScroll = () => {
 
-		if ((window.pageYOffset - scrollPos.current) > 100) {
+		if ((window.pageYOffset - scrollPos.current) > 300) {
 			if (slide) {
 				setSlide(false);
 			}
-			console.log(scrollPos);
 			scrollPos.current = window.pageYOffset;
 		}
 
-		if ((scrollPos.current - window.pageYOffset) > 100) {
+		if ((scrollPos.current - window.pageYOffset) > 300) {
 			if (!slide) {
 				setSlide(true);
 			}
-			console.log(scrollPos);
 			scrollPos.current = window.pageYOffset;
 		}
 	};

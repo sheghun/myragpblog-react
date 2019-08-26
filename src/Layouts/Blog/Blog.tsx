@@ -122,7 +122,9 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 					<Route path={route.path} key={index} component={route.component} />
 				)));
 
-				history.push(`/${username}/welcome-note`);
+				if (history.location.pathname === `/${username}`) {
+					history.push(`/${username}/welcome-note`);
+				}
 			} catch (error) {
 				const { response } = error as AxiosError;
 				if (response) {
@@ -145,8 +147,8 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 				image: userDetails.image,
 				name: userDetails.name,
 				ragpReferalId: userDetails.ragpReferalId,
-				whatsappNumber: userDetails.whatsappNumber,
 				username,
+				whatsappNumber: userDetails.whatsappNumber,
 			}}
 		>
 			{loading && (<Spinner />)}
