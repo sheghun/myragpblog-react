@@ -27,7 +27,7 @@ interface IProps extends RouteComponentProps {
 
 const Dashboard = (props: IProps) => {
 
-	const { wallet, pv, cummulativePv, network, transactions } = useContext(DashboardContext);
+	const { wallet, pv, cummulativePv, network, transactions, username } = useContext(DashboardContext);
 
 	const { classes } = props;
 	return (
@@ -59,6 +59,23 @@ const Dashboard = (props: IProps) => {
 						</CardHeader>
 						<CardFooter stats={true} />
 					</Card>
+				</GridItem>
+				<GridItem xs={12} sm={6} md={6}>
+					<Link
+						to={`/${username}`}
+						style={{ textDecoration: "none" }}
+					>
+						<Card>
+							<CardHeader color="warning" stats={true} icon={true}>
+								<CardIcon color="warning">
+									<PeopleOutlineIcon />
+								</CardIcon>
+								<br />
+								<p className={classes.cardCategory}>Click Here To Visit Your Blog</p>
+							</CardHeader>
+							<CardFooter stats={true} />
+						</Card>
+					</Link>
 				</GridItem>
 			</GridContainer>
 			<GridContainer>
@@ -101,33 +118,17 @@ const Dashboard = (props: IProps) => {
 					</Card>
 				</GridItem>
 				<GridItem xs={12} sm={12} md={12}>
-					{/* <Card>
+					<Card>
 						<CardHeader color="primary">
-							<h4 className={classes.cardTitleWhite}>Notifications</h4>
+							<h4 className={classes.cardTitleWhite}>Copy Your Blog Link</h4>
 							<p className={classes.cardCategoryWhite}>
-								All Your Notifications
-                                </p>
+								Links to send to your prospects
+							</p>
 						</CardHeader>
-						<CardBody>
-							{notifications.map((notification, i) => (
-								<SnackbarContent
-									key={i}
-									message={
-										<Typography variant="overline" style={{ color: "white", fontWeight: 700 }}>
-											{notification.message}<br />
-											{notification.link ?
-												<Link to={notification.link.path}>{notification.link.message}</Link>
-												: null
-											}
-										</Typography>
-									}
-									close={true}
-									color={notification.type}
-								/>
-							))}
-						</CardBody>
-					</Card> */}
+						<CardBody />
+					</Card>
 				</GridItem>
+
 				<GridItem xs={12} sm={12} md={12}>
 					<Card>
 						<CardHeader color="info">

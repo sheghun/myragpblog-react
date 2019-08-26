@@ -17,12 +17,12 @@ const name = "";
 const image = "";
 const ragpReferalId = "";
 const whatsappNumber = "";
-const username = "";
+let username = "";
 const BlogContext = React.createContext({
 	image,
-	username,
 	name,
 	ragpReferalId,
+	username,
 	whatsappNumber,
 });
 
@@ -30,6 +30,7 @@ const network = 0;
 const transactions = [] as string[][];
 const wallet = 0;
 const pv = 0;
+username = "";
 const cummulativePv = 0;
 
 const DashboardContext = React.createContext({
@@ -37,6 +38,7 @@ const DashboardContext = React.createContext({
 	network,
 	pv,
 	transactions,
+	username,
 	wallet,
 });
 

@@ -8,8 +8,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter, Link } from 'react-router-dom';
 // Helpers
 import { username } from '../../../../_helpers'
-//Images
-import thumbnail from '../../../../assets/images/introduction-table.jpg'
 
 // Styles
 import { faintColor } from '../../../../baseStyles';

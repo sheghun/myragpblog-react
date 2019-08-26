@@ -1,14 +1,14 @@
+import { faFacebookF, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyleRulesCallback } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { Link } from "react-router-dom";
 import Typed from "react-typed";
 import styled, { keyframes } from "styled-components";
-import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
-import PeopleImage from "../../assets/images/undraw_people_search_wctu.svg";
 import SegunPhoto from "../../assets/images/oladiran-segun.jpg";
+import subBackgroundImage from "../../assets/images/subscribe-background.jpg";
+import PeopleImage from "../../assets/images/undraw_people_search_wctu.svg";
 import Header from "./Header";
 import HeadLinks from "./HeadLinks";
 

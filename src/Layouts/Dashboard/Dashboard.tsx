@@ -45,6 +45,7 @@ const Dashboard = (props: IProps) => {
 		// notifications: [] as Array<{ type: string, message: any, link?: { path: string, message: string } }>,
 		pv: 0,
 		transactions: [],
+		username: "",
 		wallet: 0,
 	});
 
@@ -151,7 +152,6 @@ const Dashboard = (props: IProps) => {
 				</div>
 			</div>
 			}
-				<Footer />
 		</>
 	);
 };
