@@ -13,7 +13,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackwardIcon from "@material-ui/icons/ArrowBack";
 
 // react-router-dom
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 // Helpers
 import { username } from "../../../../_helpers";
@@ -69,19 +69,19 @@ const CompanyProfile = props => {
         <>
             <div className={classes.breadcrumbs}>
                 <Typography variant="overline">
-                    <a
-                        href={`/${username}/welcome-note`}
+                    <Link
+                        to={`/${username}/welcome-note`}
                         className={classes.breadCrumbsText}
                     >
                         Introduction
                         <span className={classes.breadCrumbsSeparator}>/</span>
-                    </a>
-                    <a
-                        href={`/${username}/welcome-note`}
+                    </Link>
+                    <Link
+                        to={`/${username}/welcome-note`}
                         className={[classes.breadCrumbsTextActive].join(" ")}
                     >
                         Recharge And Get Paid LTD
-                    </a>
+                    </Link>
                 </Typography>
             </div>
             <div>
@@ -177,24 +177,24 @@ const CompanyProfile = props => {
             </Typography>
             <div style={baseStyles.pagination}>
                 <div style={baseStyles.paginationBack}>
-                    <a href={"/" + username + "/what-is-RAGP"}>
+                    <Link to={"/" + username + "/welcome-note"}>
                         <Button variant="contained" color="primary">
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
-                            What is RAGP?
+                            Welcome Note
                         </Button>
-                    </a>
+                    </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <a href={"/" + username + "/the-business-model"}>
+                    <Link to={"/" + username + "/what-is-ragp"}>
                         <Button variant="contained" color="primary">
-                            The Business Model
+                            What Is RAGP
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />
                             </span>
                         </Button>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

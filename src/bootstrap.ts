@@ -1,3 +1,3 @@
-// import "@babel/polyfill";
+import "@babel/polyfill";
 import { install } from "@material-ui/styles";
 install();
