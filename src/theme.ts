@@ -13,12 +13,12 @@ export default createMuiTheme({
 	},
 	typography: {
 		body1: {
-			color: "#5f6368",
+			color: "#202124",
 			fontSize: "16px",
 			lineHeight: "2em",
 		},
 		body2: {
-			color: "#5f6368",
+			color: "#202124",
 			fontSize: "18px",
 			fontWeight: 400,
 			lineHeight: "1.7em",

@@ -30,12 +30,16 @@ const Welcome = loadable(() => import("../../Views/Blog/Introduction/Welcome/Wel
 const WhyIs = loadable(() => import("../../Views/Blog/Introduction/Whyis/Whyis"), {
 	fallback: <Spinner />,
 });
+const WhatIs = loadable(() => import("../../Views/Blog/Introduction/Whatis/Whatis"), {
+	fallback: <Spinner />,
+});
 const CompanyProfile = loadable(() => import("../../Views/Blog/Introduction/Company/Company"), {
 	fallback: <Spinner />,
 });
 const CompensationPlan = loadable(() => import("../../Views/Blog/How/Compensation/Compensation"), {
 	fallback: <Spinner />,
 });
+
 
 const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
 	avatar: {
@@ -89,6 +93,7 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 		[
 			{ path: `/${username}/welcome-note`, component: Welcome },
 			{ path: `/${username}/why-ragp`, component: WhyIs },
+			{path: `/${username}/what-is-ragp`, component: WhatIs},
 			{ path: `/${username}/the-compensation-plan`, component: CompensationPlan },
 			{ path: `/${username}/company-profile`, component: CompanyProfile },
 		]
@@ -124,6 +129,10 @@ const Blog = ({ match, history }: RouteComponentProps) => {
 
 				if (history.location.pathname === `/${username}`) {
 					history.push(`/${username}/welcome-note`);
+				}
+				if (history.location.pathname === `/${username}/register`) {
+					const urlArray = location.pathname.split("/");
+					history.push(`/register?referalId=${urlArray[1]}`)
 				}
 			} catch (error) {
 				const { response } = error as AxiosError;

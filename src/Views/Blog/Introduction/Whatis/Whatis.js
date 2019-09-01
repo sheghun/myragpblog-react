@@ -1,7 +1,6 @@
 // cSpell:ignore overline RAGP DMPI
 
 import React, { Component, useContext } from 'react';
-import Aux from 'Hoc/Aux/Aux';
 
 // @material-ui components
 import { withStyles } from '@material-ui/core/styles';
@@ -64,7 +63,7 @@ class WhatIs extends Component {
 		const { username } = useContext(BlogContext);
 		console.log(this.props)
 		return (
-			<Aux>
+			<>
 				<div className={classes.breadcrumbs}>
 					<Typography variant="overline">
 						<a href={`/${username}/welcome-note`} className={classes.breadCrumbsText}>Introduction
@@ -107,7 +106,7 @@ class WhatIs extends Component {
 						</a>
 					</div>
 				</div>
-			</Aux>
+			</>
 		)
 	}
 }

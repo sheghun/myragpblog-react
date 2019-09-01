@@ -3,7 +3,7 @@ body {
 	padding: 0;
 	width: 100vw;
 	background-color: #fafafa;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Lato', Helvetica;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

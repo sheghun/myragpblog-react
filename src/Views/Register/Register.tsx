@@ -9,10 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 import { makeStyles, useTheme } from "@material-ui/styles";
 import Axios, { AxiosError } from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, RouteComponentProps } from "react-router-dom";
 import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 import { IApiError } from "../../types";
+import queryString from "query-string";
 
 const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
 	paper: {
@@ -48,7 +49,7 @@ const useStyles = makeStyles<StyleRulesCallback>((theme) => ({
 	},
 }));
 
-const Register = () => {
+const Register = ({ location }: RouteComponentProps) => {
 
 	const classes = useStyles();
 	const theme = useTheme() as Theme;
@@ -79,6 +80,13 @@ const Register = () => {
 		tAndC: "",
 		username,
 	});
+
+	useEffect(() => {
+		const { referalId } = queryString.parse(location.search)
+		if (referalId && referalId !== "") {
+			setReferalId(referalId as string)
+		}
+	}, [])
 
 	const changeInputs = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value.trim();
