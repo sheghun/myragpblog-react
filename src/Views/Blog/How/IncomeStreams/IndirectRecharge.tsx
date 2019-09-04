@@ -157,7 +157,7 @@ const IndirectRecharge = () => {
                     </Typography>
                     <br />
                     <br />
-                    Imagine That YOU Have 1 <strong>RAGP</strong> DownLine That Harbitually Buys...
+                    Imagine That YOU Have 1 <strong>RAGP</strong> DownLine That Habitually Buys...
                     <br />
                     &#8358;2000 DATA BUNDLE
                     <br />
@@ -244,7 +244,7 @@ const IndirectRecharge = () => {
                     <br />
                     RAGP Wants You To Experience
                     <br />
-                    TRUE WEALTH = MASSIVE PASSIVE POSITVE CASH-FLOW
+                    TRUE WEALTH = MASSIVE PASSIVE POSITIVE CASH-FLOW
                     <br />
                     <br />
                     Like N5m Per Month...
@@ -261,8 +261,10 @@ const IndirectRecharge = () => {
                     Ever!!!
                     <br />
                     It's Here &amp; Yours To Fully Take Advantage Of....
-                    <Link to="#">**[To Right Away
-                    START, LAUNCH &amp; GROW YOUR RAGP BUSINESS/NETWORK SUPER FAST, Tap Here]</Link>
+                    <Link to="#">
+                        **[To Right Away START, LAUNCH &amp; GROW YOUR RAGP BUSINESS/NETWORK SUPER
+                        FAST, Tap Here]
+                    </Link>
                 </Typography>
             </div>
 
@@ -271,19 +273,19 @@ const IndirectRecharge = () => {
             </Typography>
             <div style={baseStyles.pagination}>
                 <div style={baseStyles.paginationBack}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'/' + username + '/direct-recharge-bonus'}>
                         <Button variant="text" color="primary">
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
-                            The Business Model
+                            Direct Recharge Bonus
                         </Button>
                     </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'/' + username + '/direct-referal-bonus'}>
                         <Button variant="text" color="primary">
-                            The Compensation Plan
+                            Direct Referal Commission
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />
                             </span>

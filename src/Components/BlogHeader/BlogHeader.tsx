@@ -135,8 +135,16 @@ const BlogHeader = (props: IProps) => {
         }
     };
 
-    const handleDrawerToggle = () => {
+    /**
+     * @param e: event
+     * @param isSubMenu is the parameter containing the cause of the trigger
+     */
+    const handleDrawerToggle = (
+        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+        isSubMenu?: string,
+    ) => {
         if (isLargeScreen) return;
+        if (isSubMenu === 'isSubMenu') return;
 
         setMobileOpen(open => (!open ? true : false));
     };
@@ -144,8 +152,6 @@ const BlogHeader = (props: IProps) => {
     const collapseMenu = (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
         setCollapse(c => ({...c, [index]: !c[index]}));
     };
-
-    console.log(collapse);
 
     const drawer = (
         <>
@@ -241,11 +247,14 @@ const BlogHeader = (props: IProps) => {
                                                                                 location.pathname
                                                                             );
                                                                         }}
-                                                                        onClick={_ => {
-                                                                            handleDrawerToggle();
+                                                                        onClick={e => {
+                                                                            handleDrawerToggle(
+                                                                                e,
+                                                                                'isSubMenu',
+                                                                            );
                                                                             // Set the collapse menu with an increment of 10 for sub sub menu
                                                                             collapseMenu(
-                                                                                _,
+                                                                                e,
                                                                                 key + 10,
                                                                             );
                                                                         }}
