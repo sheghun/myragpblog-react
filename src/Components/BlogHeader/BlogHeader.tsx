@@ -1,24 +1,26 @@
 // cSpell:ignore  MRPI to\'s
 
-import AppBar from "@material-ui/core/AppBar";
-import Collapse from "@material-ui/core/Collapse";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Slide from "@material-ui/core/Slide";
-import { withStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
-import { BlogContext } from "../../Context";
-import styles from "./styles";
+import AppBar from '@material-ui/core/AppBar';
+import Collapse from '@material-ui/core/Collapse';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery';
+import {useTheme} from '@material-ui/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Slide from '@material-ui/core/Slide';
+import {withStyles, Theme} from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import {NavLink, RouteComponentProps, withRouter} from 'react-router-dom';
+import {BlogContext} from '../../Context';
+import styles from './styles';
 
 interface ICollapse {
     [key: number]: boolean;
@@ -38,30 +40,32 @@ interface IRoute {
 const posts = [
     {
         posts: [
-            { title: "Company Profile", url: "company-profile" },
-            { title: "What Is RAGP", url: "what-is-ragp" },
-            { title: "Why RAGP", url: "why-ragp" }
+            {title: 'Company Profile', url: 'company-profile'},
+            {title: 'What Is RAGP', url: 'what-is-ragp'},
+            {title: 'Why RAGP', url: 'why-ragp'},
         ],
-        title: "Introduction"
+        title: 'Introduction',
     },
     {
         posts: [
-            { title: "The business model", url: "the-business-model" },
-            { title: "The compensation plan", url: "the-compensation-plan" },
-            { title: "The 6 Income Streams", url: "massive-residual-income" }
+            {title: 'The Business Model', url: 'the-business-model'},
+            {title: 'The Compensation Plan', url: 'the-compensation-plan'},
         ],
-        title: "How does it work?"
+        title: 'How does it work?',
     },
     {
-        posts: [{ title: "", url: "" }],
-        title: "How to's"
-    }
+        posts: [{title: '', url: ''}],
+        title: "How to's",
+    },
 ];
 
 const BlogHeader = (props: IProps) => {
-    const { classes, history, routes, location } = props;
+    const {classes, history, routes, location} = props;
 
-    const { username } = useContext(BlogContext);
+    const {username} = useContext(BlogContext);
+
+    const theme = useTheme() as Theme;
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
     // Initialize the current route to be the first route
     const [currentRoute, setCurrentRoute] = useState(routes[0] as IRoute);
@@ -69,12 +73,12 @@ const BlogHeader = (props: IProps) => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [slide, setSlide] = useState(true);
     const scrollPos = useRef(0);
-    const [collapse, setCollapse] = useState({ 0: false } as ICollapse);
+    const [collapse, setCollapse] = useState({0: false} as ICollapse);
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
     });
 
@@ -83,10 +87,10 @@ const BlogHeader = (props: IProps) => {
         setCurrentRoute(route as IRoute);
         // Get the post index
         const index = posts.findIndex(post =>
-            post.posts.some(p => `/${username}/${p.url}` === location.pathname)
+            post.posts.some(p => `/${username}/${p.url}` === location.pathname),
         );
         // Open the current post link
-        setCollapse(c => ({ ...c, [index]: true }));
+        setCollapse(c => ({...c, [index]: true}));
     }, [location.pathname]);
 
     const handleScroll = () => {
@@ -106,14 +110,13 @@ const BlogHeader = (props: IProps) => {
     };
 
     const handleDrawerToggle = () => {
+        if (isLargeScreen) return;
+
         setMobileOpen(open => (!open ? true : false));
     };
 
-    const collapseMenu = (
-        _: React.MouseEvent<HTMLElement, MouseEvent>,
-        index: number
-    ) => {
-        setCollapse(c => ({ ...c, [index]: !c[index] }));
+    const collapseMenu = (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
+        setCollapse(c => ({...c, [index]: !c[index]}));
     };
 
     const drawer = (
@@ -124,45 +127,40 @@ const BlogHeader = (props: IProps) => {
 
             <Divider />
 
-            <div style={{ marginTop: "24px" }} />
+            <div style={{marginTop: '24px'}} />
 
             <List>
                 <ListItem>
                     <ListItemText
                         primaryTypographyProps={{
                             style: {
-                                color: "#202124",
-                                fontSize: "18px"
+                                color: '#202124',
+                                fontSize: '18px',
                             },
-                            variant: "subtitle1"
+                            variant: 'subtitle1',
                         }}
-                        primary={"BLOG SYSTEM"}
+                        primary={'BLOG SYSTEM'}
                         secondary={
                             <>
-                                <List style={{ marginLeft: "-16px" }}>
+                                <List style={{marginLeft: '-16px'}}>
                                     <ListItem button={true}>
                                         <ListItemText
                                             primary={
                                                 <NavLink
                                                     to={`/${username}/welcome-note`}
-                                                    className={
-                                                        classes.sidebarLink
-                                                    }
-                                                    activeClassName={
-                                                        classes.sidebarActiveLink
-                                                    }
+                                                    className={classes.sidebarLink}
+                                                    activeClassName={classes.sidebarActiveLink}
                                                     style={{
-                                                        textDecoration: "none"
+                                                        textDecoration: 'none',
                                                     }}
                                                 >
-                                                    {"Welcome note"}
+                                                    {'Welcome note'}
                                                 </NavLink>
                                             }
                                             // @ts-ignore
                                             primaryTypographyProps={{
-                                                className:
-                                                    classes.sidebarMainLink,
-                                                variant: "body1"
+                                                className: classes.sidebarMainLink,
+                                                variant: 'body1',
                                             }}
                                         />
                                     </ListItem>
@@ -171,17 +169,14 @@ const BlogHeader = (props: IProps) => {
                                     <List key={index}>
                                         <ListItem
                                             button={true}
-                                            onClick={event =>
-                                                collapseMenu(event, index)
-                                            }
+                                            onClick={event => collapseMenu(event, index)}
                                         >
                                             <ListItemText
                                                 primary={post.title}
                                                 // @ts-ignore
                                                 primaryTypographyProps={{
-                                                    className:
-                                                        classes.sidebarMainLink,
-                                                    variant: "body1"
+                                                    className: classes.sidebarMainLink,
+                                                    variant: 'body1',
                                                 }}
                                             />
                                         </ListItem>
@@ -195,17 +190,13 @@ const BlogHeader = (props: IProps) => {
                                                     <ListItem
                                                         key={key}
                                                         button={true}
-                                                        className={
-                                                            classes.nested
-                                                        }
+                                                        className={classes.nested}
                                                     >
                                                         <ListItemText
                                                             primary={
                                                                 <NavLink
                                                                     to={`/${username}/${p.url}`}
-                                                                    className={
-                                                                        classes.sidebarLink
-                                                                    }
+                                                                    className={classes.sidebarLink}
                                                                     activeClassName={
                                                                         classes.sidebarActiveLink
                                                                     }
@@ -215,20 +206,16 @@ const BlogHeader = (props: IProps) => {
                                                                             location.pathname
                                                                         );
                                                                     }}
-                                                                    onClick={
-                                                                        handleDrawerToggle
-                                                                    }
+                                                                    onClick={handleDrawerToggle}
                                                                     style={{
-                                                                        textDecoration:
-                                                                            "none"
+                                                                        textDecoration: 'none',
                                                                     }}
                                                                 >
                                                                     {p.title}
                                                                 </NavLink>
                                                             }
                                                             primaryTypographyProps={{
-                                                                variant:
-                                                                    "subtitle2"
+                                                                variant: 'subtitle2',
                                                             }}
                                                         />
                                                     </ListItem>
@@ -248,13 +235,13 @@ const BlogHeader = (props: IProps) => {
                     <ListItemText
                         primaryTypographyProps={{
                             style: {
-                                color: "#202124",
-                                fontSize: "18px",
-                                textTransform: "uppercase"
+                                color: '#202124',
+                                fontSize: '18px',
+                                textTransform: 'uppercase',
                             },
-                            variant: "subtitle1"
+                            variant: 'subtitle1',
                         }}
-                        primary={"testimonies"}
+                        primary={'testimonies'}
                     />
                 </ListItem>
 
@@ -264,13 +251,13 @@ const BlogHeader = (props: IProps) => {
                     <ListItemText
                         primaryTypographyProps={{
                             style: {
-                                color: "#202124",
-                                fontSize: "18px",
-                                textTransform: "uppercase"
+                                color: '#202124',
+                                fontSize: '18px',
+                                textTransform: 'uppercase',
                             },
-                            variant: "subtitle1"
+                            variant: 'subtitle1',
                         }}
-                        primary={"videos"}
+                        primary={'videos'}
                     />
                 </ListItem>
             </List>
@@ -292,10 +279,7 @@ const BlogHeader = (props: IProps) => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <span
-                                onClick={() => history.push("/")}
-                                className={classes.logoText}
-                            >
+                            <span onClick={() => history.push('/')} className={classes.logoText}>
                                 My ragp's blog
                             </span>
                         </div>
@@ -305,26 +289,23 @@ const BlogHeader = (props: IProps) => {
                                     activeClassName={classes.navLinkActive}
                                     isActive={() => true}
                                     className={classes.navLink}
-                                    to={"/" + username + "/overview"}
+                                    to={'/' + username + '/overview'}
                                 >
                                     Blog
                                 </NavLink>
                             </Typography>
                             <Typography variant="h6">
-                                <NavLink className={classes.navLink} to={"#"}>
+                                <NavLink className={classes.navLink} to={'#'}>
                                     Testimonies
                                 </NavLink>
                             </Typography>
                             <Typography variant="h6">
-                                <NavLink className={classes.navLink} to={"#"}>
+                                <NavLink className={classes.navLink} to={'#'}>
                                     Videos
                                 </NavLink>
                             </Typography>
                             <Typography variant="h6">
-                                <NavLink
-                                    className={classes.navLink}
-                                    to={"/dashboard/overview"}
-                                >
+                                <NavLink className={classes.navLink} to={'/dashboard/overview'}>
                                     Dashboard
                                 </NavLink>
                             </Typography>
@@ -339,7 +320,7 @@ const BlogHeader = (props: IProps) => {
                         open={mobileOpen}
                         onClose={handleDrawerToggle}
                         classes={{
-                            paper: classes.drawerPaper
+                            paper: classes.drawerPaper,
                         }}
                     >
                         {drawer}
@@ -348,7 +329,7 @@ const BlogHeader = (props: IProps) => {
                 <Hidden mdDown={true} implementation="css">
                     <Drawer
                         classes={{
-                            paper: classes.drawerPaper
+                            paper: classes.drawerPaper,
                         }}
                         variant="permanent"
                         open={true}

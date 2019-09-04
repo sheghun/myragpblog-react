@@ -1,6 +1,6 @@
 // cSpell:ignore overline RAGP
 
-import React from "react";
+import React, { useContext } from "react";
 
 // @material-ui components
 import { withStyles } from "@material-ui/core/styles";
@@ -11,12 +11,10 @@ import Button from "@material-ui/core/Button";
 // @material-ui icons
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackwardIcon from "@material-ui/icons/ArrowBack";
+import { BlogContext } from "../../../../Context";
 
 // react-router-dom
 import { withRouter, Link } from "react-router-dom";
-
-// Helpers
-import { username } from "../../../../_helpers";
 
 // Base Styles
 import * as baseStyles from "../../../../baseStyles";
@@ -64,7 +62,9 @@ const styles = theme => ({
 
 const CompanyProfile = props => {
     const { classes } = props;
-    console.log(props);
+
+    const { username } = useContext(BlogContext);
+
     return (
         <>
             <div className={classes.breadcrumbs}>
@@ -147,11 +147,11 @@ const CompanyProfile = props => {
                     <br />
                     <strong>
                         We Strongly Believe That With Enough Desire &
-                        Seriousness, You Can Join/Start RAGP With Just &#8358;5,000 And
-                        Go On To LAUNCH, BUILD & GROW IT INTO A BUSINESS THAT
-                        PAYS YOU N10K TO &#8358;50K DAILY PASSIVE INCOME Within 18
-                        Months!:; And Amass/Accumulate Over N10m In The Process
-                        Of Doing That!!!
+                        Seriousness, You Can Join/Start RAGP With Just
+                        &#8358;5,000 And Go On To LAUNCH, BUILD & GROW IT INTO A
+                        BUSINESS THAT PAYS YOU N10K TO &#8358;50K DAILY PASSIVE
+                        INCOME Within 18 Months!:; And Amass/Accumulate Over
+                        N10m In The Process Of Doing That!!!
                     </strong>
                     <br />
                     <br />
@@ -178,7 +178,7 @@ const CompanyProfile = props => {
             <div style={baseStyles.pagination}>
                 <div style={baseStyles.paginationBack}>
                     <Link to={"/" + username + "/welcome-note"}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="text" color="primary">
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
@@ -188,7 +188,7 @@ const CompanyProfile = props => {
                 </div>
                 <div style={baseStyles.paginationForward}>
                     <Link to={"/" + username + "/what-is-ragp"}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="text" color="primary">
                             What Is RAGP
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />

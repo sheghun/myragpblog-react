@@ -114,7 +114,7 @@ const WhatIs = props => {
             <div style={pagination}>
                 <div style={paginationBack}>
                     <Link to={"/" + username + "/company-profile"}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="text" color="primary">
                             <span style={backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
@@ -124,7 +124,7 @@ const WhatIs = props => {
                 </div>
                 <div>
                     <Link to={"/" + username + "/why-ragp"}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="text" color="primary">
                             Why Ragp?
                             <span style={forwardIcon}>
                                 <ArrowForwardIcon />
