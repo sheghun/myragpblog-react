@@ -50,6 +50,18 @@ const posts = [
         posts: [
             {title: 'The Business Model', url: 'the-business-model'},
             {title: 'The Compensation Plan', url: 'the-compensation-plan'},
+            {
+                title: 'The 6 Income Streams',
+                url: '#',
+                posts: [
+                    {title: 'Direct Recharge Bonus (DRB)', url: 'direct-recharge-bonus'},
+                    {title: 'Indirect Recharge Bonus (IRB)', url: 'indirect-recharge-bonus'},
+                    {title: 'Direct Referal Commission (DRC)', url: 'direct-referal-bonus'},
+                    {title: 'Indirect Referal Commission (IRC)', url: 'indirect-referal-bonus'},
+                    {title: 'Leadership Bonus (via MPV)', url: 'leadership-bonus'},
+                    {title: 'Incentive Awards (Via CPV)', url: 'incentive-awards'},
+                ],
+            },
         ],
         title: 'How does it work?',
     },
@@ -187,38 +199,100 @@ const BlogHeader = (props: IProps) => {
                                         >
                                             <List component="ul">
                                                 {post.posts.map((p, key) => (
-                                                    <ListItem
-                                                        key={key}
-                                                        button={true}
-                                                        className={classes.nested}
-                                                    >
-                                                        <ListItemText
-                                                            primary={
-                                                                <NavLink
-                                                                    to={`/${username}/${p.url}`}
-                                                                    className={classes.sidebarLink}
-                                                                    activeClassName={
-                                                                        classes.sidebarActiveLink
-                                                                    }
-                                                                    isActive={() => {
-                                                                        return (
-                                                                            `/${username}/${p.url}` ===
-                                                                            location.pathname
-                                                                        );
-                                                                    }}
-                                                                    onClick={handleDrawerToggle}
-                                                                    style={{
-                                                                        textDecoration: 'none',
-                                                                    }}
-                                                                >
-                                                                    {p.title}
-                                                                </NavLink>
-                                                            }
-                                                            primaryTypographyProps={{
-                                                                variant: 'subtitle2',
-                                                            }}
-                                                        />
-                                                    </ListItem>
+                                                    <>
+                                                        <ListItem
+                                                            key={key}
+                                                            button={true}
+                                                            className={classes.nested}
+                                                        >
+                                                            <ListItemText
+                                                                primary={
+                                                                    <NavLink
+                                                                        to={
+                                                                            p.posts
+                                                                                ? '#'
+                                                                                : `/${username}/${p.url}`
+                                                                        }
+                                                                        className={
+                                                                            classes.sidebarLink
+                                                                        }
+                                                                        activeClassName={
+                                                                            classes.sidebarActiveLink
+                                                                        }
+                                                                        isActive={() => {
+                                                                            return (
+                                                                                `/${username}/${p.url}` ===
+                                                                                location.pathname
+                                                                            );
+                                                                        }}
+                                                                        onClick={_ =>{
+
+                                                                            handleDrawerToggle();
+                                                                            collapseMenu(_, key + 10)
+                                                                        }}
+                                                                        style={{
+                                                                            textDecoration: 'none',
+                                                                        }}
+                                                                    >
+                                                                        {p.title}
+                                                                    </NavLink>
+                                                                }
+                                                                primaryTypographyProps={{
+                                                                    variant: 'subtitle2',
+                                                                }}
+                                                            />
+                                                        </ListItem>
+                                                        {p.posts && (
+                                                            <Collapse
+                                                                in={collapse[key + 10]}
+                                                                timeout="auto"
+                                                                unmountOnExit={true}
+                                                            >
+                                                                {p.posts.map(p => (
+                                                                    <ListItem
+                                                                        key={key}
+                                                                        button={true}
+                                                                        style={{
+                                                                            marginLeft: '1rem',
+                                                                        }}
+                                                                    >
+                                                                        <ListItemText
+                                                                            primary={
+                                                                                <NavLink
+                                                                                    to={`/${username}/${p.url}`}
+                                                                                    className={
+                                                                                        classes.sidebarLink
+                                                                                    }
+                                                                                    activeClassName={
+                                                                                        classes.sidebarActiveLink
+                                                                                    }
+                                                                                    isActive={() => {
+                                                                                        return (
+                                                                                            `/${username}/${p.url}` ===
+                                                                                            location.pathname
+                                                                                        );
+                                                                                    }}
+                                                                                    onClick={
+                                                                                        handleDrawerToggle
+                                                                                    }
+                                                                                    style={{
+                                                                                        textDecoration:
+                                                                                            'none',
+                                                                                    }}
+                                                                                >
+                                                                                    {p.title}
+                                                                                </NavLink>
+                                                                            }
+                                                                            primaryTypographyProps={{
+                                                                                variant:
+                                                                                    'subtitle2',
+                                                                            }}
+                                                                        />
+                                                                    </ListItem>
+                                                                ))}
+                                                            </Collapse>
+                                                        )}
+                                                    </>
                                                 ))}
                                             </List>
                                         </Collapse>
