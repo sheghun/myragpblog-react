@@ -97,12 +97,26 @@ const BlogHeader = (props: IProps) => {
     useEffect(() => {
         const route = routes.find(r => r.path === location.pathname);
         setCurrentRoute(route as IRoute);
-        // Get the post index
-        const index = posts.findIndex(post =>
-            post.posts.some(p => `/${username}/${p.url}` === location.pathname),
-        );
-        // Open the current post link
-        setCollapse(c => ({...c, [index]: true}));
+        posts.forEach((post, firstIndex) => {
+            // Store the post reference in a variable
+            const p = post.posts;
+            p.forEach((p, index) => {
+                if (`/${username}/${p.url}` === location.pathname) {
+                    setCollapse(c => ({...c, [index]: true}));
+                } else {
+                    if (p.posts) {
+                        p.posts.forEach((p, i) => {
+                            if (`/${username}/${p.url}` === location.pathname) {
+                                console.log(i + 10);
+                                setCollapse(c => {
+                                    return {...c, [index + 10]: true, [firstIndex]: true};
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        });
     }, [location.pathname]);
 
     const handleScroll = () => {
@@ -130,6 +144,8 @@ const BlogHeader = (props: IProps) => {
     const collapseMenu = (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
         setCollapse(c => ({...c, [index]: !c[index]}));
     };
+
+    console.log(collapse);
 
     const drawer = (
         <>
@@ -225,10 +241,13 @@ const BlogHeader = (props: IProps) => {
                                                                                 location.pathname
                                                                             );
                                                                         }}
-                                                                        onClick={_ =>{
-
+                                                                        onClick={_ => {
                                                                             handleDrawerToggle();
-                                                                            collapseMenu(_, key + 10)
+                                                                            // Set the collapse menu with an increment of 10 for sub sub menu
+                                                                            collapseMenu(
+                                                                                _,
+                                                                                key + 10,
+                                                                            );
                                                                         }}
                                                                         style={{
                                                                             textDecoration: 'none',
@@ -244,11 +263,12 @@ const BlogHeader = (props: IProps) => {
                                                         </ListItem>
                                                         {p.posts && (
                                                             <Collapse
+                                                                // Set the collapse menu with an increment of 10 for sub sub menu
                                                                 in={collapse[key + 10]}
                                                                 timeout="auto"
                                                                 unmountOnExit={true}
                                                             >
-                                                                {p.posts.map(p => (
+                                                                {p.posts.map((p, key) => (
                                                                     <ListItem
                                                                         key={key}
                                                                         button={true}

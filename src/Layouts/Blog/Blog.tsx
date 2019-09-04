@@ -36,7 +36,7 @@ const WhatIs = loadable(() => import('../../Views/Blog/Introduction/Whatis/Whati
 const CompanyProfile = loadable(() => import('../../Views/Blog/Introduction/Company/Company'), {
     fallback: <Spinner />,
 });
-const CompensationPlan = loadable(() => import('../../Views/Blog/How/Compensation'), {
+const CompensationPlan = loadable(() => import('../../Views/Blog/How/CompensationPlan'), {
     fallback: <Spinner />,
 });
 const BusinessModel = loadable(() => import('../../Views/Blog/How/BusinessModel'), {
@@ -45,6 +45,33 @@ const BusinessModel = loadable(() => import('../../Views/Blog/How/BusinessModel'
 const IncomeStreams = loadable(() => import('../../Views/Blog/How/IncomeStreams'), {
     fallback: <Spinner />,
 });
+const DirectReferal = loadable(() => import('../../Views/Blog/How/IncomeStreams/DirectReferal'), {
+    fallback: <Spinner />,
+});
+const IndirectReferal = loadable(
+    () => import('../../Views/Blog/How/IncomeStreams/IndirectReferal'),
+    {
+        fallback: <Spinner />,
+    },
+);
+const DirectRecharge = loadable(() => import('../../Views/Blog/How/IncomeStreams/DirectRecharge'), {
+    fallback: <Spinner />,
+});
+const LeadershipBonus = loadable(() => import('../../Views/Blog/How/IncomeStreams/LeaderBonus'), {
+    fallback: <Spinner />,
+});
+const IncentiveAwards = loadable(
+    () => import('../../Views/Blog/How/IncomeStreams/IncentiveAwards'),
+    {
+        fallback: <Spinner />,
+    },
+);
+const IndirectRecharge = loadable(
+    () => import('../../Views/Blog/How/IncomeStreams/IndirectRecharge'),
+    {
+        fallback: <Spinner />,
+    },
+);
 
 const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
     avatar: {
@@ -105,6 +132,12 @@ const Blog = ({match, history}: RouteComponentProps) => {
             {path: `/${username}/company-profile`, component: CompanyProfile},
             {path: `/${username}/the-6-income-streams`, component: IncomeStreams},
             {path: `/${username}/the-business-model`, component: BusinessModel},
+            {path: `/${username}/direct-recharge-bonus`, component: DirectRecharge},
+            {path: `/${username}/indirect-recharge-bonus`, component: IndirectRecharge},
+            {path: `/${username}/direct-referal-bonus`, component: DirectReferal},
+            {path: `/${username}/indirect-referal-bonus`, component: IndirectReferal},
+            {path: `/${username}/leadership-bonus`, component: LeadershipBonus},
+            {path: `/${username}/incentive-awards`, component: IncentiveAwards},
         ],
         [],
     );
