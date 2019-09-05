@@ -86,7 +86,7 @@ const DirectReferal = () => {
     return (
         <>
             <div className={classes.breadcrumbs}>
-                <Typography variant="overline">
+            <Typography variant="overline">
                     <Link
                         to={`/${username}/the-business-model`}
                         className={classes.breadCrumbsText}
@@ -95,10 +95,17 @@ const DirectReferal = () => {
                         <span className={classes.breadCrumbsSeparator}>/</span>
                     </Link>
                     <Link
-                        to={`/${username}/welcome-note`}
+                        to={`/${username}/the-compensation-plan`}
+                        className={classes.breadCrumbsText}
+                    >
+                        The Compensation Plan
+                        <span className={classes.breadCrumbsSeparator}>/</span>
+                    </Link>
+                    <Link
+                        to={`/${username}/direct-referal-bonus`}
                         className={[classes.breadCrumbsTextActive].join(' ')}
                     >
-                        The 6 Income Streams
+                        Direct Referal Bonus
                     </Link>
                 </Typography>
             </div>

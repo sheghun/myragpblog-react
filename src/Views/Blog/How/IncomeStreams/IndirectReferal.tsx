@@ -11,7 +11,6 @@ import ArrowBackwardIcon from '@material-ui/icons/ArrowBack';
 import {StyleRulesCallback} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import Table from '../../../../Components/Table/Table';
-import bronzeMatrix from '../../../../assets/images/bronze-matrix.png';
 
 // Styles
 
@@ -87,10 +86,17 @@ const IndirectReferal = () => {
                         <span className={classes.breadCrumbsSeparator}>/</span>
                     </Link>
                     <Link
-                        to={`/${username}/welcome-note`}
+                        to={`/${username}/the-compensation-plan`}
+                        className={classes.breadCrumbsText}
+                    >
+                        The Compensation Plan
+                        <span className={classes.breadCrumbsSeparator}>/</span>
+                    </Link>
+                    <Link
+                        to={`/${username}/indirect-referal-bonus`}
                         className={[classes.breadCrumbsTextActive].join(' ')}
                     >
-                        The 6 Income Streams
+                        Direct Recharge Bonus
                     </Link>
                 </Typography>
             </div>
