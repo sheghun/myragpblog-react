@@ -208,19 +208,19 @@ const LeaderBonus = () => {
             </Typography>
             <div style={baseStyles.pagination}>
                 <div style={baseStyles.paginationBack}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'/' + username + '/indirect-referal-commission'}>
                         <Button variant="text" color="primary">
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
-                            The Business Model
+                            Indirect Referal Commission
                         </Button>
                     </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'/' + username + '/incentives-awards'}>
                         <Button variant="text" color="primary">
-                            The Compensation Plan
+                            Incentives Awards
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />
                             </span>

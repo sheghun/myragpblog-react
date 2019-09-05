@@ -116,7 +116,7 @@ const IncomeStreams = () => {
                     <br />
                     <Typography variant="h6">
                         <strong>
-                            Hence Opon Starting, On Your DashBoard, You Have 3 Wallets To Receive
+                            Hence Upon Starting, On Your DashBoard, You Have 3 Wallets To Receive
                             Your Earnings:-
                         </strong>
                     </Typography>

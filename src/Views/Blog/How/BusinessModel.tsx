@@ -198,9 +198,9 @@ const BusinessModel = () => {
                     </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <Link to={'/' + username + '/the-6-income-streams'}>
+                    <Link to={'/' + username + '/the-compensation-plan'}>
                         <Button variant="text" color="primary">
-                            The 6 Income Streams
+                            The Compensation Plan
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />
                             </span>

@@ -63,7 +63,7 @@ const IncentiveAwards = () => {
     return (
         <>
             <div className={classes.breadcrumbs}>
-            <Typography variant="overline">
+                <Typography variant="overline">
                     <Link
                         to={`/${username}/the-business-model`}
                         className={classes.breadCrumbsText}
@@ -92,29 +92,99 @@ const IncentiveAwards = () => {
                 <br />
                 <Divider />
                 <br />
-                <Typography className={classes.body} variant="body2"></Typography>
+                <Typography className={classes.body} variant="body2">
+                    <Typography variant="h5">6. Incentive Awards</Typography>
+                    <br />
+                    <br />
+                    Besides The Leadership Bonus, Another Way To{' '}
+                    <strong>CASH Your Cummulative PV</strong> Is Via The 5 AWARDS BONUSES RAGP
+                    Rewards Its Members For Exceptionally Promoting The Company & Brand!
+                    <br />
+                    <br />
+                    <strong>RAGP Has Five AWARDS BONUSES; Namely:-</strong>
+                    <br />
+                    <br />
+                    1. TRAVEL/TOURISM AWARD
+                    <br />
+                    2. SMALL CAR AWARD
+                    <br />
+                    3. 1st HOUSE FUNDS AWARD
+                    <br />
+                    4. BIG CAR AWARD
+                    <br />
+                    5. 2nd HOUSE FUNDS AWARD!
+                    <br />
+                    <br />
+                    All In All, The 5 Awards Are Worth (N500,000 + N2m + N3m + N4m + N6m = ) N15.5m.
+                    <br />
+                    <br />
+                    That Means Each RAGP Account Has The Potential Of Earning A Total Of N15.5m From
+                    The AWARDS BONUSES Alone!
+                    <br />
+                    <br />
+                    And, Best Of All, EACH MEMBER IS ALLOWED TO OWN MORE THAN ONE ACCOUNT! Î
+                    <br />
+                    <br />
+                    Imagine You Own 10 Accounts With RAGP And You're Able To Maximize Each One Of
+                    Them To Each Earn The N15.5m;
+                    <br />
+                    <br />
+                    In Total You Get To Accumulate N15.5m × 10 = N155m!!!
+                    <br />
+                    <br />
+                    Thats A Cool N155m From AWARDS BONUSES ALONE!!!
+                    <br />
+                    <br />
+                    ISN'T THAT AWESOME!!!!
+                    <br />
+                    <br />
+                    Thats Just How Lucrative & Juicy The RAGP BUSINESS PLAN IS!!!
+                    <br />
+                    <br />
+                    <strong>
+                        Following Below Is A Break Down Of The 5 AWARD BONUSES And What It Takes To
+                        Earn And CASH Them:
+                    </strong>
+                    <br />
+                    1. THE TRAVEL/TOURISM AWARD IS WORTH N500,000 CASH(OR A ONE WEEK VACATION IN
+                    DUBAI); QUALIFICATION REQUIRES THE MEMBER TO HAVE A TOTAL CUMMULATIVE PV (TCPV)
+                    OF 25,000PV.
+                    <br />
+                    2. THE SMALL CAR AWARD IS WORTH N2million CASH; QUALIFICATION REQUIRES THE
+                    MEMBER TO HAVE A TOTAL CUMMULATIVE PV (TCPV) OF 60,000PV.
+                    <br />
+                    3: THE 1st HOUSE AWARD IS WORTH N3million CASH; QUALIFICATION REQUIRES THE
+                    MEMBER TO HAVE A TOTAL CUMMULATIVE PV(TCPV) OF 100,000PV.
+                    <br />
+                    4. THE BIG CAR AWARD IS WORTH N4million; QUALIFICATION REQUIRES THE MEMBER TO
+                    HAVE A TOTAL CUMMULATIVE PV (TCPV) OF 250,000PV.
+                    <br />
+                    5. THE 2nd HOUSE FUND AWARD IS WORTH N6million; QUALIFICATION REQUIRES THE
+                    MEMBER TO HAVE A TOTAL CUMMULATIVE PV (TCPV) OF 500,000PV
+                    <br />
+                    NB: ALL THE AWARDS CAN BE WON & CLAIMED BY PLATINUM MEMBERS ONLY.
+                    <br />
+                    <br />
+                </Typography>
             </div>
             <Typography align="center" className={classes.continueReading} variant="h6">
-                Continue Reading
+                THE END
             </Typography>
             <div style={baseStyles.pagination}>
                 <div style={baseStyles.paginationBack}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'/' + username + '/leadership-bonus'}>
                         <Button variant="text" color="primary">
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
-                            The Business Model
+                            Leadership Bonus
                         </Button>
                     </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <Link to={'/' + username + '/the-business-model'}>
+                    <Link to={'#'}>
                         <Button variant="text" color="primary">
-                            The Compensation Plan
-                            <span style={baseStyles.forwardIcon}>
-                                <ArrowForwardIcon />
-                            </span>
+                            The End
                         </Button>
                     </Link>
                 </div>
