@@ -129,14 +129,14 @@ const tiers: any = [
         subheader: 'One Time Payment pay yourself when your package expires',
         title: 'One Month',
     },
-    {
+    /* {
         buttonText: 'Subscribe',
         buttonVariant: 'contained',
         description: ['Pay continuously', 'Automatically charged when your package expires'],
         price: '2,000',
         subheader: "Pay continuously you're automatically charged when your package expires",
         title: 'Subscription',
-    },
+    },*/
 ];
 
 const MakePayment = (props: IProps) => {
