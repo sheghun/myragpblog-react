@@ -72,6 +72,21 @@ const IndirectRecharge = loadable(
         fallback: <Spinner />,
     },
 );
+const HowToRegister = loadable(() => import('../../Views/Blog/HowTo/HowToRegister'), {
+    fallback: <Spinner />,
+});
+const HowToPayWithEWallet = loadable(() => import('../../Views/Blog/HowTo/HowToPayWithEWallet'), {
+    fallback: <Spinner />,
+});
+const HowToPayWithPaystack = loadable(() => import('../../Views/Blog/HowTo/HowToPayWithPaystack'), {
+    fallback: <Spinner />,
+});
+const HowToBuyAirtimeAndData = loadable(
+    () => import('../../Views/Blog/HowTo/HowToBuyAirtimeAndData'),
+    {
+        fallback: <Spinner />,
+    },
+);
 
 const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
     avatar: {
@@ -138,6 +153,10 @@ const Blog = ({match, history}: RouteComponentProps) => {
             {path: `/${username}/indirect-referal-bonus`, component: IndirectReferal},
             {path: `/${username}/leadership-bonus`, component: LeadershipBonus},
             {path: `/${username}/incentive-awards`, component: IncentiveAwards},
+            {path: `/${username}/how-to-register`, component: HowToRegister},
+            {path: `/${username}/how-to-pay-with-ewallet`, component: HowToPayWithEWallet},
+            {path: `/${username}/how-to-pay-with-paystack`, component: HowToPayWithPaystack},
+            {path: `/${username}/how-to-buy-airtime-and-data`, component: HowToBuyAirtimeAndData},
         ],
         [],
     );

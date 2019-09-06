@@ -50,7 +50,7 @@ const useStyles = makeStyles<StyleRulesCallback>(theme => ({
 
 const Welcome: React.FC<any> = () => {
     const classes = useStyles();
-    const {username} = useContext(BlogContext);
+    const {username, name} = useContext(BlogContext);
 
     return (
         <>
@@ -68,20 +68,38 @@ const Welcome: React.FC<any> = () => {
             <br />
             <br />
             <Typography variant="body2" style={{color: faintColor}}>
-                Welcome to My Ragp Blog an information center designed and intended to furnish you
-                with complete, relevant and essential information on the <strong>RAGP</strong>{' '}
-                business opportunity & program so that you can make the informed decision to
-                immediately start, launch and grow your own multi-million naira
-                <strong>RAGP</strong> business!
+                Welcome!
+                <br />
+                My Name Is {name} And This Is My RAGP-Blog!!!
                 <br />
                 <br />
-                RAGP is a very simple, powerful and super lucrative business that has already
-                empowered thousands of nigerians to start, launch & grow their own telecom VTU
-                vending business that pays them &#8358;10k, &#8358;20k, &#8358;30k, &#8358;50k and
-                even &#8358;100k daily and they each started with &#8358;5k to &#8358;100k we
-                believe you can do even better & hereby provide you with all the the info, tools &
-                guidelines you need to do so, welcome to planet ragp; the land of cash-flow
-                millionaires.
+                This Is An Information SYSTEM Designed & Intended To Furnish You With The Complete,
+                Relevant & Essential Information On The RAGP Business Opportunity & Program...
+                <br />
+                <br />
+                SO THAT YOU CAN MAKE THE SMART DECISION TO IMMEDIATELY START, LAUNCH & GROW YOUR OWN
+                MULTI-MILLION NAIRA RAGP BUSINESS!
+                <br />
+                <br />
+                RAGP Is A Very Simple, Powerful & Super Lucrative Business That Has Already
+                Empowered Thousands Of Nigerians To BECOME FINANCIALLY INDEPENDENT CASH-FLOW
+                MILLIONAIRES;[Tap Here(A Link To A Section On RAGP TRACK RECORD) To VIEW OUR TRACK
+                RECORD]
+                <br />
+                <br />
+                By Enabling Them To START, LAUNCH & GROW Their Own TELECOM VTU VENDING/RECHARGE
+                BUSINESSES That Pays Them N10k, N20k, N30k, N50k and Even N100k DAILY PASSIVE
+                INCOME!
+                <br />
+                “And, Best Of All, They Each Started With N5k To N100k!!!”
+                <br />
+                <br />
+                <Typography variant={'h6'} style={{textDecoration: 'underline'}}>
+                    <strong>
+                        We Believe You Can Do Even Better & HEREBY Provide You With All The The
+                        Info, Systems, Tools & Guidelines You Need To Do So.
+                    </strong>
+                </Typography>
             </Typography>
             <br />
             <br />

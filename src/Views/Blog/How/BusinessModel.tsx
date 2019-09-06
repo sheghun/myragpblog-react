@@ -99,12 +99,13 @@ const BusinessModel = () => {
                     </Typography>
                     <br />
                     <br />
-                    If We Reckon That Most Of These Recharge Is For N100 AIRTIME ONLY, Then It
-                    Means: PER SECOND, 3,000,000 × N100 = N300m AIRTIME RECHARGE HAPPENS; And PER
-                    MINUTE, 180,000,000 × N100 ={' '}
+                    If We Reckon That Most Of These Recharge Is For &#8358;100 AIRTIME ONLY, Then It
+                    Means: PER SECOND, 3,000,000 × &#8358;100 = &#8358;300m AIRTIME RECHARGE
+                    HAPPENS; And PER MINUTE, 180,000,000 × &#8358;100 ={' '}
                     <strong>
-                        N18bn AIRTIME Is Consumed Per Minute IN THIS COUNTRY! N18 BILLION AIRTIME
-                        RECHARGE PER MINUTE; EVERY MINUTE!?
+                        &#8358;18<span style={{textTransform: 'lowercase'}}>bn</span> AIRTIME Is
+                        Consumed Per Minute IN THIS COUNTRY! &#8358;18 BILLION AIRTIME RECHARGE PER
+                        MINUTE; EVERY MINUTE!?
                     </strong>
                     <br />
                     <br />
@@ -124,8 +125,9 @@ const BusinessModel = () => {
                     <br />
                     <Typography variant="h6">
                         <strong>
-                            How Much Of This N18bn Nigerians Spend PER MINUTE On AIRTIME ALONE
-                            ENTERS YOUR POCKET?!
+                            How Much Of This &#8358;18
+                            <span style={{textTransform: 'lowercase'}}>bn</span> Nigerians Spend PER
+                            MINUTE On AIRTIME ALONE ENTERS YOUR POCKET?!
                         </strong>
                     </Typography>
                     <br />
@@ -133,7 +135,10 @@ const BusinessModel = () => {
                     <Typography variant="h6">
                         <strong>
                             WHAT IF You Can Make Just A Fraction Of A Fraction; JUST 0.00001% OF
-                            THIS N18 bn = N1.8m DAILY or WEEKLY or Even MONTHLY?!
+                            THIS &#8358;18<span style={{textTransform: 'lowercase'}}>bn</span> =
+                            &#8358;
+                            <span style={{textTransform: 'lowercase'}}>1.8m</span> DAILY or WEEKLY
+                            or Even MONTHLY?!
                         </strong>
                     </Typography>
                     <br />
@@ -141,8 +146,8 @@ const BusinessModel = () => {
                     <Typography variant="h6">
                         <strong>
                             IF YOU HAD THE OPPORTUNITY TO CONNECT TO A RECHARGE VENDING SYSTEM &
-                            BUILD A NETWORK IN IT THAT COULD BE PAYING N1.8m PER MONTH 18 MONTHS
-                            LATER, WILL YOU TAKE IT, RUN WITH & DO EXPLOITS WITH IT?!”
+                            BUILD A NETWORK IN IT THAT COULD BE PAYING &#8358;1.8m PER MONTH 18
+                            MONTHS LATER, WILL YOU TAKE IT, RUN WITH & DO EXPLOITS WITH IT?!”
                         </strong>
                     </Typography>
                     <br />
@@ -158,17 +163,18 @@ const BusinessModel = () => {
                     <strong>YOU</strong>], WHO HABITUALLY BUY THEIR AIRTIME SUBSCRIPTIONS, DATA
                     SUBSCRIPTIONS, DSTV/GOTV/STARTIMES SUBSCRIPTIONS, PHCN PREPAID METER
                     SUBSCRIPTIONS, EACH USING THEIR OWN <strong>RAGP</strong> DASHBOARDS/VTU
-                    ACCOUNTS, AND YOU GET PAID AT LEAST N50 PER MONTH FOR THAT!!!
+                    ACCOUNTS, AND YOU GET PAID AT LEAST &#8358;50 PER MONTH FOR THAT!!!
                     <br />
                     <br />
                     <strong>
-                        That Means You Get To Be Making N50 PER MONTH × 100,000 SUBSCRIBERS = N5m
-                        PER MONTH [PURE PASSIVE INCOME]!!!
+                        That Means You Get To Be Making &#8358;50 PER MONTH × 100,000 SUBSCRIBERS =
+                        &#8358;5m PER MONTH [PURE PASSIVE INCOME]!!!
                     </strong>
                     <br />
                     <br />
-                    CAN YOU IMAGINE YOURSELF MAKING N5m PER MONTH[PURE PASSIVE INCOME] As People
-                    Habitually Service Their ADDICTION TO MOBILE PHONES, ELECTRICITY & CABLE TV?!
+                    CAN YOU IMAGINE YOURSELF MAKING &#8358;5m PER MONTH[PURE PASSIVE INCOME] As
+                    People Habitually Service Their ADDICTION TO MOBILE PHONES, ELECTRICITY & CABLE
+                    TV?!
                     <br />
                     <br />
                     <Typography variant="h6">

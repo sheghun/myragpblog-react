@@ -66,7 +66,12 @@ const posts = [
         title: 'How does it work?',
     },
     {
-        posts: [{title: '', url: ''}],
+        posts: [
+            {title: 'How To Register Yourself Or Someone', url: 'how-to-register'},
+            {title: 'How To Pay Via PayStack', url: 'how-to-pay-with-paystack'},
+            {title: 'How To Pay With E-Wallet', url: 'how-to-pay-with-ewallet'},
+            {title: 'How To Buy Airtime & Data', url: 'how-to-buy-airtime-and-data'},
+        ],
         title: "How to's",
     },
 ];

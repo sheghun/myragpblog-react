@@ -1,4 +1,4 @@
-export function setUsername(username: string) {
+export function setUsername(username: string): void {
     localStorage.setItem('username', username);
 }
 

@@ -213,12 +213,12 @@ const LeaderBonus = () => {
                             <span style={baseStyles.backwardIcon}>
                                 <ArrowBackwardIcon />
                             </span>
-                            Indirect Referal Commission
+                            Indirect Referral Commission
                         </Button>
                     </Link>
                 </div>
                 <div style={baseStyles.paginationForward}>
-                    <Link to={'/' + username + '/incentives-awards'}>
+                    <Link to={'/' + username + '/incentive-awards'}>
                         <Button variant="text" color="primary">
                             Incentives Awards
                             <span style={baseStyles.forwardIcon}>
