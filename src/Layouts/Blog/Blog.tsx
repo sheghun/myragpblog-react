@@ -87,6 +87,12 @@ const HowToBuyAirtimeAndData = loadable(
         fallback: <Spinner />,
     },
 );
+const UfuomaEmefeke = loadable(() => import('../../Views/Blog/Testimonies/UfuomaEmefeke'), {
+    fallback: <Spinner />,
+});
+const ChuksEmedike = loadable(() => import('../../Views/Blog/Testimonies/ChucksEmedike'), {
+    fallback: <Spinner />,
+});
 
 const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
     avatar: {
@@ -157,6 +163,8 @@ const Blog = ({match, history}: RouteComponentProps) => {
             {path: `/${username}/how-to-pay-with-ewallet`, component: HowToPayWithEWallet},
             {path: `/${username}/how-to-pay-with-paystack`, component: HowToPayWithPaystack},
             {path: `/${username}/how-to-buy-airtime-and-data`, component: HowToBuyAirtimeAndData},
+            {path: `/${username}/ufuoma-emefeke`, component: UfuomaEmefeke},
+            {path: `/${username}/chucks-emedike`, component: ChuksEmedike},
         ],
         [],
     );
@@ -174,7 +182,7 @@ const Blog = ({match, history}: RouteComponentProps) => {
     }
 
     useEffect(() => {
-        (async () => {
+        (async (): Promise<void> => {
             setLoading(true);
             try {
                 // Try sending request to the server

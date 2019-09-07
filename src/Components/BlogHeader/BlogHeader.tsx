@@ -17,22 +17,23 @@ import {withStyles, Theme} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {NavLink, RouteComponentProps, withRouter} from 'react-router-dom';
 import {BlogContext} from '../../Context';
+import myRagpLogo from '../../assets/images/myragpblog-logo.jpg';
 import styles from './styles';
 
-interface ICollapse {
+interface CollapseType {
     [key: number]: boolean;
 }
 
-interface IProps extends RouteComponentProps {
+interface PropsType extends RouteComponentProps {
     children: JSX.Element;
     classes: any;
-    routes: IRoute[];
+    routes: RoutType[];
 }
 
-interface IRoute {
+interface RoutType {
     path: string;
     component: React.Component;
 }
@@ -76,7 +77,12 @@ const posts = [
     },
 ];
 
-const BlogHeader = (props: IProps) => {
+const testimonies = [
+    {title: 'Ufuoma Emefeke', url: 'ufuoma-emefeke'},
+    {title: 'Chucks Emedike', url: 'chucks-emedike'},
+];
+
+const BlogHeader = (props: PropsType) => {
     const {classes, history, routes, location} = props;
 
     const {username} = useContext(BlogContext);
@@ -85,12 +91,12 @@ const BlogHeader = (props: IProps) => {
     const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
     // Initialize the current route to be the first route
-    const [currentRoute, setCurrentRoute] = useState(routes[0] as IRoute);
+    const [currentRoute, setCurrentRoute] = useState(routes[0] as RoutType);
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [slide, setSlide] = useState(true);
     const scrollPos = useRef(0);
-    const [collapse, setCollapse] = useState({0: false} as ICollapse);
+    const [collapse, setCollapse] = useState({0: false} as CollapseType);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -101,7 +107,7 @@ const BlogHeader = (props: IProps) => {
 
     useEffect(() => {
         const route = routes.find(r => r.path === location.pathname);
-        setCurrentRoute(route as IRoute);
+        setCurrentRoute(route as RoutType);
         posts.forEach((post, firstIndex) => {
             // Store the post reference in a variable
             const p = post.posts;
@@ -144,27 +150,30 @@ const BlogHeader = (props: IProps) => {
      * @param e: event
      * @param isSubMenu is the parameter containing the cause of the trigger
      */
-    const handleDrawerToggle = (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-        isSubMenu?: string,
-    ) => {
-        if (isLargeScreen) return;
-        if (isSubMenu === 'isSubMenu') return;
+    const handleDrawerToggle = useCallback(
+        (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, isSubMenu?: string) => {
+            if (isLargeScreen) return;
+            if (isSubMenu === 'isSubMenu') return;
 
-        setMobileOpen(open => (!open ? true : false));
-    };
+            setMobileOpen(open => !open);
+        },
+        [isLargeScreen],
+    );
 
-    const collapseMenu = (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
-        setCollapse(c => ({...c, [index]: !c[index]}));
-    };
+    const collapseMenu = useCallback(
+        (_: React.MouseEvent<HTMLElement, MouseEvent>, index: number) => {
+            setCollapse(c => ({...c, [index]: !c[index]}));
+        },
+        [],
+    );
 
     const drawer = (
         <>
             <div className={classes.toolbar} />
 
-            <p className={classes.sideBarLogoText}>My ragp's blog</p>
-
-            <Divider />
+            <p className={classes.sideBarLogoText}>
+                <img alt={'My Ragp Blog Logo'} width={'99%'} src={myRagpLogo} />
+            </p>
 
             <div style={{marginTop: '24px'}} />
 
@@ -255,7 +264,9 @@ const BlogHeader = (props: IProps) => {
                                                                         onClick={e => {
                                                                             handleDrawerToggle(
                                                                                 e,
-                                                                                'isSubMenu',
+                                                                                p.posts
+                                                                                    ? 'isSubMenu'
+                                                                                    : '',
                                                                             );
                                                                             // Set the collapse menu with an increment of 10 for sub sub menu
                                                                             collapseMenu(
@@ -350,6 +361,36 @@ const BlogHeader = (props: IProps) => {
                             variant: 'subtitle1',
                         }}
                         primary={'testimonies'}
+                        secondary={
+                            <>
+                                <List style={{marginLeft: '-16px'}}>
+                                    {testimonies.map(t => (
+                                        <ListItem button={true}>
+                                            <ListItemText
+                                                primary={
+                                                    <NavLink
+                                                        to={`/${username}/${t.url}`}
+                                                        className={classes.sidebarLink}
+                                                        activeClassName={classes.sidebarActiveLink}
+                                                        style={{
+                                                            textDecoration: 'none',
+                                                        }}
+                                                        onClick={e => handleDrawerToggle(e)}
+                                                    >
+                                                        {t.title}
+                                                    </NavLink>
+                                                }
+                                                // @ts-ignore
+                                                primaryTypographyProps={{
+                                                    className: classes.sidebarMainLink,
+                                                    variant: 'body1',
+                                                }}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </>
+                        }
                     />
                 </ListItem>
 
@@ -387,9 +428,15 @@ const BlogHeader = (props: IProps) => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <span onClick={() => history.push('/')} className={classes.logoText}>
-                                My ragp's blog
-                            </span>
+                            <img
+                                style={{
+                                    paddingTop: '1rem',
+                                    paddingBottom: '-1rem',
+                                    height: '3rem',
+                                }}
+                                src={myRagpLogo}
+                                alt={'My R A G P Blog logo'}
+                            />
                         </div>
                         <div className={classes.navLinks}>
                             <Typography variant="h6">
