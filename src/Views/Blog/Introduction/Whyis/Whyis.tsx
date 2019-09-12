@@ -136,11 +136,11 @@ const WhyIs = (props: any) => {
                     It's All About YOU MAKING THE MONEY &amp; THE TIME TO FUND &amp; LIVE YOUR DREAM
                     LIFESTYLE!!! It's All About You MAKING THE MONEY(&#8358;50k or &#8358;100k)
                     While You Sleep (DAILY WITH PASSIVE INCOME) So, If You're All For That, READ ON;
-                    or Tap Here(A LINK) To Join &amp; Start Right Away!!! THATS WHAT RAGP IS ALL
+                    or Tap Here(A LINK) To Join &amp; Start Right Away!!! THAT'S WHAT RAGP IS ALL
                     ABOUT!!! So, Why Should You Join RAGP?! Cause You Have All These Dreams &amp;
                     And You A SYSTEM/BUSINESS/MEANS To MAKE ALL THE MONEY &amp; TIME TO MAKE YOUR
                     DREAMS COME TRUE!!! YEA! THAT’S SIMPLY WHY YOU SHOULD JOIN RAGP!!! RIGHT AWAY!!!
-                    *<a href="http://rechargeandgetpaid.com/register.php">Tap here To Register</a>*
+                    *<a href={`/${username}/how-to-register`}>Tap here To Register</a>*
                 </Typography>
             </div>
             <br />
@@ -162,7 +162,7 @@ const WhyIs = (props: any) => {
                 <div style={baseStyles.paginationForward}>
                     <Link to={'/' + username + '/how-to-register'}>
                         <Button variant="text" color="primary">
-                            How To Register
+                            How It Works
                             <span style={baseStyles.forwardIcon}>
                                 <ArrowForwardIcon />
                             </span>

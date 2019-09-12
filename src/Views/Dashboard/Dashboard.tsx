@@ -16,8 +16,6 @@ import CardHeader from "../../Components/Card/CardHeader";
 import CardIcon from "../../Components/Card/CardIcon";
 import GridContainer from "../../Components/Grid/GridContainer";
 import GridItem from "../../Components/Grid/GridItem";
-import SnackbarContent from "../../Components/Snackbar/SnackbarContent";
-import SnackbarSpinner from "../../Components/SnackbarSpinner/SnackbarSpinner";
 import Table from "../../Components/Table/Table";
 import { DashboardContext } from "../../Context";
 

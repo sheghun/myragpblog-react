@@ -8,6 +8,7 @@ module.exports = {
     rules: {
         '@typescript-eslint/no-explicit-any': ['off'],
         '@typescript-eslint/ban-ts-ignore': ['off'],
+        '@typescript-eslint/explicit-function-return-type': ['off'],
     },
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features

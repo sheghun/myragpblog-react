@@ -10,6 +10,9 @@ import React, {useEffect, useMemo, useState} from 'react';
 // For lazy loading
 import loadable from '@loadable/component';
 import Avatar from '../../Components/Avatar/Avatar';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // react-router dependencies
 import {Route, RouteComponentProps, Switch} from 'react-router-dom';
@@ -17,6 +20,7 @@ import {Route, RouteComponentProps, Switch} from 'react-router-dom';
 import Axios, {AxiosError} from 'axios';
 import * as helpers from '../../_helpers';
 import BlogHeader from '../../Components/BlogHeader/BlogHeader';
+import Modal from '../../Components/Modal/Modal';
 import Progress from '../../Components/Progress/Progress';
 import Spinner from '../../Components/Spinner/Spinner';
 import {BlogContext} from '../../Context';
@@ -101,6 +105,31 @@ const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
         marginLeft: '-2.2rem',
         marginRight: '2rem',
     },
+    modalBody: {
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        padding: '16px',
+        width: '100vw',
+        height: '100vh',
+    },
+    modalPaper: {
+        height: '300px',
+        padding: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
+    modalOptions: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        justifyContent: 'space-around',
+        padding: '16px',
+        position: 'absolute',
+        right: '24px',
+    },
     blog: {
         margin: '64px auto 0',
         maxWidth: '392px',
@@ -128,6 +157,7 @@ const useStyles = makeStyles<StyleRulesCallback>((theme: Theme) => ({
     nextButton: {
         textDecoration: 'underline',
     },
+
     [theme.breakpoints.up('md')]: {
         blog: {
             maxWidth: '840px',
@@ -176,10 +206,10 @@ const Blog = ({match, history}: RouteComponentProps) => {
         whatsappNumber: '',
     });
     const [loading, setLoading] = useState(false);
-
-    if (!localStorage.getItem('username')) {
-        localStorage.setItem('username', username);
-    }
+    // modal state
+    const [showModal, setShowModal] = useState(true);
+    const [visitorsEmail, setVisitorsEmail] = useState('');
+    const [visitorsEmailError, setVisitorsEmailError] = useState(false);
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -215,11 +245,24 @@ const Blog = ({match, history}: RouteComponentProps) => {
             }
             setLoading(false);
         })();
+        // Check if the visitor has visited before
+        if (!localStorage.getItem('visited')) {
+            setShowModal(true);
+        }
     }, []);
 
-    if (!localStorage.getItem('username')) {
-        localStorage.setItem('username', username);
-    }
+    const submitVisitorsEmail = async (): Promise<void> => {
+        // Reset visitors Email Error
+        setVisitorsEmailError(false);
+        if (!visitorsEmail) {
+            setVisitorsEmailError(true);
+            return;
+        }
+        // Set the request to the server
+        try {
+            setShowModal(false);
+        } catch (error) {}
+    };
 
     return (
         <BlogContext.Provider
@@ -271,6 +314,34 @@ const Blog = ({match, history}: RouteComponentProps) => {
                             </div>
                         </article>
                         <Switch>{routers}</Switch>
+                        <Modal onClose={(): void => {}} open={showModal}>
+                            <div className={classes.modalBody}>
+                                <Paper className={classes.modalPaper}>
+                                    <Typography variant={'h6'}>
+                                        Receive News And Updates Concerning RAGP
+                                    </Typography>
+                                    <div style={{height: '3rem'}}>
+                                        <TextField
+                                            label={'Email'}
+                                            style={{width: '100%'}}
+                                            type={'email'}
+                                            error={visitorsEmailError}
+                                            value={visitorsEmail || ' '}
+                                            onChange={e => setVisitorsEmail(e.target.value)}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Button
+                                            onClick={submitVisitorsEmail}
+                                            color={'primary'}
+                                            variant={'contained'}
+                                        >
+                                            Yes I Want To Receive Information
+                                        </Button>
+                                    </div>
+                                </Paper>
+                            </div>
+                        </Modal>
                     </div>
                 </BlogHeader>
             }

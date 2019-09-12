@@ -21,6 +21,7 @@ import React, {useCallback, useContext, useEffect, useRef, useState} from 'react
 import {NavLink, RouteComponentProps, withRouter} from 'react-router-dom';
 import {BlogContext} from '../../Context';
 import myRagpLogo from '../../assets/images/myragpblog-logo.jpg';
+import Modal from "../Modal/Modal";
 import styles from './styles';
 
 interface CollapseType {
@@ -97,6 +98,7 @@ const BlogHeader = (props: PropsType) => {
     const [slide, setSlide] = useState(true);
     const scrollPos = useRef(0);
     const [collapse, setCollapse] = useState({0: false} as CollapseType);
+    const [showModal, setShowModal] = useState(true);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -364,8 +366,8 @@ const BlogHeader = (props: PropsType) => {
                         secondary={
                             <>
                                 <List style={{marginLeft: '-16px'}}>
-                                    {testimonies.map(t => (
-                                        <ListItem button={true}>
+                                    {testimonies.map((t, key) => (
+                                        <ListItem key={key} button={true}>
                                             <ListItemText
                                                 primary={
                                                     <NavLink

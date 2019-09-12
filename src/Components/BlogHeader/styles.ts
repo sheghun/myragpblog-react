@@ -121,6 +121,7 @@ const useStyles = (theme: Theme) => ({
             maxWidth: '100vw',
             boxSizing: 'border-box',
             overflowY: 'scroll',
+            marginTop: '-0.2rem',
             marginLeft: '-1rem',
             paddingLeft: '16px',
         },
